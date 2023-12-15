@@ -7,6 +7,7 @@ import Another from './components/Another';
 import Bar from './components/Bar';
 import Testimonials from "./components/Testimonials"
 import Sfooter from "./components/Sfooter"
+import Form from "./components/Form"
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Section />
         <Another />
         <Testimonials />
+        <Form />
         <Sfooter />
     </div>
   );

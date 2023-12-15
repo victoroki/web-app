@@ -2,32 +2,33 @@ import facebook from "../components/img/facebook.svg"
 import instagram from "../components/img/instagram.svg"
 import linkedin from "../components/img/linkedin.svg"
 import twitter from "../components/img/twitter.svg"
-
+import male from "../components/img/m1.png"
+import female from "../components/img/f1.png"
 
 export const feedback = [
   {
     id: "feedback-1",
     content:
-      "Money is only a tool. It will take you wherever you wish, but it will not replace you as the driver.",
-    name: "Herman Jensen",
-    title: "Founder & Leader",
-    img: "cctv",
+      "Torchbearers CCTV installation was seamless, and their professionalism was outstanding. I now have peace of mind knowing my property is well-protected",
+    name: "James Otieno",
+    title: "Customer",
+    img: male,
   },
   {
     id: "feedback-2",
     content:
-      "Money makes your life easier. If you're lucky to have it, you're lucky.",
-    name: "Steve Mark",
-    title: "Founder & Leader",
-    img: "cctv",
+      "Torchbearers exceeded expectations with their solar PV installation. My home is now more energy-efficient, and I'm saving on utility costs. ",
+    name: "Jane Wanjiku",
+    title: "Customer",
+    img: female,
   },
   {
     id: "feedback-3",
     content:
-      "It is usually people in the money business, finance, and international trade that are really rich.",
-    name: "Kenn Gallagher",
-    title: "Founder & Leader",
-    img: "cctv",
+      "Torchbearers saved the day with quick and reliable electrical repairs. The technicians were knowledgeable and courteous, resolving my issues promptly.",
+    name: "Musa Nasir",
+    title: "Customer",
+    img: male,
   },
 ];
 export const socialMedia = [

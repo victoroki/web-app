@@ -1,12 +1,13 @@
 import React from 'react'
 import { FaCheckSquare } from "react-icons/fa"
-import solar from "./img/solar.jpg"
+import solar from "./img/solar1.jpg"
 import slogo from "./img/slogo.png"
+import quality from "./img/quality.jpg"
 
 function Section() {
   return (
-    <div className='block md:grid grid-cols-2 gap-4 m-12 '>
-      <img className='w-full rounded-md' src={solar} alt='solar' />
+    <div className='grid md:grid-cols-2 grid-cols-1 gap-4 m-12 '>
+      <img className='hidden md:block md:w-full md:rounded-md' src={solar} alt='solar' />
       <div className='shadow-lg p-5 rounded-md '>
         <div className='flex flex-row items-center shadow-lg rounded-[10px] mb-2'>
           <img
@@ -23,11 +24,11 @@ function Section() {
           solar installation, and electric wiring, we understand the evolving needs of modern living. Our team of experts is committed to delivering cutting-edge
           solutions that not only safeguard your premises but also contribute to a greener future.
         </p>
-        <img className='hidden md:w-full rounded-md' src={solar} alt='solar' />
+        <img className='md:hidden rounded-md pb-4'  src={solar} alt='solar' />
         <div className='flex'>
           <div className='w-1/4 mr-8 '>
             <span className=''>
-              <FaCheckSquare color='green' size={65} /> 
+              <img className='' src={quality} alt="quality"/> 
             </span>
             <p className='block uppercase'>quality</p>
           </div>

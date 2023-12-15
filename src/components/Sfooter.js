@@ -1,6 +1,7 @@
 import { FaFacebookF } from "react-icons/fa";
 import { AiOutlineTwitter, AiFillYoutube } from "react-icons/ai";
 import { BiLogoPinterestAlt } from "react-icons/bi";
+import logo from "./img/slogo.png";
 
 function Footer() {
   const iconsTab = [
@@ -18,14 +19,14 @@ function Footer() {
             {/* logo side */}
             <div className="flex flex-col w-1/2 md:p-0 py-4 gap-8">
               <img
-                src={"https://i.imgur.com/520zDfd.png"}
+                src={logo}
                 alt="footer_logo"
                 className="w-[18rem]"
               />
               <p className="text-[15px] font-medium text-[#646464]">
-                Take your health and body to the next level with our
-                comprehensive program designed to help you reach your fitness
-                goals.
+              Just as we illuminate spaces with cutting-edge electrical and solar solutions, 
+              let us light the way to a healthier and fitter you. -Torchbearers – 
+              Lighting the path to a brighter, safer, and healthier future.
               </p>
               {/* socials */}
               <div className="flex gap-7 text-[18px] text-[#646464] justify-center md:justify-start">
@@ -42,59 +43,59 @@ function Footer() {
                 })}
               </div>
               <p className="text-[16px] font-medium text-[#646464]">
-                Privacy Policy | © {new Date().getFullYear()} Gymate <br />{" "}
-                Design by{" "}
+                Privacy Policy | © {new Date().getFullYear()} Torchbearers <br />{" "}
+                Torchbearers{" "}
                 <a
                   target="_blank"
                   rel="noreferrer"
-                  href="https://www.radiustheme.com/"
+                  href="#"
                 >
-                  RadiusTheme
+                 Technologies
                 </a>
               </p>
             </div>
 
             {/* middle div */}
             <div className="flex flex-col gap-8 relative">
-              <p className="text-[22px] font-bold footer-main">Our Classes</p>
+              <p className="text-[22px] font-bold footer-main ">Our Services</p>
 
-              <span className="top-[33px] absolute w-[7rem] h-[4px] bg-[#ff0366]"></span>
+              <span className="top-[33px] absolute w-[8rem] h-[4px] bg-[#6e364c]"></span>
 
               <p className="text-[16px] hover:text-[#ff0366] cursor-pointer text-[#646464] font-medium hover:font-bold">
-                Fitness Classes
+                Solar PV installation
               </p>
               <p className="text-[16px] hover:text-[#ff0366] cursor-pointer text-[#646464] font-medium hover:font-bold">
-                Aerobics Classes
+                Heating Systems
               </p>
               <p className="text-[16px] hover:text-[#ff0366] cursor-pointer text-[#646464] font-medium hover:font-bold">
-                Power Yoga
+                Electrical Installation
               </p>
               <p className="text-[16px] hover:text-[#ff0366] cursor-pointer text-[#646464] font-medium hover:font-bold">
-                Learn Machines
+                CCTV Installation
               </p>
               <p className="text-[16px] hover:text-[#ff0366] cursor-pointer text-[#646464] font-medium hover:font-bold">
-                Full-body Strength
+                Air Conditioning
               </p>
             </div>
 
             {/* right div */}
             <div className="flex flex-col gap-8 relative">
-              <p className="text-[22px] font-bold footer-main">Working Hours</p>
+              <p className="text-[22px] font-bold footer-main my-8 md:my-0">Others</p>
 
-              <span className="top-[33px] absolute w-[7rem] h-[4px] bg-[#ff0366]"></span>
+              <span className="top-[33px] absolute w-[5rem] h-[4px] bg-[#6e364c] my-8 md:my-0"></span>
 
               <p className="text-[16px]  text-[#646464] font-bold">
-                Monday - Friday:
+                efficient Electrical upgrades
               </p>
               <p className="text-[16px] text-[#646464] font-medium">
-                7:00am - 21:00pm
+                TroubleShoting
               </p>
-              <p className="text-[16px] text-[#646464] font-bold">Saturday:</p>
+              <p className="text-[16px] text-[#646464] font-bold">Lighting</p>
               <p className="text-[16px] text-[#646464] font-medium">
-                7:00am - 19:00pm
+                Electrical Repairs
               </p>
               <p className="text-[16px] text-[#646464] font-bold ">
-                Sunday - Closed
+                Decorations
               </p>
             </div>
 

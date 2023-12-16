@@ -45,13 +45,13 @@ function Topbar() {
               : 'fixed left-[-100%] z-0'
           }
         >
-          <p className="p-4 text-3xl font-bold">LOGO</p>
+          <p className="p-4 text-3xl font-bold">Torchbearer</p>
           <ul className="p-4 uppercase">
             <li className="p-4">
-              <a href="#">About us</a>
+            <p>About us</p>
             </li>
             <li className="p-4">
-              <a href="#">Contact us</a>
+              <p>Contact us</p>
             </li>
           </ul>
         </div>

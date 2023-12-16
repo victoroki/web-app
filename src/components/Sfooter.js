@@ -45,13 +45,9 @@ function Footer() {
               <p className="text-[16px] font-medium text-[#646464]">
                 Privacy Policy | © {new Date().getFullYear()} Torchbearers <br />{" "}
                 Torchbearers{" "}
-                <a
-                  target="_blank"
-                  rel="noreferrer"
-                  href="#"
-                >
+                <p>
                  Technologies
-                </a>
+                </p>
               </p>
             </div>
 

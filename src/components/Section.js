@@ -1,5 +1,4 @@
 import React from 'react'
-import { FaCheckSquare } from "react-icons/fa"
 import solar from "./img/solar1.jpg"
 import slogo from "./img/slogo.png"
 import quality from "./img/quality.jpg"

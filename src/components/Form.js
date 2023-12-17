@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import call from "./img/call.jpg";
 import axios from 'axios';
-import { FiPhoneCall, FiMail } from 'react-icons/fi';
 
 const Form = () => {
   const [formData, setFormData] = useState({

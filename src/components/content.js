@@ -4,7 +4,7 @@ import teng from "./img/eng.jpg";
 
 function Content() {
   return (
-    <div className="relative h-screen mb-[350px]">
+    <div className="relative h-screen mb-[200px] md:mb-[350px]">
       {/* Bar Components */}
       <div className="absolute top-0 left-0 w-full z-10">
         <Bar />
@@ -14,7 +14,7 @@ function Content() {
       <img
         src={teng}
         alt=""
-        className="w-full h-half-screen object-cover z-0"
+        className="w-full md:h-[128%] h-[70%] object-cover z-0"
       />
 
       {/* Content Overlay */}

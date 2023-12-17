@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import call from "./img/call.jpg";
 import axios from 'axios';
+import { FiPhoneCall, FiMail } from 'react-icons/fi';
 
 const Form = () => {
   const [formData, setFormData] = useState({
@@ -30,7 +31,8 @@ const Form = () => {
   };
 
   return (
-    <div className="flex md:flex-row flex-col items-center justify-center min-h-screen py-5 bg-gray-300">
+    <div className='bg-gray-300'>
+    <div className="flex md:flex-row flex-col items-center justify-center min-h-screen py-5 ">
       <img
         src={call} 
         alt="Person Calling"
@@ -84,6 +86,8 @@ const Form = () => {
           Submit
         </button>
       </form>
+    </div>
+
     </div>
   );
 };

@@ -18,20 +18,20 @@ function Section() {
             <span className='text-gray-500 font-bold'>Torchbearer technologies</span>
           </p>
         </div>
-        <h1 className='font-bold text-3xl capitalize text-md pb-6'>We provide your future</h1>
-        <p className='pb-10 font-light'>Torchbearer technology dedicated to transforming your spaces into havens of safety and efficiency. Specializing in CCTV installation,
+        <h1 className='font-bold text-2xl md:text-3xl capitalize text-md md:pb-6'>We provide your future</h1>
+        <p className='pb-10 font-light font-poppins font-normal text-gray-600 leading-[30.8px]'>Torchbearer technology dedicated to transforming your spaces into havens of safety and efficiency. Specializing in CCTV installation,
           solar installation, and electric wiring, we understand the evolving needs of modern living. Our team of experts is committed to delivering cutting-edge
           solutions that not only safeguard your premises but also contribute to a greener future.
         </p>
         <img className='md:hidden rounded-md pb-4'  src={solar} alt='solar' />
-        <div className='flex'>
-          <div className='w-1/4 mr-8 '>
+        <div className='flex flex-col-reverse md:flex-row items-center'>
+          <div className='w-[70%] pt-3 md:pt-0 md:w-1/4 mr-8 '>
             <span className=''>
-              <img className='' src={quality} alt="quality"/> 
+              <img className='w-full' src={quality} alt="quality"/> 
             </span>
-            <p className='block uppercase'>quality</p>
+            <p className='hidden md:block uppercase'>quality</p>
           </div>
-          <p className='font-light'>At Torchbearer technology we believe in empowering you with the tools and technologies
+          <p className='font-light font-poppins font-normal text-gray-600'>At Torchbearer technology we believe in empowering you with the systems and technologies
             that not only protect your present but also pave the way for a sustainable and secure future.
             Join us on this journey towards a smarter, safer, and more energy-efficient tomorrow</p>
         </div>

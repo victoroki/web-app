@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Sun, Shield, Droplets, Thermometer, Check, Phone, Mail, Star } from 'lucide-react';
 
 const Pricing = () => {
@@ -114,6 +114,51 @@ const Pricing = () => {
     { id: 'hvac', label: 'HVAC Services', icon: <Thermometer className="w-5 h-5" /> }
   ];
 
+  // Handle hash navigation
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.substring(1); // Remove the # symbol
+      if (hash && tabs.some(tab => tab.id === hash)) {
+        setActiveTab(hash);
+      }
+    };
+
+    // Check for hash on initial load
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  // Scroll to section when tab changes
+  useEffect(() => {
+    const scrollToSection = () => {
+      const element = document.getElementById(`${activeTab}-section`);
+      if (element) {
+        // Small delay to ensure the content is rendered
+        setTimeout(() => {
+          element.scrollIntoView({ 
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }, 100);
+      }
+    };
+
+    scrollToSection();
+  }, [activeTab]);
+
+  const handleTabClick = (tabId) => {
+    setActiveTab(tabId);
+    // Update URL hash without triggering a page reload
+    window.history.pushState(null, null, `#${tabId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
@@ -136,7 +181,7 @@ const Pricing = () => {
             {tabs.map((tab) => (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabClick(tab.id)}
                 className={`flex items-center px-6 py-3 mx-2 mb-2 rounded-lg font-semibold transition-colors ${
                   activeTab === tab.id
                     ? 'bg-red-800 text-white'
@@ -151,7 +196,7 @@ const Pricing = () => {
 
           {/* Solar Kits */}
           {activeTab === 'solar' && (
-            <div className="max-w-6xl mx-auto">
+            <div id="solar-section" className="max-w-6xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Kit Pricing</h2>
                 <p className="text-gray-600">Complete solar packages with installation included</p>
@@ -203,7 +248,7 @@ const Pricing = () => {
 
           {/* Solar Pumps */}
           {activeTab === 'pumps' && (
-            <div className="max-w-6xl mx-auto">
+            <div id="pumps-section" className="max-w-6xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Water Pumps</h2>
                 <p className="text-gray-600">Efficient water pumping solutions for irrigation and domestic use</p>
@@ -249,7 +294,7 @@ const Pricing = () => {
 
           {/* CCTV Systems */}
           {activeTab === 'cctv' && (
-            <div className="max-w-4xl mx-auto">
+            <div id="cctv-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">CCTV Systems</h2>
                 <p className="text-gray-600">Professional security camera installations</p>
@@ -291,7 +336,7 @@ const Pricing = () => {
 
           {/* Solar Heating */}
           {activeTab === 'heating' && (
-            <div className="max-w-4xl mx-auto">
+            <div id="heating-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Water Heating</h2>
                 <p className="text-gray-600">Eco-friendly water heating solutions</p>
@@ -344,7 +389,7 @@ const Pricing = () => {
 
           {/* HVAC Services */}
           {activeTab === 'hvac' && (
-            <div className="max-w-4xl mx-auto">
+            <div id="hvac-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">HVAC Services</h2>
                 <p className="text-gray-600">Heating, ventilation, and air conditioning solutions</p>

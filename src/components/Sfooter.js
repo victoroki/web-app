@@ -23,9 +23,10 @@ function Footer() {
   const otherServices = [
     { name: "Efficient Electrical upgrades", bold: true },
     { name: "TroubleShoting", bold: false },
-    { name: "Lighting", bold: true },
+    { name: "Electrical Design", bold: true },
     { name: "Electrical Repairs", bold: false },
-    { name: "Decorations", bold: true }
+    { name: "Decorations", bold: true },
+    { name: "Solar System design", bold: true }
   ];
 
   return (
@@ -104,7 +105,7 @@ function Footer() {
             </div>
 
             {/* Services Section */}
-            <div className="flex flex-col gap-6">
+            {/* <div className="flex flex-col gap-6">
               <div className="relative">
                 <h3 className="text-[22px] font-bold text-white mb-4">
                   Our Services
@@ -127,13 +128,13 @@ function Footer() {
                   </p>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Other Services Section */}
             <div className="flex flex-col gap-6">
               <div className="relative">
                 <h3 className="text-[22px] font-bold text-white mb-4">
-                  Others
+                  Others Service
                 </h3>
                 <div 
                   className="absolute -bottom-2 left-0 w-12 h-1 rounded-full"

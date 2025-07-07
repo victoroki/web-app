@@ -1,6 +1,6 @@
 import React from 'react';
 import { FiPhoneCall, FiMail } from 'react-icons/fi';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 function Bar() {
   const navItems = [
@@ -40,9 +40,11 @@ function Bar() {
           </ul>
 
           {/* Question Badge */}
+          <Link to="/contact">
           <div className="bg-[#712B35] text-[#e8e1d9] px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 cursor-pointer hover:bg-[#5f2b40]">
             Have any question?
           </div>
+          </Link>
 
           {/* Mobile Contact Info */}
           <div className="flex md:hidden lg:hidden">

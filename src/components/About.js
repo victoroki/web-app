@@ -22,7 +22,7 @@ const AboutUs = () => {
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-3xl font-bold text-gray-800 mb-8">Our Mission</h2>
             <p className="text-lg text-gray-600 leading-relaxed mb-8">
-              Torchbearer Technologies is dedicated to delivering innovative solutions in solar, security, electrical, and climate control. Our mission is to empower clients with reliable, sustainable, and cost-effective systems tailored for modern living.
+              Torchbearer Technologies is dedicated to delivering innovative solutions in solar, CCTV, electrical, and HVAC. Our mission is to empower clients with reliable, sustainable, and cost-effective systems tailored for modern living.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
               <div className="text-center p-6 bg-gray-50 rounded-lg">

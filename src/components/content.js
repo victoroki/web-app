@@ -6,9 +6,7 @@ function Content() {
   return (
     <div className="relative h-screen overflow-hidden">
       {/* Bar Components */}
-      <div className="absolute top-0 left-0 w-full z-30">
-        <Bar />
-      </div>
+
 
       {/* Video Background */}
       <video

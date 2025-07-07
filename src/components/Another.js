@@ -1,6 +1,6 @@
 import React from 'react'
 import electrical from "./img/electrical.jpg"
-import cctv from "./img/CCTV.jpg"
+import cctv from "./img/cctv.jpg"
 import solar from "./img/SOLar.jpg"
 import repair from "./img/repair.jpg"
 import { GiSpanner } from "react-icons/gi";

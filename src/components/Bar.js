@@ -4,37 +4,89 @@ import { FiPhoneCall, FiMail } from 'react-icons/fi';
 function Bar() {
   return (
     <div>
-      <nav className="bg-orange-400 flex justify-between items-center h-24 max-w-[1060px] mx-auto" >
-        <ul className="hidden md:flex">
-          <li className="p-4"><p>Home</p></li>
-          <li className="p-4"><p>About us</p></li>
-          <li className="p-4"><p>Contact us</p></li>
-        </ul>
-        <p className="text-[13px] ml-2 p-1 p-2 rounded-[3px] md:p-3 md:m-2 text-white bg-blue-950">Have any question ?</p>
-        <div className="flex  md:hidden">
-          <div className="flex justify-evenly items-center m-4">
-            <span className="rounded-full p-2">
-              <FiPhoneCall size={20} />
-            </span>
+      <nav className="bg-[#2a2118] flex justify-between items-center h-20 w-full shadow-xl border-b-2 border-[#712B35]">
+        <div className="max-w-[1200px] mx-auto w-full flex justify-between items-center px-4 lg:px-6">
+          
+          {/* Desktop Navigation */}
+          <ul className="hidden md:flex space-x-1">
+            {["home", "about", "projects", "services", "contact"].map((item, index) => (
+              <li key={index}>
+                <a
+                  href={`#${item}`}
+                  className="text-[#e8e1d9] font-medium hover:text-[#b89b6e] transition-all duration-300 relative group cursor-pointer px-4 py-6 block"
+                >
+                  {item.charAt(0).toUpperCase() + item.slice(1).replace("us", " Us")}
+                  <span className="absolute -bottom-0 left-0 w-0 h-0.5 bg-[#b89b6e] transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              </li>
+            ))}
+          </ul>
 
-            <div>
-              <h1 className="font-bold text-[13px]">Call us</h1>
-              {/* <p className="font-light text-[13px]">0743076376</p> */}
+          {/* Desktop Contact Info */}
+          {/* <div className="hidden lg:flex items-center space-x-6">
+            <div className="flex items-center group cursor-pointer">
+              <span className="rounded-full p-2 bg-[#712B35] bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-200 group-hover:scale-110">
+                <FiPhoneCall size={18} className="text-[#e8e1d9]" />
+              </span>
+              <div className="ml-2">
+                <h1 className="font-semibold text-sm text-[#e8e1d9] group-hover:text-[#b89b6e] transition-colors duration-200">
+                  Call us
+                </h1>
+              </div>
+            </div>
+            <div className="flex items-center group cursor-pointer">
+              <span className="rounded-full p-2 bg-[#712B35] bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-200 group-hover:scale-110">
+                <FiMail size={18} className="text-[#e8e1d9]" />
+              </span>
+              <div className="ml-2">
+                <h1 className="font-semibold text-sm text-[#e8e1d9] group-hover:text-[#b89b6e] transition-colors duration-200">
+                  Mail us
+                </h1>
+              </div>
+            </div>
+          </div> */}
+
+          {/* Question Badge */}
+          <div className="bg-[#712B35] text-[#e8e1d9] px-5 py-2.5 rounded-full text-sm font-semibold shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-200 cursor-pointer hover:bg-[#5f2b40]">
+            Have any question?
+          </div>
+
+          {/* Mobile Contact Info */}
+          <div className="flex md:hidden lg:hidden">
+            <div className="flex justify-evenly items-center m-2 group cursor-pointer">
+              <span className="rounded-full p-2 bg-[#712B35] bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-200 group-hover:scale-110">
+                <FiPhoneCall size={18} className="text-[#e8e1d9]" />
+              </span>
+              <div className="ml-2">
+                <h1 className="font-semibold text-[13px] text-[#e8e1d9] group-hover:text-[#b89b6e] transition-colors duration-200">
+                  Call us
+                </h1>
+              </div>
+            </div>
+            <div className="flex items-center group cursor-pointer">
+              <span className="rounded-full p-2 bg-[#712B35] bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-200 group-hover:scale-110">
+                <FiMail size={18} className="text-[#e8e1d9]" />
+              </span>
+              <div className="ml-2 mr-3">
+                <h1 className="font-semibold text-[13px] text-[#e8e1d9] group-hover:text-[#b89b6e] transition-colors duration-200">
+                  Mail us
+                </h1>
+              </div>
             </div>
           </div>
-          <div className="flex items-center">
-            <span className="rounded-full p-2">
-              <FiMail size={20} />
-            </span>
-            <div className='mr-3'>
-              <h1 className="font-bold text-[13px]">Mail us</h1>
-              {/* <p className="font-light text-[12px]">torchbearer@gmail.com</p> */}
-            </div>
+
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button className="text-[#e8e1d9] hover:text-[#b89b6e] transition-colors duration-200 p-2">
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
           </div>
         </div>
       </nav>
     </div>
-  )
+  );
 }
 
-export default Bar
+export default Bar;

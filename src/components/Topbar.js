@@ -14,6 +14,16 @@ function Topbar() {
     setNav(false);
   };
 
+  // Color variables based on primary color #712B35
+  const primaryColor = '#712B35';
+  const primaryDark = '#5A222B';
+  const primaryLight = '#8A3643';
+  const secondaryColor = '#D4A59A'; // A complementary light shade
+  const accentColor = '#C97D60'; // A warm accent color
+  const darkBg = '#1A1A2E'; // Dark background for contrast
+  const lightText = '#F8F9FA';
+  const darkText = '#212529';
+
   // Handle scroll effect
   useEffect(() => {
     const handleScroll = () => {
@@ -32,7 +42,7 @@ function Topbar() {
         }`}
         style={{
           background: scrolled 
-            ? 'linear-gradient(135deg, #223b52 0%, #712B35 100%)' 
+            ? `linear-gradient(135deg, ${darkBg} 0%, ${primaryDark} 100%)` 
             : 'white'
         }}
       >
@@ -52,7 +62,7 @@ function Topbar() {
               <span 
                 className="rounded-full p-3 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #712B35 0%, #489820 100%)'
+                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
                 }}
               >
                 <FiPhoneCall size={20} className="text-white" />
@@ -60,8 +70,13 @@ function Topbar() {
               <div>
                 <h3 
                   className={`font-bold text-sm transition-colors duration-200 ${
-                    scrolled ? 'text-white group-hover:text-green-300' : 'text-gray-800 group-hover:text-green-600'
+                    scrolled ? 'text-white group-hover:text-secondary-300' : 'text-gray-800 group-hover:text-primaryLight'
                   }`}
+                  style={{
+                    color: scrolled ? lightText : darkText,
+                    '--tw-text-opacity': scrolled ? 1 : 1,
+                    '--primaryLight': primaryLight
+                  }}
                 >
                   Contact us
                 </h3>
@@ -79,7 +94,7 @@ function Topbar() {
               <span 
                 className="rounded-full p-3 shadow-lg group-hover:shadow-xl group-hover:scale-105 transition-all duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #712B35 0%, #489820 100%)'
+                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
                 }}
               >
                 <FiMail size={20} className="text-white" />
@@ -87,8 +102,13 @@ function Topbar() {
               <div>
                 <h3 
                   className={`font-bold text-sm transition-colors duration-200 ${
-                    scrolled ? 'text-white group-hover:text-green-300' : 'text-gray-800 group-hover:text-green-600'
+                    scrolled ? 'text-white group-hover:text-secondary-300' : 'text-gray-800 group-hover:text-primaryLight'
                   }`}
+                  style={{
+                    color: scrolled ? lightText : darkText,
+                    '--tw-text-opacity': scrolled ? 1 : 1,
+                    '--primaryLight': primaryLight
+                  }}
                 >
                   Mail us
                 </h3>
@@ -108,15 +128,19 @@ function Topbar() {
             onClick={handleNav}
             className={`block lg:hidden p-3 rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-opacity-50 hover:scale-105 ${
               scrolled 
-                ? 'hover:bg-white hover:bg-opacity-20 focus:ring-green-400' 
-                : 'hover:bg-gray-100 focus:ring-green-400'
+                ? `hover:bg-white hover:bg-opacity-20 focus:ring-[${secondaryColor}]` 
+                : `hover:bg-gray-100 focus:ring-[${primaryColor}]`
             }`}
+            style={{
+              '--secondaryColor': secondaryColor,
+              '--primaryColor': primaryColor
+            }}
             aria-label="Toggle navigation menu"
           >
             {nav ? (
-              <FiX size={28} className={scrolled ? 'text-white' : 'text-gray-700'} />
+              <FiX size={28} className={scrolled ? 'text-white' : `text-[${primaryColor}]`} />
             ) : (
-              <FiMenu size={28} className={scrolled ? 'text-white' : 'text-gray-700'} />
+              <FiMenu size={28} className={scrolled ? 'text-white' : `text-[${primaryColor}]`} />
             )}
           </button>
         </div>
@@ -146,7 +170,7 @@ function Topbar() {
           <div 
             className="flex items-center justify-between p-6 border-b border-gray-200"
             style={{
-              background: 'linear-gradient(135deg, #712B35 0%, #223b52 100%)'
+              background: `linear-gradient(135deg, ${primaryColor} 0%, ${darkBg} 100%)`
             }}
           >
             <img className="h-10 w-auto" src={logo} alt="Torchbearer Technologies" />
@@ -178,8 +202,8 @@ function Topbar() {
                       background: 'transparent'
                     }}
                     onMouseEnter={(e) => {
-                      e.target.style.background = 'linear-gradient(135deg, #712B35 0%, #489820 100%)';
-                      e.target.style.borderLeftColor = '#489820';
+                      e.target.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`;
+                      e.target.style.borderLeftColor = accentColor;
                     }}
                     onMouseLeave={(e) => {
                       e.target.style.background = 'transparent';
@@ -199,21 +223,27 @@ function Topbar() {
           <div 
             className="border-t p-6 space-y-4"
             style={{
-              borderTopColor: '#dcdcdc',
-              background: 'linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'
+              borderTopColor: secondaryColor,
+              background: `linear-gradient(135deg, ${lightText} 0%, ${secondaryColor}20 100%)`
             }}
           >
             <div className="flex items-center space-x-3 p-3 rounded-lg hover:bg-white hover:shadow-md transition-all duration-200 cursor-pointer group">
               <span 
                 className="rounded-full p-2 group-hover:scale-110 transition-transform duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #712B35 0%, #489820 100%)'
+                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
                 }}
               >
                 <FiPhoneCall size={18} className="text-white" />
               </span>
               <div>
-                <h3 className="font-bold text-gray-800 text-sm group-hover:text-green-600 transition-colors duration-200">
+                <h3 
+                  className="font-bold text-sm group-hover:text-primaryLight transition-colors duration-200"
+                  style={{
+                    color: darkText,
+                    '--primaryLight': primaryLight
+                  }}
+                >
                   Contact us
                 </h3>
                 <p className="font-light text-gray-600 text-sm">0743076376</p>
@@ -224,13 +254,19 @@ function Topbar() {
               <span 
                 className="rounded-full p-2 group-hover:scale-110 transition-transform duration-200"
                 style={{
-                  background: 'linear-gradient(135deg, #712B35 0%, #489820 100%)'
+                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
                 }}
               >
                 <FiMail size={18} className="text-white" />
               </span>
               <div>
-                <h3 className="font-bold text-gray-800 text-sm group-hover:text-green-600 transition-colors duration-200">
+                <h3 
+                  className="font-bold text-sm group-hover:text-primaryLight transition-colors duration-200"
+                  style={{
+                    color: darkText,
+                    '--primaryLight': primaryLight
+                  }}
+                >
                   Mail us
                 </h3>
                 <p className="font-light text-gray-600 text-sm">torchbearer@gmail.com</p>

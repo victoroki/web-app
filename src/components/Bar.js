@@ -3,7 +3,7 @@ import { FiPhoneCall, FiMail } from 'react-icons/fi';
 
 function Bar() {
   return (
-    <div>
+    <div className="hidden md:block">
       <nav className="bg-[#2a2118] flex justify-between items-center h-20 w-full shadow-xl border-b-2 border-[#712B35]">
         <div className="max-w-[1200px] mx-auto w-full flex justify-between items-center px-4 lg:px-6">
           

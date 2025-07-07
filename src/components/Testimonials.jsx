@@ -9,7 +9,7 @@ const Testimonials = () => {
       id='clients' 
       className={`relative ${styles.paddingY} ${styles.flexce} flex-col items-center justify-center overflow-hidden`}
       style={{
-        background: 'linear-gradient(135deg, #223b52 0%, #712B35 50%, #223b52 100%)',
+        background: 'linear-gradient(135deg, #223b52 0%, #712B35 50%, #5a2129 100%)',
       }}
     >
       {/* Decorative Background Elements */}
@@ -40,17 +40,17 @@ const Testimonials = () => {
             What people are{' '}
             <span 
               className="relative"
-              style={{ color: '#489820' }}
+              style={{ color: '#b89b6e' }}
             >
               saying
               <div 
                 className="absolute -bottom-2 left-0 w-full h-1 rounded-full"
-                style={{ backgroundColor: '#489820' }}
+                style={{ backgroundColor: '#b89b6e' }}
               />
             </span>
             {' '}about us
           </h2>
-          <div className="w-16 h-1 bg-white rounded-full mt-4 mx-auto md:mx-0 opacity-60"></div>
+          <div className="w-16 h-1 rounded-full mt-4 mx-auto md:mx-0 opacity-60" style={{ backgroundColor: '#8d3640' }}></div>
         </div>
         
         <div className='w-full md:w-auto md:mt-0 mt-6'>
@@ -83,7 +83,7 @@ const Testimonials = () => {
       </div>
 
       {/* Bottom Accent */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-white to-transparent opacity-30"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 opacity-30" style={{ background: 'linear-gradient(90deg, transparent, #b89b6e, transparent)' }}></div>
 
       <style jsx>{`
         @keyframes fadeInUp {
@@ -109,7 +109,7 @@ const Testimonials = () => {
           transform: translateX(-50%);
           width: 100px;
           height: 2px;
-          background: linear-gradient(90deg, transparent, #489820, transparent);
+          background: linear-gradient(90deg, transparent, #b89b6e, transparent);
           border-radius: 2px;
         }
       `}</style>

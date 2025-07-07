@@ -1,14 +1,15 @@
-import { FaFacebookF } from "react-icons/fa";
-import { AiOutlineTwitter, AiFillYoutube } from "react-icons/ai";
-import { BiLogoPinterestAlt } from "react-icons/bi";
+import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
+import { AiFillYoutube } from "react-icons/ai";
+import { RiTwitterXFill } from "react-icons/ri";
 import logo from "./img/slogo.png";
 
 function Footer() {
   const iconsTab = [
     { icon: <FaFacebookF /> },
-    { icon: <AiOutlineTwitter /> },
+    { icon: <RiTwitterXFill /> },
+    { icon: <FaInstagram /> },
+    { icon: <FaLinkedinIn /> },
     { icon: <AiFillYoutube /> },
-    { icon: <BiLogoPinterestAlt /> },
   ];
 
   const services = [

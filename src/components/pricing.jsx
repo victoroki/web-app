@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Sun, Shield, Droplets, Thermometer, Check, Phone, Mail, Star } from 'lucide-react';
+import img10kw from './img/10kw.jpeg'
+import img1kw from './img/1kw.jpeg'
+import img30kw from './img/30kw.jpeg'
+import img20kw from './img/20kw.jpeg'
+import img15kw from './img/15kw.jpeg'
+import img8kw from './img/8kw.jpeg'
+import img5kw from './img/5kw.jpeg'
+import img3kw from './img/3kw.jpeg'
 
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState('solar');
@@ -69,6 +77,17 @@ const Pricing = () => {
     }
   ];
 
+  const solarKitImages = {
+  '1 kW': img1kw,
+  '3 kW': img3kw,
+  '5 kW': img5kw,
+  '8 kW': img8kw,
+  '10 kW': img10kw,
+  '15 kW': img15kw,
+  '20 kW': img20kw,
+  '30 kW': img30kw,
+};
+
   const cctvPackages = [
     { cameras: 3, price: 28000 },
     { cameras: 4, price: 33000 },
@@ -105,6 +124,8 @@ const Pricing = () => {
       minimumFractionDigits: 0
     }).format(price);
   };
+
+
 
   const tabs = [
     { id: 'solar', label: 'Solar Kits', icon: <Sun className="w-5 h-5" /> },
@@ -204,35 +225,56 @@ const Pricing = () => {
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {solarKits.map((kit) => (
-                  <div key={kit.size} className={`bg-white rounded-lg shadow-lg p-6 relative ${kit.popular ? 'ring-2 ring-red-800' : ''}`}>
+                  <div key={kit.size} className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${kit.popular ? 'ring-2 ring-red-800' : ''}`}>
                     {kit.popular && (
-                      <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <div className="absolute top-4 left-4 z-10">
                         <span className="bg-red-800 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center">
                           <Star className="w-4 h-4 mr-1" />
                           Popular
                         </span>
                       </div>
                     )}
-                    <div className="text-center">
-                      <h3 className="text-2xl font-bold text-gray-800 mb-2">{kit.size} Kit</h3>
-                      <div className="text-3xl font-bold text-red-800 mb-4">{formatPrice(kit.price)}</div>
-                      <div className="text-gray-600 mb-6">Complete installation included</div>
-                      
-                      <div className="text-left mb-6">
-                        <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
-                        <ul className="text-sm text-gray-600 space-y-1">
-                          {['Inverter', 'AC & DC cables', 'Solar panels', 'Batteries', 'Mounting rails', 'Circuit breakers (DC & AC)', 'Lugs, cable ties, tapes, nails', 'Professional installation'].map((item, index) => (
-                            <li key={index} className="flex items-center">
-                              <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
-                              {item}
-                            </li>
-                          ))}
-                        </ul>
+                    
+                    {/* Image Section */}
+                    <div className="relative h-48 bg-gray-100 overflow-hidden">
+                      <img
+                        src={solarKitImages[kit.size]}
+                        alt={`${kit.size} Solar Kit`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback if image doesn't load
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      {/* Fallback content if image fails to load */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{display: 'none'}}>
+                        <Sun className="w-16 h-16 text-red-800 opacity-50" />
                       </div>
-                      
-                      <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
-                        Get Quote
-                      </button>
+                    </div>
+                    
+                    <div className="p-6">
+                      <div className="text-center">
+                        <h3 className="text-2xl font-bold text-gray-800 mb-2">{kit.size} Kit</h3>
+                        <div className="text-3xl font-bold text-red-800 mb-4">{formatPrice(kit.price)}</div>
+                        <div className="text-gray-600 mb-6">Complete installation included</div>
+                        
+                        <div className="text-left mb-6">
+                          <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
+                          <ul className="text-sm text-gray-600 space-y-1">
+                            {['Inverter', 'AC & DC cables', 'Solar panels', 'Batteries', 'Mounting rails', 'Circuit breakers (DC & AC)', 'Lugs, cable ties, tapes, nails', 'Professional installation'].map((item, index) => (
+                              <li key={index} className="flex items-center">
+                                <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                                {item}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                        
+                        <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
+                          Get Quote
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}

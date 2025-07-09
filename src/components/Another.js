@@ -1,8 +1,9 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState } from 'react'
-import cctv from "./img/cctv.jpg"
 import solar from "./img/SOLar.jpg"
 import electrical from "./img/electrical.jpg"
+import hvac from "./img/hvac.jpeg"
+import cctvService from "./img/cctvService.jpeg"
 import { X } from 'lucide-react'
 
 // Service categories with their sub-services
@@ -42,7 +43,7 @@ const serviceCategories = [
   {
     id: 2,
     title: "CCTV Cameras",
-    image: cctv,
+    image: cctvService,
     description: "Enhance the security of your property with our comprehensive CCTV solutions. From hidden surveillance to advanced IP cameras, we provide cutting-edge security systems.",
     subServices: [
       {
@@ -106,7 +107,7 @@ const serviceCategories = [
   {
     id: 4,
     title: "HVAC",
-    image: solar,
+    image: hvac,
     description: "Complete heating, ventilation, and air conditioning solutions. We provide comfort and climate control for all types of properties.",
     subServices: [
       {
@@ -157,7 +158,7 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
           </button>
         </div>
         
-        <div className="p-6">
+        <div id="services" className="p-6">
           <img 
             src={service.image} 
             alt={service.title}

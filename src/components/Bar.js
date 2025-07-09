@@ -7,6 +7,7 @@ function Bar() {
     { path: "/", name: "Home" },
     { path: "/about", name: "About Us" },
     { path: "/projects", name: "Projects" },
+    { path: "/service", name: "Services" },
     { path: "/pricing", name: "Pricing" },
     { path: "/contact", name: "Contact" }
   ];

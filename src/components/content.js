@@ -1,6 +1,5 @@
 import React from 'react';
-import Bar from './Bar';
-import Solar from './img/solar.mp4'
+import Solar from './img/video.mp4'
 
 function Content() {
   return (

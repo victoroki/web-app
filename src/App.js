@@ -10,7 +10,6 @@ import Form from "./components/Form";
 import Pricing from './components/pricing';
 import AboutUs from './components/About';
 import Projects from './components/projects';
-import Home from './components/Home'; // You might want to create this
 import Bar from './components/Bar';
 
 function App() {
@@ -37,6 +36,7 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/contact" element={<Form />} />
+          <Route path="/service" element={<Another />} />
         </Routes>
         
         <Sfooter />

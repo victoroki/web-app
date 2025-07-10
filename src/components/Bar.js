@@ -9,7 +9,8 @@ function Bar() {
     { path: "/projects", name: "Projects" },
     { path: "/service", name: "Services" },
     { path: "/pricing", name: "Pricing" },
-    { path: "/contact", name: "Contact" }
+    { path: "/contact", name: "Contact" },
+    { path: "/training", name: "Training" }
   ];
 
   return (

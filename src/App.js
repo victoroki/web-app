@@ -17,7 +17,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Main layout routes */}
+        {/* Main layout routes` */}
         <Route element={
           <>
             <Topbar />

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import logo from './img/logoai.png'
-import { Menu, X, Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Calendar, Clock, DollarSign, Users, Award, BookOpen, Zap, Sun, Palette, ChevronRight, CheckCircle, AlertCircle, Star, ArrowRight, Shield, Target, Lightbulb, TrendingUp, ChevronDown } from 'lucide-react';
+import logo from './img/logo2.jpeg';
+import { Menu, X, Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Calendar, Clock, DollarSign, Users, Award, BookOpen, Zap, Sun, Palette, ChevronRight, CheckCircle, AlertCircle, Star, ArrowRight, Shield, Target, Lightbulb, TrendingUp, ChevronDown, Youtube } from 'lucide-react';
 import Hero from './img/hero.mp4'
 // Header Component
 const Header = () => {
@@ -12,9 +12,10 @@ const Header = () => {
   };
 
   const servicesItems = [
-    { name: 'Electrical Design', href: '#electrical' },
+    { name: 'Electrical Design', href: '#electrical' },//Eectrical -- EPRA, ELEctrical Design
     { name: 'Solar System Design', href: '#solar' },
-    { name: 'Professional Branding', href: '#branding' }
+    { name: 'Professional Branding', href: '#branding' }, //company registration/Business registration, Company licensing with EPRA and CAK NCA, Digital marketing(Canva, facebook, google workspace, linkedin),
+    { name: 'Occupation Health and Safety training', href: '#' }, //work at height taining, fire safety training, first aid training, International local codes e.g NFPA,IEE,IEC, NEC, ISO, ILO, KS
   ];
 
   const trainingItems = [
@@ -32,18 +33,18 @@ const Header = () => {
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About Us', href: '#about' },
-    { 
-      name: 'Services', 
+    {
+      name: 'Services',
       href: '#services',
       dropdown: servicesItems
     },
-    { 
-      name: 'Trainings', 
+    {
+      name: 'Trainings',
       href: '#trainings',
       dropdown: trainingItems
     },
-    { 
-      name: 'Webinars', 
+    {
+      name: 'Webinars',
       href: '#webinars',
       dropdown: webinarItems
     },
@@ -59,7 +60,7 @@ const Header = () => {
             <div className="flex-shrink-0 flex items-center">
               <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-3">
                 {/* <Lightbulb className="w-6 h-6 text-white" /> */}
-                <img src={logo} alt={ <Lightbulb className="w-6 h-6 text-white"  height={40} width={30}/>} />
+                <img src={logo} alt={<Lightbulb className="w-6 h-6 text-white" height={40} width={30} />} />
               </div>
               <div>
                 <h1 className="text-l font-bold text-amber-600">Torchbearer Institute of Technologies</h1>
@@ -67,7 +68,7 @@ const Header = () => {
               </div>
             </div>
           </div>
-          
+
           {/* Desktop Navigation */}
           <nav className="hidden md:block">
             <div className="ml-10 flex items-center space-x-6">
@@ -186,24 +187,30 @@ const HeroSection = () => {
       />
       {/* Dark overlay on top of video for better text visibility */}
       <div className="absolute inset-0 bg-black/70 z-10"></div>
-      
+
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 z-20">
         <div className="text-center">
           {/* Main heading */}
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 drop-shadow-2xl">
-            Welcome to <span className="text-white">Torchbearer Institute</span>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
+            Torchbearer Institute of Technologies
           </h1>
-          
+
           {/* Subheading */}
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 drop-shadow-xl">
-            PROFESSIONAL TRAINING & DEVELOPMENT FOR
+            <div className='w-fit border-r-2 whitespace-nowrap overflow-hidden'>
+              <span className='inline-block border animate-typing'>
+                EMPOWER THE MINDS  ENERGIZE THE COMMUNITY
+              </span>
+            </div>
+
+
           </h2>
-          
+
           {/* Description */}
           <div className="text-xl md:text-2xl text-white font-medium mb-8 max-w-4xl mx-auto drop-shadow-lg">
-            Electrical, Solar and Branding 
+            Electrical, Solar and Branding
           </div>
-          
+
           {/* Optional paragraph */}
           {/* 
           <p className="text-lg md:text-xl text-gray-200 mb-12 max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
@@ -211,11 +218,11 @@ const HeroSection = () => {
             curriculum and advanced practical capabilities to help you excel in your professional career.
           </p> 
           */}
-          
+
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <a 
-              href="#about" 
+            <a
+              href="#about"
               className="bg-amber-600 text-white px-10 py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg hover:shadow-xl"
             >
               Learn More About Us
@@ -275,7 +282,7 @@ const UpcomingTraining = () => {
         "Networking techniques"
       ],
       price: "Ksh 890",
-      
+
     }
   ];
 
@@ -390,19 +397,19 @@ const AboutSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
             <p className="text-lg text-gray-700 leading-relaxed">
-              Torchbearer Institute provides professional training and development services to individuals and organizations 
-              seeking to excel in electrical engineering, renewable energy, and professional development. We offer comprehensive 
+              Torchbearer Institute provides professional training and development services to individuals and organizations
+              seeking to excel in electrical engineering, renewable energy, and professional development. We offer comprehensive
               solutions and expert guidance from entry-level certification to advanced professional development programs.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Established with a commitment to excellence, we are dedicated to exceeding expectations by providing 
-              cost-effective, innovative training solutions without compromising the quality of education that we deliver. 
-              Our expertise encompasses every aspect of professional development needs including EPRA licensing, solar system 
+              Established with a commitment to excellence, we are dedicated to exceeding expectations by providing
+              cost-effective, innovative training solutions without compromising the quality of education that we deliver.
+              Our expertise encompasses every aspect of professional development needs including EPRA licensing, solar system
               design, electrical engineering, and professional branding.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Our team consists of experienced professionals and certified instructors with industry-standard expertise 
-              and advanced teaching capabilities, ensuring you receive the highest quality education and practical skills 
+              Our team consists of experienced professionals and certified instructors with industry-standard expertise
+              and advanced teaching capabilities, ensuring you receive the highest quality education and practical skills
               needed for career success.
             </p>
           </div>
@@ -516,7 +523,7 @@ const EPRALicensing = () => {
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-            Get certified with Energy and Petroleum Regulatory Authority (EPRA) electrical worker licenses. 
+            Get certified with Energy and Petroleum Regulatory Authority (EPRA) electrical worker licenses.
             Choose the right license class for your expertise level and career advancement goals.
           </p>
         </div>
@@ -788,7 +795,7 @@ const BrandingTraining = () => {
 
         <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-lg shadow-lg">
           <h3 className="text-3xl font-bold mb-8 text-center text-gray-900">What You'll Learn</h3>
-                    <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-xl font-bold mb-4 text-amber-800">Core Modules</h4>
               <ul className="space-y-3">
@@ -857,7 +864,7 @@ const WebinarsSection = () => {
             Join our expert-led webinars to gain valuable insights and stay updated with industry trends
           </p>
         </div>
-        
+
         <UpcomingWebinars />
         <PastWebinars />
       </div>
@@ -919,7 +926,7 @@ const UpcomingWebinars = () => {
               </div>
               <p className="text-gray-700 mb-4"><strong>Speaker:</strong> {webinar.speaker}</p>
               <p className="text-gray-700 mb-6">{webinar.description}</p>
-              <a 
+              <a
                 href={webinar.registrationLink}
                 className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors"
               >
@@ -979,13 +986,13 @@ const PastWebinars = () => {
                 <p className="text-gray-700 mt-2">{webinar.description}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a 
+                <a
                   href={webinar.recordingLink}
                   className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
                 >
                   Watch Recording
                 </a>
-                <a 
+                <a
                   href={webinar.slidesLink}
                   className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors text-center"
                 >
@@ -1286,6 +1293,12 @@ const Footer = () => {
               <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
+              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+                <Youtube className="w-5 h-5" />
+              </a>
+              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+                <Youtube className="w-5 h-5" />
+              </a>
             </div>
           </div>
 
@@ -1368,7 +1381,7 @@ const App = () => {
         <SolarDesignTraining />
         <ElectricalDesign />
         <BrandingTraining />
-        <UpcomingTraining /> 
+        <UpcomingTraining />
         <Testimonials />
         <ContactSection />
       </main>

@@ -10,7 +10,7 @@ function Bar() {
     { path: "/service", name: "Services" },
     { path: "/pricing", name: "Pricing" },
     { path: "/contact", name: "Contact" },
-    { path: "/training", name: "Training" }
+    { path: "/training", name: "Torchbearer Institute" }
   ];
 
   return (

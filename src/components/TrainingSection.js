@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import logo from './img/logo2.jpeg';
-import { Menu, X, Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Calendar, Clock, DollarSign, Users, Award, BookOpen, Zap, Sun, Palette, ChevronRight, CheckCircle, AlertCircle, Star, ArrowRight, Shield, Target, Lightbulb, TrendingUp, ChevronDown, Youtube } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import logo from './img/torchbearer-logo.png';
+import { Menu, X, Phone, Mail, MapPin, Facebook, Linkedin, Instagram, Calendar, Clock, DollarSign, Users, Award, BookOpen, Zap, Sun, Palette, ChevronRight, CheckCircle, AlertCircle, Star, ArrowRight, Shield, Target, Lightbulb, TrendingUp, ChevronDown, Youtube, Building, Monitor, HardHat, Heart, FileText, AlertTriangle } from 'lucide-react';
 import Hero from './img/hero.mp4'
 // Header Component
 const Header = () => {
@@ -58,7 +58,7 @@ const Header = () => {
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
             <div className="flex-shrink-0 flex items-center">
-              <div className="w-12 h-12 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mr-3">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mr-3">
                 {/* <Lightbulb className="w-6 h-6 text-white" /> */}
                 <img src={logo} alt={<Lightbulb className="w-6 h-6 text-white" height={40} width={30} />} />
               </div>
@@ -175,6 +175,25 @@ const Header = () => {
 
 // Hero Section Component
 const HeroSection = () => {
+  const [displayText, setDisplayText] = useState('');
+  const [isTyping, setIsTyping] = useState(true);
+  const fullText = 'EMPOWER THE MINDS ENERGIZE THE COMMUNITY';
+
+  useEffect(() => {
+    let index = 0;
+    const typingInterval = setInterval(() => {
+      if (index < fullText.length) {
+        setDisplayText(fullText.slice(0, index + 1));
+        index++;
+      } else {
+        setIsTyping(false);
+        clearInterval(typingInterval);
+      }
+    }, 100); // speed (100ms per character)
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
   return (
     <section id="home" className="relative bg-[#e4d7c8] py-20">
       <video
@@ -195,15 +214,16 @@ const HeroSection = () => {
             Torchbearer Institute of Technologies
           </h1>
 
-          {/* Subheading */}
+          {/* Subheading with typing animation */}
           <h2 className="text-2xl md:text-3xl font-semibold text-white mb-8 drop-shadow-xl">
-            <div className='w-fit border-r-2 whitespace-nowrap overflow-hidden'>
-              <span className='inline-block border animate-typing'>
-                EMPOWER THE MINDS  ENERGIZE THE COMMUNITY
+            <div className="relative inline-block">
+              <span className="font-mono">
+                {displayText}
               </span>
+              {isTyping && (
+                <span className="inline-block w-0.5 h-8 bg-white ml-1 animate-pulse"></span>
+              )}
             </div>
-
-
           </h2>
 
           {/* Description */}
@@ -239,52 +259,179 @@ const HeroSection = () => {
     </section>
   );
 };
+
 //upcoming section
 const UpcomingTraining = () => {
-  const upcomingCourses = [
-    {
-      title: "Advanced Solar PV System Design",
-      date: "15th - 30th October 2023",
-      time: "6:00 PM - 8:00 PM EAT",
-      description: "Master advanced solar PV system design techniques with hands-on training using industry-standard software.",
-      features: [
-        "PVsyst software training",
-        "Battery sizing calculations",
-        "Grid-tied system design",
-        "Project case studies"
-      ],
-      price: "Ksh 1120",
-      earlyBirdPrice: "Ksh 999 (until 5th Oct)"
-    },
-    {
-      title: "EPRA Licensing Preparation (Class C1-B)",
-      date: "5th - 20th November 2023",
-      time: "5:00 PM - 7:00 PM EAT",
-      description: "Comprehensive preparation for EPRA electrical worker licensing exams with mock tests and practical guidance.",
-      features: [
-        "Exam syllabus coverage",
-        "Practice tests",
-        "Technical drawing exercises",
-        "Interview preparation"
-      ],
-      price: "Ksh 880",
-      earlyBirdPrice: "ksh 865 (until 20th Oct)"
-    },
-    {
-      title: "Professional Branding",
-      date: "1st - 15th December 2023",
-      time: "7:00 PM - 9:00 PM EAT",
-      description: "Develop a powerful professional brand to advance your engineering career and attract better opportunities.",
-      features: [
-        "Personal branding strategy",
-        "LinkedIn optimization",
-        "Professional portfolio development",
-        "Networking techniques"
-      ],
-      price: "Ksh 890",
-
-    }
-  ];
+ const upcomingCourses = [
+  {
+    "title": "NITA EXAM COACHING",
+    "date": "July 31",
+    "time": "07:00 PM - 08:30 PM",
+    "description": "NITA exam coaching. T2 - KSH 5000, T3 - KSH 7000.",
+    "features": [
+      "Exam syllabus coverage",
+      "Practice tests" 
+      // Based on typical NITA coaching, more specific features are not provided in the original text
+    ],
+    "price": "T2 - KSH 5000, T3 - KSH 7000",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "ELECTRICAL TRAINING",
+    "date": "August 4 - 22",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Electrical Training.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "60 USD",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "PERSONAL BRANDING",
+    "date": "August 6 - 7",
+    "time": "07:00 PM - 08:00 PM",
+    "description": "Personal branding training.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "KSH 1050",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
+    "date": "August 18 - 22",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "Training on SketchUp, PVSYST, Homer & AutoCAD designs.",
+    "features": [
+      "SketchUp software training",
+      "PVSYST software training",
+      "Homer software training",
+      "AutoCAD software training"
+    ],
+    "price": "KSH 3000",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "August 31",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Free webinar for Solar EPRA T2 & T3 training.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "FREE",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "September 8 - 26",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "FREE",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
+    "date": "October 2",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "Free webinar combining NITA Exam Coaching and EPRA T2 & T3 Solar.",
+    "features": [
+      "NITA Exam Coaching",
+      "EPRA T2 Solar insights",
+      "EPRA T3 Solar insights"
+    ],
+    "price": "FREE",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
+    "date": "October 6 - 24",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Webinar on SketchUp, PVSYST, Homer & AutoCAD designs.",
+    "features": [
+      "SketchUp software insights",
+      "PVSYST software insights",
+      "Homer software insights",
+      "AutoCAD software insights"
+    ],
+    "price": "KSH 6000",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
+    "date": "November 2",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Free training on SketchUp, PVSYST, Homer & AutoCAD designs.",
+    "features": [
+      "SketchUp software training",
+      "PVSYST software training",
+      "Homer software training",
+      "AutoCAD software training"
+    ],
+    "price": "FREE",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "NITA EXAM COACHING",
+    "date": "November 10 - 14",
+    "time": "07:00 PM - 08:00 PM",
+    "description": "NITA exam coaching.",
+    "features": [
+      "Exam syllabus coverage",
+      "Practice tests"
+    ],
+    "price": "KSH 3000",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "ELECTRICAL TRAINING",
+    "date": "November 17 - December 5",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Electrical Training. For more info call/WhatsApp +254789173033.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "N/A", // Price not specified
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "December 8 - 12",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "Solar EPRA T2 & T3 training webinar.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "T2-KSH 5000, T3-KSH 7000",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "January 8",
+    "time": "07:00 PM - 08:00 PM",
+    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "FREE",
+    "earlyBirdPrice": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "January 12 - 30",
+    "time": "07:30 PM - 09:00 PM",
+    "description": "Solar EPRA T2 & T3 training webinar.",
+    "features": [
+      "N/A" // No specific features listed in the original text
+    ],
+    "price": "T2-KSH 5000, T3-KSH 7000",
+    "earlyBirdPrice": "N/A"
+  }
+];
 
   return (
     <section id="upcoming" className="py-20 bg-gradient-to-br from-amber-50 to-amber-100">
@@ -328,10 +475,10 @@ const UpcomingTraining = () => {
                     <span className="text-lg font-semibold">Regular Price:</span>
                     <span className="text-xl font-bold text-amber-600">{course.price}</span>
                   </div>
-                  <div className="flex justify-between items-center mt-2">
+                  {/* <div className="flex justify-between items-center mt-2">
                     <span className="text-sm font-medium">Early Bird:</span>
                     <span className="text-sm font-bold text-amber-600">{course.earlyBirdPrice}</span>
-                  </div>
+                  </div> */}
                 </div>
                 <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors shadow-lg">
                   Register Now
@@ -420,7 +567,7 @@ const AboutSection = () => {
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">500+</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">100+</h3>
                   <p className="text-gray-600">Trained Professionals</p>
                 </div>
               </div>
@@ -429,7 +576,7 @@ const AboutSection = () => {
                   <Award className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">15+</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">2+</h3>
                   <p className="text-gray-600">Years of Experience</p>
                 </div>
               </div>
@@ -560,7 +707,7 @@ const EPRALicensing = () => {
           ))}
         </div>
 
-        <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
+        {/* <div className="bg-red-50 border-l-4 border-red-400 p-6 rounded-lg">
           <div className="flex">
             <AlertCircle className="h-6 w-6 text-red-400 mr-3" />
             <div>
@@ -570,7 +717,7 @@ const EPRALicensing = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
@@ -752,6 +899,123 @@ const ElectricalDesign = () => {
   );
 };
 
+const HealthSafetyTraining = () => {
+  return (
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            Occupational <span className="text-amber-600">Health & Safety Training</span>
+          </h2>
+          <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
+          <p className="text-xl text-gray-700 max-w-4xl mx-auto">
+            Comprehensive workplace safety training programs designed to protect workers and ensure compliance with international standards
+          </p>
+        </div>
+
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-8 rounded-lg shadow-lg">
+            <HardHat className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Work at Height Training</h3>
+            <p className="text-lg">
+              Essential safety protocols and equipment usage for working at elevated positions and confined spaces
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-amber-400 to-amber-500 text-white p-8 rounded-lg shadow-lg">
+            <AlertTriangle className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Fire Safety Training</h3>
+            <p className="text-lg">
+              Fire prevention, emergency response procedures, and proper use of firefighting equipment and evacuation protocols
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-amber-600 to-amber-700 text-white p-8 rounded-lg shadow-lg">
+            <Heart className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">First Aid Training</h3>
+            <p className="text-lg">
+              Life-saving first aid techniques, CPR certification, and emergency medical response for workplace incidents
+            </p>
+          </div>
+        </div>
+
+        <div className="bg-gray-50 p-8 rounded-lg">
+          <h3 className="text-3xl font-bold text-gray-900 mb-6 text-center">
+            <span className="text-amber-600">International Standards</span> & Compliance
+          </h3>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">NFPA Standards</h4>
+              <p className="text-gray-600">National Fire Protection Association codes and standards</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">IEEE Standards</h4>
+              <p className="text-gray-600">Institute of Electrical and Electronics Engineers protocols</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">IEC Standards</h4>
+              <p className="text-gray-600">International Electrotechnical Commission guidelines</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">NEC Codes</h4>
+              <p className="text-gray-600">National Electrical Code compliance training</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">ISO Standards</h4>
+              <p className="text-gray-600">International Organization for Standardization protocols</p>
+            </div>
+
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">ILO & KS Standards</h4>
+              <p className="text-gray-600">International Labour Organization and Kenyan Standards</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-16 text-center">
+          <div className="bg-amber-50 p-8 rounded-lg">
+            <Shield className="w-16 h-16 text-amber-600 mx-auto mb-6" />
+            <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Choose Our Safety Training?</h3>
+            <div className="grid md:grid-cols-3 gap-6 text-left">
+              <div className="flex items-start">
+                <Users className="w-6 h-6 text-amber-600 mt-1 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900">Expert Instructors</h4>
+                  <p className="text-gray-600">Certified safety professionals with industry experience</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <FileText className="w-6 h-6 text-amber-600 mt-1 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900">Certification</h4>
+                  <p className="text-gray-600">Internationally recognized certificates upon completion</p>
+                </div>
+              </div>
+              <div className="flex items-start">
+                <Shield className="w-6 h-6 text-amber-600 mt-1 mr-3 flex-shrink-0" />
+                <div>
+                  <h4 className="font-semibold text-gray-900">Compliance</h4>
+                  <p className="text-gray-600">Meet all regulatory requirements and safety standards</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 // Branding Training Component
 const BrandingTraining = () => {
   return (
@@ -789,6 +1053,31 @@ const BrandingTraining = () => {
             <h3 className="text-2xl font-bold mb-4">Brand Management</h3>
             <p className="text-lg">
               Learn to maintain brand consistency and manage your brand reputation in the digital age
+            </p>
+          </div>
+        </div>
+        <div className="grid md:grid-cols-3 gap-8 mb-12">
+          <div className="bg-gradient-to-br from-amber-500 to-amber-600 text-white p-8 rounded-lg shadow-lg">
+            <Building className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Company Registration</h3>
+            <p className="text-lg">
+              Complete business registration services to establish your company legally and get started with confidence
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-amber-400 to-amber-500 text-white p-8 rounded-lg shadow-lg">
+            <FileText className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Business Licensing</h3>
+            <p className="text-lg">
+              Professional licensing assistance with EPRA, CAK, and NCA to ensure your business meets all regulatory requirements
+            </p>
+          </div>
+
+          <div className="bg-gradient-to-br from-amber-600 to-amber-700 text-white p-8 rounded-lg shadow-lg">
+            <Monitor className="w-16 h-16 mb-6" />
+            <h3 className="text-2xl font-bold mb-4">Digital Marketing</h3>
+            <p className="text-lg">
+              Master essential digital tools including Canva, Facebook, Google Workspace, and LinkedIn for effective online marketing
             </p>
           </div>
         </div>
@@ -876,28 +1165,116 @@ const WebinarsSection = () => {
 const UpcomingWebinars = () => {
   const upcomingWebinars = [
     {
-      title: "Solar Energy Trends 2024",
-      date: "October 25, 2023",
-      time: "2:00 PM - 3:30 PM EAT",
-      speaker: "Dr. Jane Muthoni",
-      description: "Explore the latest trends and innovations in solar energy technology for 2024",
-      registrationLink: "#register"
+      "title": "NITA EXAM COACHING",
+      "date": "July 31",
+      "time": "07:00 PM - 08:30 PM",
+      "speaker": "N/A",
+      "description": "NITA exam coaching. T2 - KSH 5000, T3 - KSH 7000.",
+      "registrationLink": "N/A"
     },
     {
-      title: "EPRA Licensing Updates",
-      date: "November 8, 2023",
-      time: "4:00 PM - 5:30 PM EAT",
-      speaker: "Eng. Peter Kamau",
-      description: "Learn about the latest changes in EPRA licensing requirements and procedures",
-      registrationLink: "#register"
+      "title": "ELECTRICAL TRAINING",
+      "date": "August 4 - 22",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Electrical Training. Cost: 60 USD.",
+      "registrationLink": "N/A"
     },
     {
-      title: "Electrical Safety Standards",
-      date: "December 5, 2023",
-      time: "10:00 AM - 11:30 AM EAT",
-      speaker: "Prof. James Omondi",
-      description: "Understanding the new electrical safety standards and compliance requirements",
-      registrationLink: "#register"
+      "title": "PERSONAL BRANDING",
+      "date": "August 6 - 7",
+      "time": "07:00 PM - 08:00 PM",
+      "speaker": "N/A",
+      "description": "Personal branding training. Cost: KSH 1050.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
+      "date": "August 18 - 22",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Training on SketchUp, PVSYST, Homer & AutoCAD designs. Cost: KSH 3000.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "August 31",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Free webinar for Solar EPRA T2 & T3 training.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "September 8 - 26",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+      "registrationLink": "tel:+254789173033"
+    },
+    {
+      "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
+      "date": "October 2",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Free webinar combining NITA Exam Coaching and EPRA T2 & T3 Solar.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
+      "date": "October 6 - 24",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Webinar on SketchUp, PVSYST, Homer & AutoCAD designs. Cost: KSH 6000.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
+      "date": "November 2",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Free training on SketchUp, PVSYST, Homer & AutoCAD designs.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "NITA EXAM COACHING",
+      "date": "November 10 - 14",
+      "time": "07:00 PM - 08:00 PM",
+      "speaker": "N/A",
+      "description": "NITA exam coaching. Cost: KSH 3000.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "ELECTRICAL TRAINING",
+      "date": "November 17 - December 5",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Electrical Training. For more info call/WhatsApp +254789173033.",
+      "registrationLink": "tel:+254789173033"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "December 8 - 12",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Solar EPRA T2 & T3 training webinar. T2: KSH 5000, T3: KSH 7000.",
+      "registrationLink": "N/A"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "January 8",
+      "time": "07:00 PM - 08:00 PM",
+      "speaker": "N/A",
+      "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+      "registrationLink": "tel:+254789173033"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "January 12 - 30",
+      "time": "07:30 PM - 09:00 PM",
+      "speaker": "N/A",
+      "description": "Solar EPRA T2 & T3 training webinar. T2: KSH 5000, T3: KSH 7000.",
+      "registrationLink": "N/A"
     }
   ];
 
@@ -942,32 +1319,96 @@ const UpcomingWebinars = () => {
 
 // Past Webinars Component
 const PastWebinars = () => {
-  const pastWebinars = [
-    {
-      title: "Introduction to Solar Design",
-      date: "September 15, 2023",
-      speaker: "Eng. Arnold ",
-      description: "Fundamentals of solar system design for beginners",
-      recordingLink: "#watch",
-      slidesLink: "#download"
-    },
-    {
-      title: "EPRA License Application Process",
-      date: "August 22, 2023",
-      speaker: "Mr. Dalton",
-      description: "Step-by-step guide to applying for EPRA electrical licenses",
-      recordingLink: "#watch",
-      slidesLink: "#download"
-    },
-    {
-      title: "Career Growth in Electrical Engineering",
-      date: "July 10, 2023",
-      speaker: "Dr. Dalton",
-      description: "Strategies for advancing your career in electrical engineering",
-      recordingLink: "#watch",
-      slidesLink: "#download"
-    }
-  ];
+const pastWebinars = [
+  {
+    "title": "SOLAR AND ELECTRICAL EPRA LICENSING INSIGHTS WEBINAR",
+    "date": "January 15",
+    "time": "N/A",
+    "speaker": "N/A",
+    "description": "Free webinar for insights into solar and electrical EPRA licensing. For more info call/WhatsApp +254789173033.",
+    "registrationLink": "tel:+254789173033"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING",
+    "date": "January 27",
+    "time": "07:40 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "Solar EPRA T2 & T3 training session.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING",
+    "date": "February 21",
+    "time": "N/A",
+    "speaker": "N/A",
+    "description": "Four weeks training for Solar EPRA T2 & T3. T2: KSH 5000, T3: KSH 7000.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR SYSTEMS DESIGN AND SIZING (PVSYST & SKETCHUP, SMA SUNNY DESIGN TOOL)",
+    "date": "March 5",
+    "time": "07:30 PM - 09:30 PM",
+    "speaker": "N/A",
+    "description": "Training on solar systems design and sizing using PVSYST, SketchUp, and SMA Sunny Design Tool. Cost: 12 USD / KSH 1500.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING",
+    "date": "March 10 - 28",
+    "time": "07:40 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "Solar EPRA T2 & T3 training. T2: KSH 5000, T3: KSH 7000. For more info call/WhatsApp +254789173033.",
+    "registrationLink": "tel:+254789173033"
+  },
+  {
+    "title": "SOLAR SYSTEM DESIGN BASICS (PVSYST & SKETCHUP)",
+    "date": "April 17",
+    "time": "04:00 PM - 05:00 PM",
+    "speaker": "N/A",
+    "description": "Basics of solar system design using PVSYST & SketchUp. Cost: KSH 3000.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR SYSTEM TESTING & COMMISSIONING",
+    "date": "June 5",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "Free webinar on solar system testing and commissioning.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR SYSTEM DESIGN & SIZING (PVSYST & SKETCHUP, SMA SUNNY DESIGN TOOL)",
+    "date": "June 9 - 13",
+    "time": "07:30 PM - 09:30 PM",
+    "speaker": "N/A",
+    "description": "Solar system design and sizing training using PVSYST, SketchUp, and SMA Sunny Design Tool. Cost: 12.99 USD.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "June 22",
+    "time": "07:40 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+    "registrationLink": "tel:+254789173033"
+  },
+  {
+    "title": "SOLAR SYSTEM DESIGN BASICS (PVSYST & SKETCHUP)",
+    "date": "July 2",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "Solar system design basics using PVSYST & SketchUp. Cost: KSH 1050.",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "NITA EXAM COACHING",
+    "date": "July 7 - 25",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "N/A",
+    "description": "NITA exam coaching. T2 - KSH 5000, T3 - KSH 7000.",
+    "registrationLink": "N/A"
+  }
+];
 
   return (
     <div>
@@ -1135,7 +1576,7 @@ const ContactSection = () => {
               </div>
             </div>
 
-            <div className="flex items-start">
+            {/* <div className="flex items-start">
               <div className="bg-amber-100 p-4 rounded-full mr-6">
                 <MapPin className="w-6 h-6 text-amber-600" />
               </div>
@@ -1144,7 +1585,7 @@ const ContactSection = () => {
                 <p className="text-gray-700">Torchbearer Plaza, 5th Floor</p>
                 <p className="text-gray-700">Ngong Road, Nairobi, Kenya</p>
               </div>
-            </div>
+            </div> */}
 
             <div className="pt-8">
               <h3 className="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
@@ -1284,19 +1725,19 @@ const Footer = () => {
               Professional training and development for electrical engineering, renewable energy, and career advancement.
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.facebook.com/profile.php?id=61572958352380" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.linkedin.com/company/torchbearer-institute-of-technologies" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.tiktok.com/@torchbearersinstitute?_t=ZM-8y0qzId3szF&_r=1" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Instagram className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.youtube.com/@TORCHBEARERINSITTUTE" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
-              <a href="#" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.youtube.com/@TORCHBEARERINSITTUTE" className="bg-gray-800 p-3 rounded-full hover:bg-amber-600 transition-colors">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
@@ -1339,10 +1780,10 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-6">Contact Info</h3>
             <ul className="space-y-4">
-              <li className="flex items-start">
+              {/* <li className="flex items-start">
                 <MapPin className="w-5 h-5 text-amber-500 mr-3 mt-1" />
                 <span className="text-gray-400">Torchbearer Plaza, 5th Floor<br />Ngong Road, Nairobi, Kenya</span>
-              </li>
+              </li> */}
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-amber-500 mr-3" />
                 <span className="text-gray-400">+254 789 173033</span>
@@ -1380,6 +1821,8 @@ const App = () => {
         <EPRALicensing />
         <SolarDesignTraining />
         <ElectricalDesign />
+        <HealthSafetyTraining />
+        <WebinarsSection />
         <BrandingTraining />
         <UpcomingTraining />
         <Testimonials />

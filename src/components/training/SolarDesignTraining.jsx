@@ -6,27 +6,35 @@ import {
   Award,
   Target,
 } from 'lucide-react';
+import autocard from '../img/autocard.png'
+import pyvsist from '../img/pyvsist.png'
+import sketchup from '../img/sketchup.png'
+import homer from '../img/homer.png'
+import helioscope from '../img/helioscope.png'
+import EpraComponent from "./EpraComponent"
 
 const SolarDesignTraining = () => {
   const software = [
-    { name: 'Autodesk AutoCAD', icon: <BookOpen className="w-8 h-8" /> },
-    { name: 'PVsyst (Photovoltaic Software)', icon: <Sun className="w-8 h-8" /> },
-    { name: 'SketchUp', icon: <Zap className="w-8 h-8" /> }
+    { name: 'Autodesk AutoCAD', icon: autocard, desc:'AutoCAD is a crucial and versatile CAD software extensively used in the solar industry for system design, drafting, and documentation of photovoltaic (PV) projects. It offers precision, scalability, and detailed 2D/3D modeling capabilities that support solar layout planning from small residential systems to large utility-scale installations.' },
+    { name: 'SketchUp', icon: sketchup, desc:"SketchUp is a widely used 3D modeling software that, when combined with specialized plugins like Skelion, becomes a powerful tool for solar system design. It is valued in the solar industry for detailed 3D visualization, layout planning, and shading analysis which are critical in optimizing photovoltaic (PV) system performance" },
+    { name: 'PVsyst (Photovoltaic Software)', icon: pyvsist, desc:'PVsyst is a comprehensive photovoltaic (PV) system design and simulation software widely used by engineers, researchers, educators, and architects for evaluating and optimizing solar energy projects. It supports all sizes of PV systems, including grid-connected, standalone, or pumping systems' },
+    { name: 'Homer', icon: homer, desc:'HOMER Pro (Hybrid Optimization of Multiple Energy Resources) is a leading microgrid modeling and optimization software widely used worldwide for the design, simulation, and economic analysis of distributed energy systems and microgrids'},
+    { name: 'HelioScope', icon: helioscope, desc:'SketchUp is a widely used 3D modeling software that, when combined with specialized plugins like Skelion, becomes a powerful tool for solar system design. It is valued in the solar industry for detailed 3D visualization, layout planning, and shading analysis which are critical in optimizing photovoltaic (PV) system performanc' }
   ];
 
   const trainingLevels = [
     {
-      title: 'Solar Training T1',
+      title: 'Solar EPRA Training T1',
       description: 'Fundamentals of solar energy systems, basic design principles, and introduction to solar components',
       level: 'Beginner'
     },
     {
-      title: 'Solar Training T2',
+      title: 'Solar EPRA Training T2',
       description: 'Intermediate system design, load calculations, and solar panel sizing techniques',
       level: 'Intermediate'
     },
     {
-      title: 'Solar Training T3',
+      title: 'Solar EPRA Training T3',
       description: 'Advanced system optimization, grid integration, and complex project management',
       level: 'Advanced'
     }
@@ -114,7 +122,7 @@ const SolarDesignTraining = () => {
           </div>
 
           <div className="space-y-8">
-            <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
+            {/* <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center mb-8">
                 <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mr-4">
                   <BookOpen className="w-6 h-6 text-white" />
@@ -139,7 +147,7 @@ const SolarDesignTraining = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
               <div className="flex items-center mb-8">
@@ -150,18 +158,21 @@ const SolarDesignTraining = () => {
               </div>
               <div className="space-y-4">
                 {software.map((item, index) => (
-                  <div key={index} className="group flex items-center p-6 bg-gradient-to-r from-green-50 to-green-100/50 rounded-xl border border-green-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
+                  <div key={index} className="group flex items-center p-6 bg-[#d6baa3] rounded-xl border border-green-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
                     <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mr-6 shadow-md group-hover:shadow-lg transition-shadow">
                       <div className="text-green-600 group-hover:text-green-700 transition-colors">
-                        {item.icon}
+                        <img src={item.icon} />
                       </div>
                     </div>
                     <div className="flex-1">
                       <span className="text-xl font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
                         {item.name}
                       </span>
+                      <p className='text-sm font-italic'>
+                        {item.desc}
+                      </p>
                       <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-                        <div className="bg-gradient-to-r from-green-500 to-green-600 h-2 rounded-full w-full"></div>
+                        <div className="bg-[#e99621] h-2 rounded-full w-full"></div>
                       </div>
                     </div>
                   </div>
@@ -170,6 +181,9 @@ const SolarDesignTraining = () => {
             </div>
           </div>
         </div>
+        <>
+        <EpraComponent />
+        </>
       </div>
     </section>
   );

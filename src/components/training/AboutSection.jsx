@@ -61,7 +61,7 @@ const AboutSection = () => {
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">100+</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">1000+</h3>
                   <p className="text-gray-600">Trained Professionals</p>
                 </div>
               </div>

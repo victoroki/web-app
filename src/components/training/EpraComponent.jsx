@@ -3,7 +3,7 @@ import { CheckCircle } from 'lucide-react';
 
 
 const EpraComponent = () => {
-  const licenseClasses = [
+    const licenseClasses = [
   {
     "class": "T1",
     "scope": "Solar PV system installation work for small systems or single battery DC systems of up to 100Wp (watts peak).",
@@ -40,16 +40,17 @@ const EpraComponent = () => {
   }
 ];
 
+
   return (
     <section id="epra" className="py-20 bg-gradient-to-br from-amber-50 to-amber-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            EPRA <span className="text-amber-600">Electrical Worker Training</span>
+            EPRA <span className="text-amber-600">Solar Worker Training</span>
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-           Prepare to advance your electrical career with our focused training designed specifically for any one who is aming to get EPRA ELECTRICAL coaching training and material
+           Prepare to advance your electrical career with our focused training designed specifically for any one who is aming to get EPRA Solar coaching training and material
           </p>
         </div>
 

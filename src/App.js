@@ -10,7 +10,6 @@ import Pricing from './components/pricing';
 import Projects from './components/projects';
 import Form from "./components/Form";
 import Another from './components/Another';
-import TrainingLayout from './components/TrainingLayout';
 
 import Header from './components/training/Header';
 import HeroSection from './components/training/HeroSection';
@@ -26,6 +25,25 @@ import BrandingTraining from './components/training/BrandingTraining';
 import UpcomingTraining from './components/training/UpcomingTraining';
 import Footer from './components/training/Footer';
 import PastWebinars from './components/training/PastWebinars';
+import Partners from './components/training/Partners';
+import TrainerProfile from './components/training/Trainer';
+import Whatsapp from './components/Whatsapp';
+import WhatsappTrainer from './components/training/WhatsappTrainer';
+
+// Create a component for the training homepage that includes all the sections
+const TrainingHomepage = () => {
+  return (
+    <>
+      <HeroSection />
+      <AboutSection />
+      <Partners />
+      <Testimonials />
+      <WhatsappTrainer />
+      {/* <TrainerProfile /> */}
+      {/* Add any other components you want on the training homepage */}
+    </>
+  );
+};
 
 function App() {
   return (
@@ -38,6 +56,7 @@ function App() {
               <Topbar />
               <Bar />
               <Outlet />
+              <Whatsapp />
               <Sfooter />
             </>
           }
@@ -50,7 +69,7 @@ function App() {
           <Route path="/service" element={<Another />} />
         </Route>
 
-        {/* Training layout with all training subroutes */}
+        {/* Training layout - common header and footer for all training pages */}
         <Route
           element={
             <div className="min-h-screen flex flex-col">
@@ -62,7 +81,10 @@ function App() {
             </div>
           }
         >
-          <Route path="/training" element={<HeroSection />} />
+          {/* Training homepage with all sections */}
+          <Route path="/training" element={<TrainingHomepage />} />
+          
+          {/* Individual training pages without repeated components */}
           <Route path="/training/about" element={<AboutSection />} />
           <Route path="/training/epra" element={<EPRALicensing />} />
           <Route path="/training/solar" element={<SolarDesignTraining />} />
@@ -73,7 +95,7 @@ function App() {
           <Route path="/training/upcoming" element={<UpcomingTraining />} />
           <Route path="/training/testimonials" element={<Testimonials />} />
           <Route path="/training/contact" element={<ContactSection />} />
-          <Route path="/training/pastwebinars" element={<PastWebinars />} />zzz
+          <Route path="/training/pastwebinars" element={<PastWebinars />} />
         </Route>
       </Routes>
     </Router>

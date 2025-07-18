@@ -79,6 +79,8 @@ const HeroSection = () => {
           <span className="mx-2 text-gray-300">•</span>
           <span className="text-orange-300 font-medium">Solar</span>
           <span className="mx-2 text-gray-300">•</span>
+          <span className="text-amber-500 font-medium">OSHA</span>
+          <span className="mx-2 text-gray-300">•</span>
           <span className="text-amber-500 font-medium">Branding</span>
         </div>
 
@@ -88,7 +90,7 @@ const HeroSection = () => {
             href="#about"
             className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white transition-all duration-300 transform hover:scale-105 hover:shadow-2xl focus:outline-none focus:ring-4 focus:ring-amber-400/50 rounded-full overflow-hidden"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-amber-500 via-orange-500 to-red-500 rounded-full transition-all duration-300 group-hover:from-amber-400 group-hover:via-orange-400 group-hover:to-red-400"></span>
+            <span className="absolute inset-0 bg-[#d97706] rounded-full transition-all duration-300 group-hover:from-amber-400 group-hover:via-orange-400 group-hover:to-red-400"></span>
             <span className="relative z-10 flex items-center space-x-2">
               <span>Learn More About Us</span>
               <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">

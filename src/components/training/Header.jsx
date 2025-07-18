@@ -18,7 +18,7 @@ const Header = () => {
   const servicesItems = [
     { name: 'Solar System', href: '/training/solar' },
     { name: 'Electrical', href: '/training/electrical' },
-    { name: 'Occupation Health and Safety training', href: '/training/safety-training' },
+    { name: 'Occupation  Safety and Health training', href: '/training/safety-training' },
     { name: 'Professional Branding', href: '/training/branding' },
 
   ];

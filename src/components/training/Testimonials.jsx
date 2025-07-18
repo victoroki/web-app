@@ -1,21 +1,30 @@
 import { Star } from 'lucide-react';
+import deborah from '../img/deborah.jpeg'
+import ezekiel from '../img/ezekiel.jpeg'
+import roy from '../img/roy.jpeg'
 
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: "Torchbearer Institute's EPRA licensing training helped me advance from Class C2 to B within a year. Their practical approach made all the difference.",
-      author: "James Mwangi",
-      role: "Electrical Contractor"
+      quote: "Torcherear delivered exceptional, tailored training that was instrumental in helping me earn my T2 license. The well-structured, practical sessions and knowledgeable instructors made complex topics easy to grasp and built my confidence for both written and oral exams. I highly recommend Torcherear for effective, professional training in the renewable energy sector.",
+      author: "Ezekiel Omae",
+      role: "Site Electromechanical Engineer",
+      link:"https://www.linkedin.com/in/ezekiel-omae-229945199?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      image: ezekiel
     },
     {
-      quote: "The solar design course was comprehensive and hands-on. I was able to start my own solar installation business immediately after completion.",
-      author: "Sarah Omondi",
-      role: "Solar Energy Entrepreneur"
+      quote: "Torchbearer Institute’s solar training was practical, well‑structured, and made complex concepts easy to grasp. With their expert guidance, I passed my NITA T1 exam and quickly landed a job in the solar industry. I highly recommend Torchbearer Institute to anyone looking to launch a career in renewable energy.",
+      author: "Deborah Nyakinyua",
+      role: "Electrical and Electronic Engineer",
+      link:'https://www.linkedin.com/in/deborah-nyakinyua-6066h5037?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_recommendations_details%3B%2F7jPjEO0T7K%2FiFPTZK6p%2Bg%3D%3D',
+      image: deborah
     },
     {
-      quote: "The professional branding training transformed how I present my electrical business. My client base has doubled in just three months!",
-      author: "David Kamau",
-      role: "Electrical Engineer"
+      quote: "Torchbearer offers hands-on, practical training that makes complex concepts easy to understand while building real-world skills. Their program covers key areas like solar energy conversion, system sizing, and commissioning, with strong mentorship and support. I highly recommend them for anyone pursuing a career in renewable energy.",
+      author: "Roy Otieno",
+      role: "Agricultural & Biosystems Engineer",
+      link:'https://www.linkedin.com/in/roy-otieno-60b190174?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bw3xM3kuXTiaQyD1p865guQ%3D%3D',
+      image: roy
     }
   ];
 
@@ -43,10 +52,10 @@ const Testimonials = () => {
               <p className="text-gray-700 text-lg mb-6 italic">"{testimonial.quote}"</p>
               <div className="flex items-center">
                 <div className="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  {testimonial.author.charAt(0)}
+                  <img className='rounded-full' src={testimonial.image} alt={testimonial.image} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-900">{testimonial.author}</h4>
+                  <a href={testimonial.link}><h4 className="font-bold text-gray-900">{testimonial.author}</h4></a>
                   <p className="text-amber-600">{testimonial.role}</p>
                 </div>
               </div>

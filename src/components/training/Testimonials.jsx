@@ -1,19 +1,19 @@
-import { Star } from 'lucide-react';
-import deborah from '../img/deborah.jpeg'
-import ezekiel from '../img/ezekiel.jpeg'
+import { Star, Linkedin } from 'lucide-react';
+import deborah from '../img/deborah.png'
+import ezekiel from '../img/ezekiel.png'
 import roy from '../img/roy.jpeg'
 
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: "Torcherear delivered exceptional, tailored training that was instrumental in helping me earn my T2 license. The well-structured, practical sessions and knowledgeable instructors made complex topics easy to grasp and built my confidence for both written and oral exams. I highly recommend Torcherear for effective, professional training in the renewable energy sector.",
+      quote: "Torchberear delivered exceptional, tailored training that was instrumental in helping me earn my T2 license. The well-structured, practical sessions and knowledgeable instructors made complex topics easy to grasp and built my confidence. I highly recommend Torchberear for effective, professional training in the renewable energy sector.",
       author: "Ezekiel Omae",
       role: "Site Electromechanical Engineer",
       link:"https://www.linkedin.com/in/ezekiel-omae-229945199?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       image: ezekiel
     },
     {
-      quote: "Torchbearer Institute’s solar training was practical, well‑structured, and made complex concepts easy to grasp. With their expert guidance, I passed my NITA T1 exam and quickly landed a job in the solar industry. I highly recommend Torchbearer Institute to anyone looking to launch a career in renewable energy.",
+      quote: "Torchbearer Institute's solar training was practical, well‑structured, and made complex concepts easy to grasp. With their expert guidance, I passed my NITA T1 exam and quickly landed a job in the solar industry. I highly recommend Torchbearer Institute to anyone looking to launch a career in renewable energy.",
       author: "Deborah Nyakinyua",
       role: "Electrical and Electronic Engineer",
       link:'https://www.linkedin.com/in/deborah-nyakinyua-6066h5037?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_recommendations_details%3B%2F7jPjEO0T7K%2FiFPTZK6p%2Bg%3D%3D',
@@ -37,7 +37,7 @@ const Testimonials = () => {
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-            Hear from our graduates who have transformed their careers through our training programs
+            Hear from our Alumnus who have transformed their careers through our training programs
           </p>
         </div>
 
@@ -54,8 +54,21 @@ const Testimonials = () => {
                 <div className="w-12 h-12 bg-amber-600 rounded-full flex items-center justify-center text-white font-bold mr-4">
                   <img className='rounded-full' src={testimonial.image} alt={testimonial.image} />
                 </div>
-                <div>
-                  <a href={testimonial.link}><h4 className="font-bold text-gray-900">{testimonial.author}</h4></a>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <a href={testimonial.link} target="_blank" rel="noopener noreferrer">
+                      <h4 className="font-bold text-gray-900 hover:text-amber-600 transition-colors">{testimonial.author}</h4>
+                    </a>
+                    <a 
+                      href={testimonial.link} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-blue-600 hover:text-blue-800 transition-colors"
+                      title="View LinkedIn Profile"
+                    >
+                      <Linkedin className="w-4 h-4" />
+                    </a>
+                  </div>
                   <p className="text-amber-600">{testimonial.role}</p>
                 </div>
               </div>

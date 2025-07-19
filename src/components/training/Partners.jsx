@@ -36,12 +36,12 @@ const LogoSlider = () => {
     },
     { 
       src: Denidev, 
-      alt: 'Denidev Logo',
+      alt: 'Senidev Logo',
       url: 'https://senidev.org/' 
     },
     { 
       src: notion, 
-      alt: 'Notion Logo',
+      alt: 'Notions Logo',
       url: 'https://www.solarnotions.com' 
     },
   ];

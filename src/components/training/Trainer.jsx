@@ -1,31 +1,47 @@
 import React from 'react';
+import ceo from '../img/ceo.png'
+import moha from '../img/moha.png'
+import emmanuel from '../img/emmanuel.png'
+import Aziz from '../img/Aziz.png'
 import { FaChalkboardTeacher, FaLinkedin, FaBookOpen } from 'react-icons/fa';
 
 const TrainersSection = () => {
   const trainers = [
     {
       id: 1,
-      name: "Dr. Amina Diallo",
-      role: "Cognitive Neuroscience",
-      bio: "Specializes in brain-based learning strategies with 10+ years in teacher training",
-      image: "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-      courses: ["Neuroeducation", "Memory Systems"]
+      name: "Ondora Mogere Dalton",
+      role: "Technical Solar Engineer",
+      bio: "Specialized in solar sizing designing and training",
+      image: ceo,
+      link:"https://www.linkedin.com/in/ondora-mogere-dalton?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      courses: ["Solar Design", "EPRA Licensing", "OSHA"]
     },
     {
       id: 2,
-      name: "Prof. James Chen",
-      role: "Educational Technology",
-      bio: "Pioneer in digital learning ecosystems and hybrid classroom models",
-      image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      courses: ["EdTech Integration", "Gamification"]
+      name: "Aziz ul Hassan",
+      role: "Solar Design Engineer | Solar Project Lead",
+      bio: "skilled in AutoCAD, PVsyst, PVCase, Helioscope, SketchUp, PVSol, and ETAP",
+      image:Aziz,
+      link:'https://www.linkedin.com/in/mazizhassan',
+      courses: ["Solar Design", "electrical"]
     },
     {
       id: 3,
-      name: "Dr. Fatima Nkosi",
-      role: "Inclusive Education",
-      bio: "Expert in universal design for learning and accessibility frameworks",
-      image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80",
-      courses: ["UDL Certification", "Trauma-Informed Teaching"]
+      name: "mazin-ahmed Ibrahim ahmed",
+      role: "Solar Design Engineer ",
+      bio: "skilled in PVsyst, SketchUp and Excel sheet",
+      image: moha,
+      link:"https://www.linkedin.com/in/mazin-ahmed-ibrahim-ahmed-162898315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      courses: ["Solar Design", "electrical"]
+    },
+        {
+      id: 4,
+      name: "Emmanuel Marindi",
+      role: "Energy consultant | Renewable Energy ",
+      bio: "skilled in PVsyst, SketchUp and Excel sheet",
+      image: emmanuel,
+      link:"https://www.linkedin.com/in/emmanuel-marindi-91a484266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BP8y2iigsR8qUcSjgZABxPw%3D%3D",
+      courses: ["Solar Technologies", "EPRA solar Training"]
     }
   ];
 
@@ -81,11 +97,13 @@ const TrainersSection = () => {
                 
                 {/* Footer */}
                 <div className="flex justify-between items-center pt-4 border-t border-[#eadcc8]">
+                  <a href={trainer.link}>
                   <button className="text-sm text-[#994a0c] hover:underline flex items-center">
                     <FaBookOpen className="mr-1" /> View Profile
                   </button>
+                  </a>
                   <a 
-                    href="#" 
+                    href={trainer.link} 
                     className="text-[#5c4a36] hover:text-[#994a0c] transition"
                     aria-label={`Connect with ${trainer.name} on LinkedIn`}
                   >

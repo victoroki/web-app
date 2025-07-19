@@ -18,9 +18,9 @@ const EpraComponent = () => {
     "scope": "Solar PV system installation work for medium systems or multiple batteries which may include an inverter.",
     "minQualification": "KCSE",
     "technicalQualification": [
-      "Certificate in Electrical and/or Electronic and Intermediate Solar Training with 4 years of solar installation experience",
-      "Diploma in Electrical and/or Electronic and Intermediate Solar Training with 2 years of solar installation experience",
-      "BSc Electrical Engineering or relevant degree or Higher National Diploma with 1 year of solar installation experience"
+      "Certificate in Electrical/Electronic and Intermediate Solar Training with 4 years of experience",
+      "Diploma in Electrical/Electronic and Intermediate Solar Training with 2 years of experience",
+      "BSc Electrical Engineering or relevant degree or Higher National Diploma with 1 year of experience"
     ],
     "experience": "2–4 years depending on qualification",
     "startingLicense": "T2",

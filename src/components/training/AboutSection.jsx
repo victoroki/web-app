@@ -39,14 +39,14 @@ const AboutSection = () => {
           <div className="space-y-6">
             <p className="text-lg text-gray-700 leading-relaxed">
               Torchbearer Institute provides professional training and development services to individuals and organizations
-              seeking to excel in electrical engineering, renewable energy, and professional development. We offer comprehensive
+              seeking to excel in renewable energy, and professional development. We offer comprehensive
               solutions and expert guidance from entry-level certification to advanced professional development programs.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
               Established with a commitment to excellence, we are dedicated to exceeding expectations by providing
               cost-effective, innovative training solutions without compromising the quality of education that we deliver.
               Our expertise encompasses every aspect of professional development needs including EPRA licensing, solar system
-              design, electrical engineering, and professional branding.
+              design, electrical engineering, Occupational Safety and Health training and professional branding.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
               Our team consists of experienced professionals and certified instructors with industry-standard expertise

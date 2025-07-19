@@ -39,7 +39,7 @@ const TrainingHomepage = () => {
       <Partners />
       <Testimonials />
       <WhatsappTrainer />
-      {/* <TrainerProfile /> */}
+      <TrainerProfile />
       {/* Add any other components you want on the training homepage */}
     </>
   );

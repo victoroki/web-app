@@ -1,290 +1,327 @@
-import React, { useState, useEffect } from 'react';
-import { FiPhoneCall, FiMail, FiMenu, FiX } from 'react-icons/fi';
-import logo from './img/flogo.png';
+import { useNavigate } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+import solar from "./img/SOLar.jpg"
+import electrical from "./img/electrical.jpg"
+import hvac from "./img/hvac.jpeg"
+import cctvService from "./img/cctv.png"
+import cctvhidden from "./img/cctvhidden.png"
+import cctvhkvision from "./img/cctvhkvision.png"
+import cctvaudio from "./img/cctvaudio.png"
+import cctvspy from "./img/cctvspy.png"
+import { X } from 'lucide-react'
 
-function Topbar() {
-  const [nav, setNav] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+// Service categories with their sub-services
+const serviceCategories = [
+  {
+    id: 1,
+    title: "Solar Technologies",
+    image: solar,
+    description: "Go green and harness the power of the sun with our comprehensive solar solutions. From residential panels to commercial installations, we provide cutting-edge technology for sustainable energy.",
+    subServices: [
+      {
+        id: 11,
+        name: "Solar panels (PV kits)",
+        description: "Complete photovoltaic kits for residential and commercial use",
+        redirect: "/pricing#solar"
+      },
+      {
+        id: 12,
+        name: "Solar street lights",
+        description: "Energy-efficient lighting solutions for streets and pathways",
+        redirect: "/pricing#solar"
+      },
+      {
+        id: 13,
+        name: "Solar water heating",
+        description: "Eco-friendly water heating systems powered by solar energy",
+        redirect: "/pricing#heating"
+      },
+      {
+        id: 14,
+        name: "Solar water pumping",
+        description: "Reliable water pumping solutions for remote areas and irrigation",
+        redirect: "/pricing#pumps"
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "CCTV Cameras",
+    image: cctvService,
+    galleryImages: [cctvService, cctvhidden, cctvhkvision, cctvaudio, cctvspy],
+    description: "Enhance the security of your property with our comprehensive CCTV solutions. From hidden surveillance to advanced IP cameras, we provide cutting-edge security systems.",
+    subServices: [
+      {
+        id: 21,
+        name: "Spy/hidden cameras",
+        description: "Discreet surveillance solutions for covert monitoring",
+        redirect: "/pricing#cctv"
+      },
+      {
+        id: 22,
+        name: "Solar PTZ stand-alone cameras",
+        description: "Self-powered pan-tilt-zoom cameras for remote locations",
+        redirect: "/pricing#cctv"
+      },
+      {
+        id: 23,
+        name: "IP cameras",
+        description: "Network-based cameras for digital surveillance systems",
+        redirect: "/pricing#cctv"
+      },
+      {
+        id: 24,
+        name: "PTZ stand-alone cameras",
+        description: "Professional pan-tilt-zoom cameras for comprehensive coverage",
+        redirect: "/pricing#cctv"
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Electrical",
+    image: electrical,
+    description: "Complete electrical solutions for residential and commercial properties. From basic wiring to complex installations, we ensure safety and efficiency.",
+    subServices: [
+      {
+        id: 31,
+        name: "Piping & wiring",
+        description: "Professional electrical piping and wiring installations",
+        redirect: "/#"
+      },
+      {
+        id: 32,
+        name: "Panel upgrades",
+        description: "Electrical panel upgrades for improved safety and capacity",
+        redirect: "/#"
+      },
+      {
+        id: 33,
+        name: "Instant shower installation",
+        description: "Quick and efficient electric shower installations",
+        redirect: "/#"
+      },
+      {
+        id: 34,
+        name: "Repairs and maintenance",
+        description: "Comprehensive electrical repair and maintenance services",
+        redirect: "/#"
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "HVAC",
+    image: hvac,
+    description: "Complete heating, ventilation, and air conditioning solutions. We provide comfort and climate control for all types of properties.",
+    subServices: [
+      {
+        id: 41,
+        name: "Air conditioning installation and servicing",
+        description: "Professional AC installation and maintenance services",
+        redirect: "/pricing#hvac"
+      },
+      {
+        id: 42,
+        name: "Heating systems",
+        description: "Efficient heating solutions for residential and commercial spaces",
+        redirect: "/pricing#hvac"
+      },
+      {
+        id: 43,
+        name: "Ventilation solutions",
+        description: "Proper ventilation systems for improved air quality",
+        redirect: "/pricing#hvac"
+      }
+    ]
+  }
+]
 
-  const handleNav = () => {
-    setNav(!nav);
-  };
+// Modal component for service details
+const ServiceModal = ({ isOpen, onClose, service }) => {
+  const navigate = useNavigate();
+  if (!isOpen || !service) return null
 
-  const handleNavItemClick = () => {
-    setNav(false);
-  };
-
-  // Contact handlers
-  const handleCallClick = () => {
-    window.open('tel:0743076376', '_self');
-  };
-
-  const handleMailClick = () => {
-    window.open('mailto:torchbearer@gmail.com', '_self');
-  };
-
-  // Color variables based on primary color #712B35
-  const primaryColor = '#712B35';
-  const primaryDark = '#5A222B';
-  const primaryLight = '#8A3643';
-  const secondaryColor = '#D4A59A';
-  const accentColor = '#C97D60';
-  const darkBg = '#1A1A2E';
-  const lightText = '#F8F9FA';
-  const darkText = '#212529';
-
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  const handleSubServiceClick = (subService) => {
+    navigate(subService.redirect)
+  }
 
   return (
-    <div className="relative z-50">
-      {/* Top Contact Bar */}
-      <div 
-        className={`transition-all duration-500 ${
-          scrolled ? 'shadow-2xl backdrop-blur-sm' : 'shadow-lg'
-        }`}
-        style={{
-          background: scrolled 
-            ? `linear-gradient(135deg, ${darkBg}f0 0%, ${primaryDark}f0 100%)` 
-            : `linear-gradient(135deg, white 0%, ${lightText} 100%)`
-        }}
-      >
-        <div className="flex px-4 md:px-8 py-4 justify-between items-center max-w-7xl mx-auto">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <img 
-              className="h-12 md:h-16 w-auto hover:scale-110 transition-all duration-300 filter hover:brightness-110" 
-              src={logo} 
-              alt="Torchbearer Technologies Logo" 
-            />
-          </div>
-
-          {/* Desktop Contact Info */}
-          <div className="hidden lg:flex space-x-8">
-            <div 
-              className="flex items-center space-x-4 group cursor-pointer transform hover:scale-105 transition-all duration-300"
-              onClick={handleCallClick}
-            >
-              <div 
-                className="rounded-full p-4 shadow-lg group-hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
-                }}
-              >
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                <FiPhoneCall size={15} className="text-white relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-              </div>
-              <div className="group-hover:translate-x-1 transition-transform duration-300">
-                <h3 
-                  className={`font-bold text-base transition-all duration-300 ${
-                    scrolled ? 'text-white group-hover:text-orange-300' : 'text-gray-800 group-hover:text-red-600'
-                  }`}
-                >
-                  Call Us
-                </h3>
-                <p 
-                  className={`font-light text-sm mt-1 ${
-                    scrolled ? 'text-gray-200' : 'text-gray-600'
-                  }`}
-                >
-                  Get in touch today
-                </p>
-              </div>
-            </div>
-            
-            <div 
-              className="flex items-center space-x-4 group cursor-pointer transform hover:scale-105 transition-all duration-300"
-              onClick={handleMailClick}
-            >
-              <div 
-                className="rounded-full p-4 shadow-lg group-hover:shadow-2xl transition-all duration-300 relative overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
-                }}
-              >
-                <div className="absolute inset-0 bg-white opacity-0 group-hover:opacity-20 transition-opacity duration-300"></div>
-                <FiMail size={15} className="text-white relative z-10 group-hover:rotate-12 transition-transform duration-300" />
-              </div>
-              <div className="group-hover:translate-x-1 transition-transform duration-300">
-                <h3 
-                  className={`font-bold text-base transition-all duration-300 ${
-                    scrolled ? 'text-white group-hover:text-orange-300' : 'text-gray-800 group-hover:text-red-600'
-                  }`}
-                >
-                  Mail Us
-                </h3>
-                <p 
-                  className={`font-light text-sm mt-1 ${
-                    scrolled ? 'text-gray-200' : 'text-gray-600'
-                  }`}
-                >
-                  Send us a message
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Mobile Menu Button */}
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+        <div className="sticky top-0 bg-white border-b border-gray-200 p-4 flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-[#712B35]">{service.title}</h2>
           <button
-            onClick={handleNav}
-            className={`block lg:hidden p-3 rounded-xl transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50 hover:scale-110 transform ${
-              scrolled 
-                ? 'hover:bg-white hover:bg-opacity-20 focus:ring-orange-300' 
-                : 'hover:bg-gray-100 focus:ring-red-300'
-            }`}
-            aria-label="Toggle navigation menu"
+            onClick={onClose}
+            className="p-2 hover:bg-gray-100 rounded-full transition-colors"
           >
-            {nav ? (
-              <FiX size={28} className={scrolled ? 'text-white' : 'text-gray-800'} />
-            ) : (
-              <FiMenu size={28} className={scrolled ? 'text-white' : 'text-gray-800'} />
-            )}
+            <X size={24} className="text-gray-500" />
           </button>
         </div>
-      </div>
-
-      {/* Mobile Navigation Menu */}
-      <div
-        className={`fixed inset-0 z-50 lg:hidden transition-all duration-300 ease-in-out ${
-          nav ? 'opacity-100 visible' : 'opacity-0 invisible'
-        }`}
-      >
-        {/* Backdrop */}
-        <div
-          className={`absolute inset-0 bg-black transition-opacity duration-300 ${
-            nav ? 'bg-opacity-60' : 'bg-opacity-0'
-          }`}
-          onClick={handleNav}
-        />
         
-        {/* Menu Panel */}
-        <div
-          className={`absolute left-0 top-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform transition-transform duration-300 ease-in-out ${
-            nav ? 'translate-x-0' : '-translate-x-full'
-          }`}
-        >
-          {/* Menu Header */}
-          <div 
-            className="flex items-center justify-between p-6 border-b border-gray-200"
-            style={{
-              background: `linear-gradient(135deg, ${primaryColor} 0%, ${darkBg} 100%)`
-            }}
-          >
-            <img className="h-10 w-auto" src={logo} alt="Torchbearer Technologies" />
-            <button
-              onClick={handleNav}
-              className="p-2 rounded-lg hover:bg-white hover:bg-opacity-20 transition-all duration-200 hover:scale-105"
-              aria-label="Close menu"
-            >
-              <FiX size={24} className="text-white" />
-            </button>
-          </div>
-
-          {/* Menu Items */}
-          <nav className="py-6">
-            <ul className="space-y-2">
-              {[
-                { href: '#home', label: 'Home' },
-                { href: '#about', label: 'About Us' },
-                { href: '#projects', label: 'Projects' },
-                { href: '#services', label: 'Services' },
-                { href: '/institute', label: 'Insititute' },
-                { href: '#contact', label: 'Contact' }
-              ].map((item, index) => (
-                <li key={index}>
-                  <a
-                    href={item.href}
-                    onClick={handleNavItemClick}
-                    className="flex items-center px-6 py-4 text-gray-700 hover:text-white transition-all duration-300 font-medium border-l-4 border-transparent group relative overflow-hidden"
-                    style={{
-                      background: 'transparent'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.target.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`;
-                      e.target.style.borderLeftColor = accentColor;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.background = 'transparent';
-                      e.target.style.borderLeftColor = 'transparent';
-                    }}
-                  >
-                    <span className="group-hover:translate-x-2 transition-transform duration-300">
-                      {item.label}
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Mobile Contact Info */}
-          <div 
-            className="border-t p-6 space-y-4"
-            style={{
-              borderTopColor: secondaryColor,
-              background: `linear-gradient(135deg, ${lightText} 0%, ${secondaryColor}20 100%)`
-            }}
-          >
-            <div 
-              className="flex items-center space-x-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer group transform hover:scale-105"
-              onClick={handleCallClick}
-            >
-              <div 
-                className="rounded-full p-3 group-hover:scale-110 transition-transform duration-300"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
-                }}
+        <div className="p-6">
+          <img 
+            src={service.image} 
+            alt={service.title}
+            className="w-full h-48 object-cover rounded-lg mb-4"
+          />
+          
+          <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
+          
+          <h3 className="text-xl font-semibold text-[#712B35] mb-4">Our Services Include:</h3>
+          
+          <div className="space-y-3">
+            {service.subServices.map((subService) => (
+              <div
+                key={subService.id}
+                onClick={() => handleSubServiceClick(subService)}
+                className="p-4 border border-gray-200 rounded-lg hover:bg-[#712B35] hover:text-white cursor-pointer transition-all duration-300 group"
               >
-                <FiPhoneCall size={20} className="text-white" />
+                <h4 className="font-semibold text-lg mb-2 group-hover:text-white">
+                  {subService.name}
+                </h4>
+                <p className="text-gray-600 group-hover:text-gray-200">
+                  {subService.description}
+                </p>
               </div>
-              <div>
-                <h3 
-                  className="font-bold text-base group-hover:text-red-600 transition-colors duration-300"
-                  style={{
-                    color: darkText
-                  }}
-                >
-                  Call Us
-                </h3>
-                <p className="font-light text-gray-600 text-sm">Get in touch today</p>
+            ))}
+          </div>
+          
+          {service.id === 1 && (
+            <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+              <h4 className="text-xl font-semibold text-[#712B35] mb-4">Solar Water Pumps</h4>
+              <div className="space-y-4 text-gray-700">
+                <p>
+                  Solar water pumps use electricity generated by photovoltaic (PV) panels to deliver water for drinking, livestock, or irrigation. The system includes solar panels, a pump, and a controller that regulates power and protects against voltage fluctuations, reducing maintenance costs.
+                </p>
+                <p>
+                  Ideal for remote areas, solar pumps are reliable and low-maintenance. They operate using different mechanisms such as centrifugal, rotary, diaphragm, or piston pumps. Centrifugal pumps are best for high water volume with low pressure, while helical rotor pumps suit higher pressure but lower volume needs.
+                </p>
               </div>
             </div>
-            
-            <div 
-              className="flex items-center space-x-4 p-4 rounded-xl hover:bg-white hover:shadow-lg transition-all duration-300 cursor-pointer group transform hover:scale-105"
-              onClick={handleMailClick}
-            >
-              <div 
-                className="rounded-full p-3 group-hover:scale-110 transition-transform duration-300"
-                style={{
-                  background: `linear-gradient(135deg, ${primaryColor} 0%, ${accentColor} 100%)`
-                }}
-              >
-                <FiMail size={20} className="text-white" />
-              </div>
-              <div>
-                <h3 
-                  className="font-bold text-base group-hover:text-red-600 transition-colors duration-300"
-                  style={{
-                    color: darkText
-                  }}
-                >
-                  Mail Us
-                </h3>
-                {/* <p className="font-light text-gray-600 text-sm">Send us a message</p> */}
-              </div>
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
-export default Topbar;
+// Service Card Component with Slideshow
+const ServiceCard = ({ service, onClick }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const images = service.galleryImages || [service.image]
+
+  useEffect(() => {
+    if (images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => 
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        )
+      }, 3000)
+      return () => clearInterval(interval)
+    }
+  }, [images.length])
+
+  return (
+    <div 
+      onClick={onClick}
+      className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-[#712B35] hover:text-white rounded-lg shadow-2xl p-3 group border-2 border-transparent hover:border-[#8d3640] cursor-pointer"
+    >
+      <div className="m-2 text-justify text-sm">
+        <div className="rounded-t overflow-hidden relative h-48">
+          {images.map((image, index) => (
+            <img 
+              key={index}
+              alt={`${service.title} service`} 
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} 
+              src={image}
+              loading="lazy"
+            />
+          ))}
+          {images.length > 1 && (
+            <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setCurrentImageIndex(index)
+                  }}
+                  className={`w-2 h-2 rounded-full ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        <h3 className="font-semibold my-4 text-2xl text-center text-[#712B35] group-hover:text-white">
+          {service.title}
+        </h3>
+        <p className="text-md font-medium mb-4">
+          {service.description}
+        </p>
+        <div className="text-center">
+          <span className="text-sm text-[#712B35] group-hover:text-white font-semibold">
+            Click to explore services →
+          </span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Another() {
+  const [selectedService, setSelectedService] = useState(null)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const handleServiceClick = (service) => {
+    setSelectedService(service)
+    setIsModalOpen(true)
+  }
+
+  const closeModal = () => {
+    setIsModalOpen(false)
+    setSelectedService(null)
+  }
+
+  return (
+    <div>
+      <section id="services" className="bg-gradient-to-br from-gray-50 to-gray-100 py-12">
+        <div data-aos="zoom-in-down">
+          <div className="my-4 py-4">
+            <h2 className="my-2 text-center text-3xl text-[#712B35] uppercase font-bold">
+              Services
+            </h2>
+            
+            <div className='flex justify-center'>
+              <div className='w-24 border-b-4 border-[#712B35]' aria-hidden="true"></div>
+            </div>
+            
+            <h3 className="mt-4 mx-12 text-center text-xl lg:text-2xl font-semibold text-[#5a2129]">
+              We are deeply committed to the growth and success of our clients.
+            </h3>
+          </div>
+
+          <div className="px-12" data-aos="fade-down" data-aos-delay="600">
+            <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {serviceCategories.map((service) => (
+                <ServiceCard 
+                  key={service.id} 
+                  service={service} 
+                  onClick={() => handleServiceClick(service)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <ServiceModal 
+        isOpen={isModalOpen}
+        onClose={closeModal}
+        service={selectedService}
+      />
+    </div>
+  )
+}
+
+export default Another

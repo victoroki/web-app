@@ -194,7 +194,7 @@ function Topbar() {
                 { href: '#about', label: 'About Us' },
                 { href: '#projects', label: 'Projects' },
                 { href: '#services', label: 'Services' },
-                { href: '#training', label: 'Training' },
+                { href: '/institute', label: 'Insititute' },
                 { href: '#contact', label: 'Contact' }
               ].map((item, index) => (
                 <li key={index}>

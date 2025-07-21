@@ -1,7 +1,41 @@
 import { Award, BookOpen, Target, TrendingUp, Users, Star } from 'lucide-react';
-
+import { useEffect, useState } from 'react';
 
 const AboutSection = () => {
+  const [trainedProfessionals, setTrainedProfessionals] = useState(0);
+  const [yearsOfExperience, setYearsOfExperience] = useState(0);
+  const [successRate, setSuccessRate] = useState(0);
+
+  useEffect(() => {
+    // Function to animate counting
+    const animateCount = (target: number, setter: React.Dispatch<React.SetStateAction<number>>, duration: number = 2000) => {
+      const start = 0;
+      const increment = target / (duration / 16); // 60fps
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
+        }
+        setter(Math.floor(current));
+      }, 16);
+      
+      return timer;
+    };
+
+    const timer1 = animateCount(1000, setTrainedProfessionals);
+    const timer2 = animateCount(2, setYearsOfExperience, 1000);
+    const timer3 = animateCount(98, setSuccessRate);
+
+    return () => {
+      clearInterval(timer1);
+      clearInterval(timer2);
+      clearInterval(timer3);
+    };
+  }, []);
+
   const features = [
     {
       icon: <Award className="w-8 h-8" />,
@@ -61,7 +95,7 @@ const AboutSection = () => {
                   <Users className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">1000+</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">{trainedProfessionals}+</h3>
                   <p className="text-gray-600">Trained Professionals</p>
                 </div>
               </div>
@@ -70,7 +104,7 @@ const AboutSection = () => {
                   <Award className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">2+</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">{yearsOfExperience}+</h3>
                   <p className="text-gray-600">Years of Experience</p>
                 </div>
               </div>
@@ -79,7 +113,7 @@ const AboutSection = () => {
                   <Star className="w-8 h-8 text-white" />
                 </div>
                 <div>
-                  <h3 className="text-2xl font-bold text-gray-900">98%</h3>
+                  <h3 className="text-2xl font-bold text-gray-900">{successRate}%</h3>
                   <p className="text-gray-600">Success Rate</p>
                 </div>
               </div>

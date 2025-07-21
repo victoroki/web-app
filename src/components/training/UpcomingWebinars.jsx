@@ -113,7 +113,23 @@ const UpcomingWebinars = () => {
       "speaker": "N/A",
       "description": "Solar EPRA T2 & T3 training webinar. T2: KSH 5000, T3: KSH 7000.",
       "registrationLink": "N/A"
-    }
+    },
+    {
+    "title": "ELECTRICAL TRAINING",
+    "date": "August 31",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "Dalton and Emmanuel",
+    "description": "Electrical Trainng",
+    "registrationLink": "N/A"
+  },
+  {
+    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
+    "date": "October 2",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "Dalton and Mazin",
+    "description": "Training on SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS",
+    "registrationLink": "N/A"
+  }
   ];
 
   return (

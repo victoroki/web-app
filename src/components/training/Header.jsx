@@ -38,7 +38,7 @@ const Header = () => {
   ];
 
   const navItems = [
-    { name: 'Home', href: '/' },
+    { name: 'Home', href: '/institute' },
     { name: 'About Us', href: '/training/about' },
     {
       name: 'Services',

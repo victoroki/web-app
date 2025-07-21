@@ -149,36 +149,37 @@ const SolarDesignTraining = () => {
               </div>
             </div> */}
 
-            <div className="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 hover:shadow-2xl transition-all duration-300">
-              <div className="flex items-center mb-8">
-                <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mr-4">
-                  <Sun className="w-6 h-6 text-white" />
-                </div>
-                <h3 className="text-3xl font-bold text-gray-900">Software Training</h3>
-              </div>
-              <div className="space-y-4">
-                {software.map((item, index) => (
-                  <div key={index} className="group flex items-center p-6 bg-[#d6baa3] rounded-xl border border-green-200 hover:border-green-300 hover:shadow-md transition-all duration-300">
-                    <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mr-6 shadow-md group-hover:shadow-lg transition-shadow">
-                      <div className="text-green-600 group-hover:text-green-700 transition-colors">
-                        <img src={item.icon} />
-                      </div>
-                    </div>
-                    <div className="flex-1">
-                      <span className="text-xl font-semibold text-gray-900 group-hover:text-green-700 transition-colors">
-                        {item.name}
-                      </span>
-                      <p className='text-sm font-italic'>
-                        {item.desc}
-                      </p>
-                      <div className="w-full bg-green-200 rounded-full h-2 mt-2">
-                        <div className="bg-[#e99621] h-2 rounded-full w-full"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+<div className="bg-white p-8 mb-7 rounded-2xl shadow-xl border border-amber-100 hover:shadow-2xl transition-all duration-300">
+  <div className="flex items-center mb-8">
+    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mr-4">
+      <Zap className="w-6 h-6 text-white" />
+    </div>
+    <h3 className="text-3xl font-bold text-gray-900">Software Training</h3>
+  </div>
+  <div className="space-y-4">
+    {software.map((item, index) => (
+      <div key={index} className="group flex items-start p-6 bg-amber-50 rounded-xl border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all duration-300">
+        <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mr-6 shadow-md group-hover:shadow-lg transition-shadow p-2">
+          <img src={item.icon} alt={item.name} className="w-full h-full object-contain" />
+        </div>
+        <div className="flex-1">
+          <h4 className="text-xl font-semibold text-gray-900 group-hover:text-amber-700 transition-colors mb-2">
+            {item.name}
+          </h4>
+          <p className="text-gray-600 text-sm mb-3">
+            {item.desc}
+          </p>
+          <div className="w-full bg-amber-200 rounded-full h-1.5">
+            <div 
+              className="bg-gradient-to-r from-amber-500 to-amber-600 h-1.5 rounded-full" 
+              style={{ width: `${Math.min(100, 80 + (index * 5))}%` }}
+            ></div>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
           </div>
         </div>
         <>

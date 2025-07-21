@@ -6,6 +6,15 @@ import {
   Shield,
   Users,
 } from 'lucide-react';
+import ilo from '../img/ilo.png'
+import iso from '../img/iso.png'
+import nec from '../img/nec.png'
+import nfpa from '../img/nfpa.png'
+import iee from '../img/ieee.png'
+import iec from '../img/iec.png'
+import epra from "../img/epra.png"
+import nca from "../img/nca.png"
+import osha from "../img/osha.png"
 
 const HealthSafetyTraining = () => {
   return (
@@ -53,40 +62,105 @@ const HealthSafetyTraining = () => {
           </h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <img
+                src={nfpa}
+                alt="NFPA Logo"
+                className="w-20 h-8 mb-3"
+
+              />
               <h4 className="font-bold text-lg text-gray-900 mb-2">NFPA Standards</h4>
               <p className="text-gray-600">National Fire Protection Association codes and standards</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <img
+                src={iee}
+                alt="IEEE Logo"
+                className="w-15 h-8 mb-3"
+
+              />
               <h4 className="font-bold text-lg text-gray-900 mb-2">IEEE Standards</h4>
               <p className="text-gray-600">Institute of Electrical and Electronics Engineers protocols</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <img
+                src={iec}
+                alt="ISO Logo"
+                className="w-15 h-8 mb-3"
+
+              />
               <h4 className="font-bold text-lg text-gray-900 mb-2">IEC Standards</h4>
               <p className="text-gray-600">International Electrotechnical Commission guidelines</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <img
+                src={nec}
+                alt="ISO Logo"
+                className="w-14 h-8 mb-3"
+
+              />
               <h4 className="font-bold text-lg text-gray-900 mb-2">NEC Codes</h4>
               <p className="text-gray-600">National Electrical Code compliance training</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
+              <img
+                src={iso}
+                alt="ISO Logo"
+                className="w-11 h-8 mb-3"
+
+              />
               <h4 className="font-bold text-lg text-gray-900 mb-2">ISO Standards</h4>
               <p className="text-gray-600">International Organization for Standardization protocols</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
-              <FileText className="w-8 h-8 text-amber-600 mb-3" />
-              <h4 className="font-bold text-lg text-gray-900 mb-2">ILO & KS Standards</h4>
-              <p className="text-gray-600">International Labour Organization and Kenyan Standards</p>
+              <img
+                src={ilo}
+                alt="ISO Logo"
+                className="w-15 h-10 mb-3"
+
+              />
+              <h4 className="font-bold text-lg text-gray-900 mb-2">ILO Standards</h4>
+              <p className="text-gray-600">International Labour Organization Standards</p>
             </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <img
+                src={epra}
+                alt="ISO Logo"
+                className="w-15 h-10 mb-3"
+
+              />
+              <h4 className="font-bold text-lg text-gray-900 mb-2"></h4>
+              <p className="text-gray-600"> Energy and Petroleum Regulatory Authority Regulations and standards</p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <img
+                src={nca}
+                alt="ISO Logo"
+                className="w-18 h-16 mb-3"
+
+              />
+              <h4 className="font-bold text-lg text-gray-900 mb-2"></h4>
+              <p className="text-gray-600">National Construction Authority (NCA) Regulations and standards </p>
+            </div>
+            <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">
+              <img
+                src={osha}
+                alt="ISO Logo"
+                className="w-17 h-12 mb-3"
+
+              />
+              <h4 className="font-bold text-lg text-gray-900 mb-2"></h4>
+              <p className="text-gray-600">Occupational Safety and Health Administration Regulations and standards </p>
+            </div>
+          </div>
+          <div class="flex justify-center">
+            <button class="px-6 py-2 bg-amber-600 rounded text-white mt-5">
+              Get Full Course
+            </button>
           </div>
         </div>
 

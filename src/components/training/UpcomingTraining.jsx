@@ -5,23 +5,23 @@ const UpcomingTraining = () => {
   {
     "title": "NITA EXAM COACHING",
     "date": "July 31",
-    "time": "07:00 PM - 08:30 PM",
-    "description": "NITA exam coaching. T2 - KSH 5000, T3 - KSH 7000.",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "NITA exam coaching.",
     "features": [
-      "Exam syllabus coverage",
-      "Practice tests" 
-      // Based on typical NITA coaching, more specific features are not provided in the original text
+      "Solar T1 and T2",
+      "Electrical Grade III, Grade II " 
     ],
-    "price": "T2 - KSH 5000, T3 - KSH 7000",
+    "price": "Ksh 1050",
     "earlyBirdPrice": "N/A"
   },
   {
-    "title": "ELECTRICAL TRAINING",
+    "title": "Solar Design",
     "date": "August 4 - 22",
     "time": "07:30 PM - 09:00 PM",
-    "description": "Electrical Training.",
+    "description": "Designing and Simulating softwares",
     "features": [
-      "N/A" // No specific features listed in the original text
+      "SKETCHUP","PVSYST","AUTOCAD "
+
     ],
     "price": "60 USD",
     "earlyBirdPrice": "N/A"
@@ -30,62 +30,31 @@ const UpcomingTraining = () => {
     "title": "PERSONAL BRANDING",
     "date": "August 6 - 7",
     "time": "07:00 PM - 08:00 PM",
-    "description": "Personal branding training.",
+    "description": "Presonal Branding",
     "features": [
-      "N/A" // No specific features listed in the original text
+      "Proffesional Academic Research Tool",
+      "Online Presence",
+      "Graphic design tool",
+      "Company and Business Registration"
     ],
     "price": "KSH 1050",
     "earlyBirdPrice": "N/A"
   },
   {
-    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
+    "title": "Electrical Training",
     "date": "August 18 - 22",
     "time": "08:00 PM - 09:00 PM",
-    "description": "Training on SketchUp, PVSYST, Homer & AutoCAD designs.",
+    "description": "Electrical training",
     "features": [
-      "SketchUp software training",
-      "PVSYST software training",
-      "Homer software training",
+      "class C2 Low Voltage",
+      "class C1 Low Voltage",
+      "class B Medium Volage",
       "AutoCAD software training"
     ],
     "price": "KSH 3000",
     "earlyBirdPrice": "N/A"
   },
-  {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "August 31",
-    "time": "07:30 PM - 09:00 PM",
-    "description": "Free webinar for Solar EPRA T2 & T3 training.",
-    "features": [
-      "N/A" // No specific features listed in the original text
-    ],
-    "price": "FREE",
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "September 8 - 26",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
-    "features": [
-      "N/A" // No specific features listed in the original text
-    ],
-    "price": "FREE",
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
-    "date": "October 2",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "Free webinar combining NITA Exam Coaching and EPRA T2 & T3 Solar.",
-    "features": [
-      "NITA Exam Coaching",
-      "EPRA T2 Solar insights",
-      "EPRA T3 Solar insights"
-    ],
-    "price": "FREE",
-    "earlyBirdPrice": "N/A"
-  },
+  
   {
     "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
     "date": "October 6 - 24",
@@ -101,20 +70,6 @@ const UpcomingTraining = () => {
     "earlyBirdPrice": "N/A"
   },
   {
-    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
-    "date": "November 2",
-    "time": "07:30 PM - 09:00 PM",
-    "description": "Free training on SketchUp, PVSYST, Homer & AutoCAD designs.",
-    "features": [
-      "SketchUp software training",
-      "PVSYST software training",
-      "Homer software training",
-      "AutoCAD software training"
-    ],
-    "price": "FREE",
-    "earlyBirdPrice": "N/A"
-  },
-  {
     "title": "NITA EXAM COACHING",
     "date": "November 10 - 14",
     "time": "07:00 PM - 08:00 PM",
@@ -126,50 +81,50 @@ const UpcomingTraining = () => {
     "price": "KSH 3000",
     "earlyBirdPrice": "N/A"
   },
-  {
-    "title": "ELECTRICAL TRAINING",
+    {
+    "title": "SOLAR EPRA TRAINING",
     "date": "November 17 - December 5",
     "time": "07:30 PM - 09:00 PM",
-    "description": "Electrical Training. For more info call/WhatsApp +254789173033.",
+    "description": " Training for Solar EPRA T2 & T3 licensing.",
     "features": [
-      "N/A" // No specific features listed in the original text
+      "Solar T2 & T3 ",
     ],
-    "price": "N/A", // Price not specified
+    "price": "T2 5000, T3 7000",
     "earlyBirdPrice": "N/A"
   },
   {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "title": "ELECTRICAL TRAINING",
     "date": "December 8 - 12",
     "time": "08:00 PM - 09:00 PM",
-    "description": "Solar EPRA T2 & T3 training webinar.",
+    "description": "Electrical Training  for EPRA licensing",
     "features": [
-      "N/A" // No specific features listed in the original text
+      "EPRA C1","EPRA C2","EPRA B" 
     ],
-    "price": "T2-KSH 5000, T3-KSH 7000",
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "January 8",
-    "time": "07:00 PM - 08:00 PM",
-    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
-    "features": [
-      "N/A" // No specific features listed in the original text
-    ],
-    "price": "FREE",
+    "price": "3000", 
     "earlyBirdPrice": "N/A"
   },
   {
     "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
     "date": "January 12 - 30",
-    "time": "07:30 PM - 09:00 PM",
+    "time": "08:00 PM - 09:00 PM",
     "description": "Solar EPRA T2 & T3 training webinar.",
     "features": [
-      "N/A" // No specific features listed in the original text
+      "N/A" 
     ],
     "price": "T2-KSH 5000, T3-KSH 7000",
     "earlyBirdPrice": "N/A"
-  }
+  },
+  {
+    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "date": "January 12 to 30",
+    "time": "07:30 PM - 09:00 PM",
+    "description": " webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+    "features": [
+      "solar EPRA T2", "solar EPRA T3" 
+    ],
+    "price": "T2 Ksh 5000, T3 Ksh 7000",
+    "earlyBirdPrice": "N/A"
+  },
 ];
 
   return (

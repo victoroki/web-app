@@ -16,11 +16,11 @@ const BrandingTraining = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Professional <span className="text-amber-600">Branding Training</span>
+            Professional <span className="text-amber-600">Branding </span>
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-            Build a powerful brand identity and comprehensive marketing strategy for your business success
+           We Build a powerful brand identity and comprehensive marketing strategy for your business success
           </p>
         </div>
 
@@ -29,7 +29,7 @@ const BrandingTraining = () => {
             <Palette className="w-16 h-16 mb-6" />
             <h3 className="text-2xl font-bold mb-4">Brand Identity</h3>
             <p className="text-lg">
-              Create compelling visual identities, logos, and brand guidelines that resonate with your target audience
+              Create compelling visual identities, logos, Websites and brand guidelines that resonate with your target audience
             </p>
           </div>
 
@@ -76,18 +76,18 @@ const BrandingTraining = () => {
         </div>
 
         <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-lg shadow-lg">
-          <h3 className="text-3xl font-bold mb-8 text-center text-gray-900">What You'll Learn</h3>
+          <h3 className="text-3xl font-bold mb-8 text-center text-gray-900">What we offer</h3>
           <div className="grid md:grid-cols-2 gap-8">
             <div>
               <h4 className="text-xl font-bold mb-4 text-amber-800">Core Modules</h4>
               <ul className="space-y-3">
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-amber-600 mr-3 mt-0.5" />
-                  <span className="text-gray-700">Brand positioning and differentiation</span>
+                  <span className="text-gray-700">Company and business registration</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-amber-600 mr-3 mt-0.5" />
-                  <span className="text-gray-700">Visual identity design principles</span>
+                  <span className="text-gray-700">Visual identity and website design</span>
                 </li>
                 <li className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-amber-600 mr-3 mt-0.5" />

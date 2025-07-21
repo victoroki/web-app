@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import solar from "./img/SOLar.jpg"
 import electrical from "./img/electrical.jpg"
 import hvac from "./img/hvac.jpeg"
-import cctvService from "./img/cctvService.jpeg"
+import cctvService from "./img/cctv.png"
 import { X } from 'lucide-react'
 
 // Service categories with their sub-services

@@ -16,19 +16,19 @@ const Footer = () => {
   const quickLinks = [
     { name: 'Home', href: '#home' },
     { name: 'About Us', href: '#about' },
-    { name: 'EPRA Licensing', href: '#epra' },
-    { name: 'Solar Design', href: '#solar' },
-    { name: 'Electrical Design', href: '#electrical' },
-    { name: 'Branding', href: '#branding' },
-    { name: 'Contact', href: '#contact' }
+    { name: 'EPRA Licensing', href: '/training/electrical' },
+    { name: 'Solar Design', href: '/training/solar' },
+    { name: 'Electrical Design', href: '/training/electrical' },
+    { name: 'Branding', href: '/training/branding' },
+    { name: 'Contact', href: '/training/contact' }
   ];
 
   const trainingPrograms = [
-    { name: 'EPRA License Classes', href: '#epra' },
-    { name: 'Solar PV System Design', href: '#solar' },
-    { name: 'AutoCAD Electrical', href: '#electrical' },
-    { name: 'Professional Branding', href: '#branding' },
-    { name: 'Career Development', href: '#' }
+    { name: 'EPRA License Classes', href: '/training/electrical' },
+    { name: 'Solar PV System Design', href: '/training/solar' },
+    { name: 'AutoCAD Electrical', href: '/training/electrical' },
+    { name: 'Professional Branding', href: '/training/branding' },
+    { name: 'Occupation Safety and Health training', href: '/training/safety-training' }
   ];
 
   return (

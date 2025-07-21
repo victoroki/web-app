@@ -29,8 +29,9 @@ import Partners from './components/training/Partners';
 import TrainerProfile from './components/training/Trainer';
 import Whatsapp from './components/Whatsapp';
 import WhatsappTrainer from './components/training/WhatsappTrainer';
+import PastTraining from "./components/training/PastTraining"
 
-// Create a component for the training homepage that includes all the sections
+
 const TrainingHomepage = () => {
   return (
     <>
@@ -40,7 +41,6 @@ const TrainingHomepage = () => {
       <Testimonials />
       <WhatsappTrainer />
       <TrainerProfile />
-      {/* Add any other components you want on the training homepage */}
     </>
   );
 };
@@ -49,7 +49,6 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* Main layout routes */}
         <Route
           element={
             <>
@@ -69,7 +68,7 @@ function App() {
           <Route path="/service" element={<Another />} />
         </Route>
 
-        {/* Training layout - common header and footer for all training pages */}
+
         <Route
           element={
             <div className="min-h-screen flex flex-col">
@@ -81,10 +80,9 @@ function App() {
             </div>
           }
         >
-          {/* Training homepage with all sections */}
-          <Route path="/training" element={<TrainingHomepage />} />
+          <Route path="/institute" element={<TrainingHomepage />} />
           
-          {/* Individual training pages without repeated components */}
+
           <Route path="/training/about" element={<AboutSection />} />
           <Route path="/training/epra" element={<EPRALicensing />} />
           <Route path="/training/solar" element={<SolarDesignTraining />} />
@@ -96,6 +94,7 @@ function App() {
           <Route path="/training/testimonials" element={<Testimonials />} />
           <Route path="/training/contact" element={<ContactSection />} />
           <Route path="/training/pastwebinars" element={<PastWebinars />} />
+          <Route path="/training/pasttraining" element={<PastTraining />} />
         </Route>
       </Routes>
     </Router>

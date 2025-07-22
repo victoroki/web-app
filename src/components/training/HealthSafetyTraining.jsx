@@ -180,7 +180,7 @@ const HealthSafetyTraining = () => {
                 <FileText className="w-6 h-6 text-amber-600 mt-1 mr-3 flex-shrink-0" />
                 <div>
                   <h4 className="font-semibold text-gray-900">Certification</h4>
-                  <p className="text-gray-600">Internationally recognized certificates upon completion</p>
+                  <p className="text-gray-600">Receive certificates upon completion</p>
                 </div>
               </div>
               <div className="flex items-start">

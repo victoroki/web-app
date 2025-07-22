@@ -1,9 +1,13 @@
 import { useNavigate } from 'react-router-dom'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import solar from "./img/SOLar.jpg"
 import electrical from "./img/electrical.jpg"
 import hvac from "./img/hvac.jpeg"
 import cctvService from "./img/cctv.png"
+import cctvhidden from "./img/cctvhidden.png"
+import cctvhkvision from "./img/cctvhkvision.png"
+import cctvaudio from "./img/cctvaudio.png"
+import cctvspy from "./img/cctvspy.png"
 import { X } from 'lucide-react'
 
 // Service categories with their sub-services
@@ -44,6 +48,7 @@ const serviceCategories = [
     id: 2,
     title: "CCTV Cameras",
     image: cctvService,
+    galleryImages: [cctvService, cctvhidden, cctvhkvision, cctvaudio, cctvspy],
     description: "Enhance the security of your property with our comprehensive CCTV solutions. From hidden surveillance to advanced IP cameras, we provide cutting-edge security systems.",
     subServices: [
       {
@@ -134,15 +139,11 @@ const serviceCategories = [
 
 // Modal component for service details
 const ServiceModal = ({ isOpen, onClose, service }) => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   if (!isOpen || !service) return null
 
   const handleSubServiceClick = (subService) => {
-    // console.log(`Redirecting to: ${subService.redirect}`)
-    // For actual implementation, you might use:
-    // window.location.href = subService.redirect
     navigate(subService.redirect)
-    // alert(`Redirecting to: ${subService.name}`)
   }
 
   return (
@@ -158,7 +159,7 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
           </button>
         </div>
         
-        <div id="services" className="p-6">
+        <div className="p-6">
           <img 
             src={service.image} 
             alt={service.title}
@@ -167,7 +168,7 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
           
           <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
           
-          <h3 id="services" className="text-xl font-semibold text-[#712B35] mb-4">Our Services Include:</h3>
+          <h3 className="text-xl font-semibold text-[#712B35] mb-4">Our Services Include:</h3>
           
           <div className="space-y-3">
             {service.subServices.map((subService) => (
@@ -186,7 +187,6 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
             ))}
           </div>
           
-          {/* Special section for Solar Water Pumps */}
           {service.id === 1 && (
             <div className="mt-8 p-6 bg-gray-50 rounded-lg">
               <h4 className="text-xl font-semibold text-[#712B35] mb-4">Solar Water Pumps</h4>
@@ -206,35 +206,68 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
   )
 }
 
-// Service Card Component
-const ServiceCard = ({ service, onClick }) => (
-  <div 
-    onClick={onClick}
-    className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-[#712B35] hover:text-white rounded-lg shadow-2xl p-3 group border-2 border-transparent hover:border-[#8d3640] cursor-pointer"
-  >
-    <div className="m-2 text-justify text-sm">
-      <div className="rounded-t overflow-hidden">
-        <img 
-          alt={`${service.title} service`} 
-          className="rounded-t group-hover:scale-[1.15] transition duration-1000 ease-in-out w-full h-48 object-cover" 
-          src={service.image}
-          loading="lazy"
-        />
-      </div>
-      <h3 className="font-semibold my-4 text-2xl text-center text-[#712B35] group-hover:text-white">
-        {service.title}
-      </h3>
-      <p className="text-md font-medium mb-4">
-        {service.description}
-      </p>
-      <div className="text-center">
-        <span className="text-sm text-[#712B35] group-hover:text-white font-semibold">
-          Click to explore services →
-        </span>
+// Service Card Component with Slideshow
+const ServiceCard = ({ service, onClick }) => {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const images = service.galleryImages || [service.image]
+
+  useEffect(() => {
+    if (images.length > 1) {
+      const interval = setInterval(() => {
+        setCurrentImageIndex((prevIndex) => 
+          prevIndex === images.length - 1 ? 0 : prevIndex + 1
+        )
+      }, 3000)
+      return () => clearInterval(interval)
+    }
+  }, [images.length])
+
+  return (
+    <div 
+      onClick={onClick}
+      className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-[#712B35] hover:text-white rounded-lg shadow-2xl p-3 group border-2 border-transparent hover:border-[#8d3640] cursor-pointer"
+    >
+      <div className="m-2 text-justify text-sm">
+        <div className="rounded-t overflow-hidden relative h-48">
+          {images.map((image, index) => (
+            <img 
+              key={index}
+              alt={`${service.title} service`} 
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} 
+              src={image}
+              loading="lazy"
+            />
+          ))}
+          {images.length > 1 && (
+            <div className="absolute bottom-2 left-0 right-0 flex justify-center space-x-2">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    setCurrentImageIndex(index)
+                  }}
+                  className={`w-2 h-2 rounded-full ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+        <h3 className="font-semibold my-4 text-2xl text-center text-[#712B35] group-hover:text-white">
+          {service.title}
+        </h3>
+        <p className="text-md font-medium mb-4">
+          {service.description}
+        </p>
+        <div className="text-center">
+          <span className="text-sm text-[#712B35] group-hover:text-white font-semibold">
+            Click to explore services →
+          </span>
+        </div>
       </div>
     </div>
-  </div>
-)
+  )
+}
 
 function Another() {
   const [selectedService, setSelectedService] = useState(null)
@@ -282,7 +315,6 @@ function Another() {
         </div>
       </section>
 
-      {/* Modal */}
       <ServiceModal 
         isOpen={isModalOpen}
         onClose={closeModal}

@@ -3,42 +3,43 @@ import { CheckCircle } from 'lucide-react';
 
 
 const EpraComponent = () => {
-    const licenseClasses = [
-  {
-    "class": "T1",
-    "scope": "Solar PV system installation work for small systems or single battery DC systems of up to 100Wp (watts peak).",
-    "minQualification": "KCPE",
-    "technicalQualification": "Electrical Government Trade Test 2 and basic solar training",
-    "experience": "2 years of verifiable solar installation experience",
-    "startingLicense": "T1",
-    "highestAchievable": "T3"
-  },
-  {
-    "class": "T2",
-    "scope": "Solar PV system installation work for medium systems or multiple batteries which may include an inverter.",
-    "minQualification": "KCSE",
-    "technicalQualification": [
-      "Certificate in Electrical/Electronic and Intermediate Solar Training with 4 years of experience",
-      "Diploma in Electrical/Electronic and Intermediate Solar Training with 2 years of experience",
-      "BSc Electrical Engineering or relevant degree or Higher National Diploma with 1 year of experience"
-    ],
-    "experience": "2–4 years depending on qualification",
-    "startingLicense": "T2",
-    "highestAchievable": "T3"
-  },
-  {
-    "class": "T3",
-    "scope": "Solar PV system installation work for advanced projects, including grid-connected and hybrid systems.",
-    "minQualification": "KCSE",
-    "technicalQualification": [
-      "Diploma in Electrical and/or Electronic and Advanced Solar Training with 4 years of solar installation experience",
-      "BSc Electrical Engineering or relevant degree or Higher National Diploma with 2 years of solar installation experience"
-    ],
-    "experience": "2–4 years depending on qualification",
-    "startingLicense": "T3",
-    "highestAchievable": "T3"
-  }
-];
+  const licenseClasses = [
+    {
+      "class": "T1",
+      "scope": "Solar PV system installation work for small systems or single battery DC systems of up to 100Wp (watts peak).",
+      "minQualification": "KCPE",
+      "technicalQualification": "Electrical Government Trade Test 2 and basic solar training",
+      "experience": "2 years of verifiable solar installation experience",
+      "startingLicense": "T1",
+      "highestAchievable": "T3"
+    },
+    {
+      "class": "T2",
+      "scope": "Solar PV system installation work for medium systems or multiple batteries which may include an inverter.",
+      "minQualification": "KCSE",
+      "technicalQualification": [
+        "Certificate in Electrical/Electronic and Intermediate Solar Training with 4 years of experience, \n",
+        "Diploma in Electrical/Electronic and Intermediate Solar Training with 2 years of experience, \n",
+        "BSc Electrical Engineering or relevant degree or Higher National Diploma with 1 year of experience, \n"
+      ],
+      "experience": "2–4 years depending on qualification",
+      "startingLicense": "T2",
+      "highestAchievable": "T3"
+    },
+    {
+      "class": "T3",
+      "scope": "Solar PV system installation work for advanced projects, including grid-connected and hybrid systems.",
+      "minQualification": "KCSE",
+      "technicalQualification": [
+        "Diploma in Electrical and/or Electronic and Advanced Solar Training with 4 years of solar installation experience,\n",
+        "BSc Electrical Engineering or relevant degree or Higher National Diploma with 2 years of solar installation experience,\n"
+      ],
+      "experience": "2–4 years depending on qualification",
+      "startingLicense": "T3",
+      "highestAchievable": "T3"
+    }
+  ];
+
 
 
   return (
@@ -50,7 +51,7 @@ const EpraComponent = () => {
           </h2>
           <div className="w-24 h-1 bg-amber-600 mx-auto mb-8"></div>
           <p className="text-xl text-gray-700 max-w-4xl mx-auto">
-           Prepare to advance your electrical career with our focused training designed specifically for any one who is aming to get EPRA Solar coaching training and material
+            Prepare to advance your electrical career with our focused training designed specifically for any one who is aming to get EPRA Solar coaching training and material
           </p>
         </div>
 
@@ -69,10 +70,22 @@ const EpraComponent = () => {
                   <CheckCircle className="w-5 h-5 text-amber-500 mr-3 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700"><strong>Min Academic:</strong> {license.minQualification}</span>
                 </div>
-                <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-amber-500 mr-3 mt-0.5 flex-shrink-0" />
-                  <span className="text-gray-700"><strong>Technical:</strong> {license.technicalQualification}</span>
-                </div>
+<div className="flex items-start">
+  <CheckCircle className="w-5 h-5 text-amber-500 mr-3 mt-0.5 flex-shrink-0" />
+  <span className="text-gray-700">
+    <strong>Technical:</strong>{" "}
+    {Array.isArray(license.technicalQualification) ? (
+      <ul className="list-disc list-inside mt-1 space-y-1">
+        {license.technicalQualification.map((item, idx) => (
+          <li key={idx}>{item}</li>
+        ))}
+      </ul>
+    ) : (
+      license.technicalQualification
+    )}
+  </span>
+</div>
+
                 <div className="flex items-start">
                   <CheckCircle className="w-5 h-5 text-amber-500 mr-3 mt-0.5 flex-shrink-0" />
                   <span className="text-gray-700"><strong>Starting License:</strong> {license.startingLicense}</span>
@@ -99,9 +112,9 @@ const EpraComponent = () => {
         </div> */}
       </div>
       <div className="text-center">
-                    <p className="bg-amber-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg">
-              Get Full Trainings Outline
-            </p>
+        <p className="bg-amber-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg">
+          Get Full Trainings Outline
+        </p>
       </div>
 
 

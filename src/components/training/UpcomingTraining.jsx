@@ -49,7 +49,6 @@ const UpcomingTraining = () => {
       "class C2 Low Voltage",
       "class C1 Low Voltage",
       "class B Medium Volage",
-      "AutoCAD software training"
     ],
     "price": "KSH 3000",
     "earlyBirdPrice": "N/A"
@@ -75,8 +74,8 @@ const UpcomingTraining = () => {
     "time": "07:00 PM - 08:00 PM",
     "description": "NITA exam coaching.",
     "features": [
-      "Exam syllabus coverage",
-      "Practice tests"
+      "Comprehensive NITA Syllabus Alignment",
+      "Topic-by-topic Training"
     ],
     "price": "KSH 3000",
     "earlyBirdPrice": "N/A"
@@ -101,17 +100,6 @@ const UpcomingTraining = () => {
       "EPRA C1","EPRA C2","EPRA B" 
     ],
     "price": "3000", 
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "January 12 - 30",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "Solar EPRA T2 & T3 training webinar.",
-    "features": [
-      "N/A" 
-    ],
-    "price": "T2-KSH 5000, T3-KSH 7000",
     "earlyBirdPrice": "N/A"
   },
   {

@@ -14,8 +14,8 @@ import logo from '../img/torchbearer-logo.png'
 
 const Footer = () => {
   const quickLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About Us', href: '#about' },
+    { name: 'Home', href: '/' },
+    { name: 'About Us', href: '/about' },
     { name: 'EPRA Licensing', href: '/training/electrical' },
     { name: 'Solar Design', href: '/training/solar' },
     { name: 'Electrical Design', href: '/training/electrical' },

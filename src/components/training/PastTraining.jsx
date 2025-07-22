@@ -81,7 +81,7 @@ const PastWebinars = () => {
                       rel="noopener noreferrer"
                       className="ml-2 text-blue-600 hover:text-blue-800"
                     >
-                      <Linkedin className="w-4 h-4" />
+                      {/* <Linkedin className="w-4 h-4" /> */}
                     </a>
                   )}
                 </div>

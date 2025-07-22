@@ -3,123 +3,11 @@ import { Calendar, Clock } from 'lucide-react';
 const UpcomingWebinars = () => {
   const upcomingWebinars = [
     {
-      "title": "NITA EXAM COACHING",
-      "date": "July 31",
-      "time": "07:00 PM - 08:30 PM",
-      "speaker": "N/A",
-      "description": "NITA exam coaching. T2 - KSH 5000, T3 - KSH 7000.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "ELECTRICAL TRAINING",
-      "date": "August 4 - 22",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Electrical Training. Cost: 60 USD.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "PERSONAL BRANDING",
-      "date": "August 6 - 7",
-      "time": "07:00 PM - 08:00 PM",
-      "speaker": "N/A",
-      "description": "Personal branding training. Cost: KSH 1050.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
-      "date": "August 18 - 22",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Training on SketchUp, PVSYST, Homer & AutoCAD designs. Cost: KSH 3000.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "August 31",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Free webinar for Solar EPRA T2 & T3 training.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "September 8 - 26",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
-      "registrationLink": "tel:+254789173033"
-    },
-    {
-      "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
-      "date": "October 2",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Free webinar combining NITA Exam Coaching and EPRA T2 & T3 Solar.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
-      "date": "October 6 - 24",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Webinar on SketchUp, PVSYST, Homer & AutoCAD designs. Cost: KSH 6000.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS TRAINING",
-      "date": "November 2",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Free training on SketchUp, PVSYST, Homer & AutoCAD designs.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "NITA EXAM COACHING",
-      "date": "November 10 - 14",
-      "time": "07:00 PM - 08:00 PM",
-      "speaker": "N/A",
-      "description": "NITA exam coaching. Cost: KSH 3000.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "ELECTRICAL TRAINING",
-      "date": "November 17 - December 5",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Electrical Training. For more info call/WhatsApp +254789173033.",
-      "registrationLink": "tel:+254789173033"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "December 8 - 12",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Solar EPRA T2 & T3 training webinar. T2: KSH 5000, T3: KSH 7000.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "January 8",
-      "time": "07:00 PM - 08:00 PM",
-      "speaker": "N/A",
-      "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
-      "registrationLink": "tel:+254789173033"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "January 12 - 30",
-      "time": "07:30 PM - 09:00 PM",
-      "speaker": "N/A",
-      "description": "Solar EPRA T2 & T3 training webinar. T2: KSH 5000, T3: KSH 7000.",
-      "registrationLink": "N/A"
-    },
-    {
-    "title": "ELECTRICAL TRAINING",
+    "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
     "date": "August 31",
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Emmanuel",
-    "description": "Electrical Trainng",
+    "description": "Solar EPRA T2 AND T3 Training",
     "registrationLink": "N/A"
   },
   {
@@ -128,6 +16,22 @@ const UpcomingWebinars = () => {
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Mazin",
     "description": "Training on SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS",
+    "registrationLink": "N/A"
+  },
+    {
+    "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
+    "date": "November 2",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "Dalton and Mazin",
+    "description": "NITA Training",
+    "registrationLink": "N/A"
+  },
+      {
+    "title": "SOLAR EPRA T2 & T3  WEBINAR",
+    "date": "January 8",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "Dalton and Mazin",
+    "description": "Solar EPRA training",
     "registrationLink": "N/A"
   }
   ];
@@ -155,7 +59,7 @@ const UpcomingWebinars = () => {
                   Upcoming
                 </span>
               </div>
-              <p className="text-gray-700 mb-4"><strong>Speaker:</strong> {webinar.speaker}</p>
+              {/* <p className="text-gray-700 mb-4"><strong>Speaker:</strong> {webinar.speaker}</p> */}
               <p className="text-gray-700 mb-6">{webinar.description}</p>
               <a
                 href={webinar.registrationLink}

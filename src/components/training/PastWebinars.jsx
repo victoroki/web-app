@@ -10,6 +10,14 @@ const pastWebinars = [
     "description": "Free webinar for insights into solar and electrical EPRA licensing. For more info call/WhatsApp +254789173033.",
     "registrationLink": "tel:+254789173033"
   },
+    {
+    "title": "SOLAR AND SYSTEM DESIGN BASICS PVSYST AND SKETCHUP",
+    "date": "Jane 5",
+    "time": "N/A",
+    "speaker": "Dalton",
+    "description": "Free webinar for solar system design on Pvsyst and Sketchup",
+    "registrationLink": "tel:+254789173033"
+  },
   {
     "title": "SOLAR SYSTEM TESTING & COMMISSIONING",
     "date": "June 5",
@@ -19,19 +27,19 @@ const pastWebinars = [
     "registrationLink": "N/A"
   },
   {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+    "title": "SMA SUNNY DESIGN TOOL WEBINAR",
     "date": "June 22",
     "time": "07:40 PM - 09:00 PM",
     "speaker": "Dalton",
-    "description": "Free webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+    "description": "Free webinar for Solar SMA sunny desgn Tool.",
     "registrationLink": "tel:+254789173033"
   },
   {
-    "title": "SOLAR SYSTEM DESIGN BASICS (PVSYST & SKETCHUP)",
+    "title": "SOLAR EPRA TRAINING T2, T3 AND ELECTRICAL TRAINING WEBINAR",
     "date": "July 2",
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Mazin",
-    "description": "Solar system design basics using PVSYST & SketchUp. ",
+    "description": "Solar EPRA training t2, t3 and electrical training.",
     "registrationLink": "N/A"
   },
   {

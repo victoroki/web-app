@@ -38,7 +38,7 @@ const PastWebinars = () => {
       "date": "March 10 - 28",
       "time": "07:40 PM - 09:00 PM",
       "speaker": "Dalton and Emmanuel",
-      "description": "Training on SOLAR SYSTEMS DESIGN AND SIZING PVSYST &SKETCHUP . T2 AND T2: KSH 3500, . For more info call/WhatsApp +254789173033.",
+      "description": "Training on SOLAR SYSTEMS DESIGN AND SIZING PVSYST &SKETCHUP",
       "registrationLink": ""
     },
     {

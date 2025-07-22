@@ -20,16 +20,11 @@ const Header = () => {
     { name: 'Electrical', href: '/training/electrical' },
     { name: 'Occupation  Safety and Health training', href: '/training/safety-training' },
     { name: 'Professional Branding', href: '/training/branding' },
-
   ];
 
   const trainingItems = [
     { name: 'Upcoming Training', href: '/training/upcoming' },
     { name: 'Past Training', href: '/training/pasttraining' },
-    // { name: 'EPRA Licensing', href: '/training/epra' },
-    // { name: 'AutoCAD Electrical', href: '/training/electrical' },
-    // { name: 'Solar PV Design', href: '/training/solar' },
-    // { name: 'Career Development', href: '/training/about' }, 
   ];
 
   const webinarItems = [
@@ -55,38 +50,44 @@ const Header = () => {
       href: '/training/webinars',
       dropdown: webinarItems
     },
-    // { name: 'Upcoming Training', href: '/training/upcoming' },
     { name: 'Contact', href: '/training/contact' }
   ];
-
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50 border-b-2 border-amber-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-20">
-          <div className="flex items-center">
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          {/* Logo and Company Info */}
+          <div className="flex items-center min-w-0 flex-1 pr-4">
             <div className="flex-shrink-0 flex items-center">
-              <div className="w-12 h-12 rounded-full flex items-center justify-center mr-3">
-                {/* <Lightbulb className="w-6 h-6 text-white" /> */}
-                <img src={logo} alt={<Lightbulb className="w-6 h-6 text-white" height={40} width={30} />} />
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center mr-2 sm:mr-3">
+                <img src={logo} alt="Torchbearer Logo" className="w-full h-full object-contain" />
               </div>
-              <div>
-                <h1 className="text-l font-bold text-amber-600">Torchbearer Institute of Technologies</h1>
-                <p className="text-sm text-gray-600">Empower the mind energize the community</p>
+              <div className="min-w-0 flex-1">
+                <h1 className="text-xs sm:text-sm md:text-base lg:text-lg font-bold text-amber-600 leading-tight truncate">
+                  Torchbearer Institute of Technologies
+                </h1>
+                <p className="text-xs sm:text-sm text-gray-600 leading-tight hidden sm:block">
+                  Empower the mind energize the community
+                </p>
+                {/* Mobile subtitle - shorter version */}
+                <p className="text-xs text-gray-600 leading-tight sm:hidden">
+                  Empower the mind...
+                </p>
               </div>
             </div>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6">
+          <nav className="hidden md:block flex-shrink-0">
+            <div className="ml-10 flex items-center space-x-4 lg:space-x-6">
               {navItems.map((item) => (
                 <div key={item.name} className="relative">
                   {item.dropdown ? (
                     <div className="relative">
                       <button
                         onClick={() => toggleDropdown(item.name)}
-                        className="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-semibold transition-colors border-b-2 border-transparent hover:border-amber-500 flex items-center"
+                        className="text-gray-700 hover:text-amber-600 px-2 lg:px-3 py-2 rounded-md text-sm font-semibold transition-colors border-b-2 border-transparent hover:border-amber-500 flex items-center whitespace-nowrap"
                       >
                         {item.name}
                         <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${openDropdown === item.name ? 'transform rotate-180' : ''}`} />
@@ -111,7 +112,7 @@ const Header = () => {
                   ) : (
                     <a
                       href={item.href}
-                      className="text-gray-700 hover:text-amber-600 px-3 py-2 rounded-md text-sm font-semibold transition-colors border-b-2 border-transparent hover:border-amber-500"
+                      className="text-gray-700 hover:text-amber-600 px-2 lg:px-3 py-2 rounded-md text-sm font-semibold transition-colors border-b-2 border-transparent hover:border-amber-500 whitespace-nowrap"
                     >
                       {item.name}
                     </a>
@@ -122,12 +123,13 @@ const Header = () => {
           </nav>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex-shrink-0">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600"
+              className="text-gray-700 hover:text-amber-600 focus:outline-none focus:ring-2 focus:ring-amber-600 p-2"
+              aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
           </div>
         </div>

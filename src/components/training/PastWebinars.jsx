@@ -40,7 +40,8 @@ const pastWebinars = [
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Mazin",
     "description": "Solar EPRA training t2, t3 and electrical training.",
-    "registrationLink": "N/A"
+    "registrationLink": "N/A",
+    "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1"
   },
   {
     "title": "Solar Design on Pvsyst and Sketchup",
@@ -48,7 +49,8 @@ const pastWebinars = [
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Aziz",
     "description": "Solar Design on Pvsyst and Sketchup",
-    "registrationLink": "N/A"
+    "registrationLink": "N/A",
+    "slidesLink":"https://drive.google.com/file/d/1KqPCmPuLcK9bqb6FqiXxhw2Azq2cJKrr/view?usp=drive_link"
   },
     {
     "title": "Solar Design - cable sizing",
@@ -56,7 +58,8 @@ const pastWebinars = [
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Aziz",
     "description": "Training on Solar Design - cable sizing",
-    "registrationLink": "N/A"
+    "registrationLink": "N/A",
+    "slidesLink":"https://ln5.sync.com/4.0/dl/bf76b9200#ensf64v5-9ghbbsrt-3uv4rtbz-jpcfp9ke"
   },
 
 ];

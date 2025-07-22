@@ -149,29 +149,44 @@ const SolarDesignTraining = () => {
               </div>
             </div> */}
 
-<div className="bg-white p-8 mb-7 rounded-2xl shadow-xl border border-amber-100 hover:shadow-2xl transition-all duration-300">
-  <div className="flex items-center mb-8">
-    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mr-4">
+<div className="bg-white p-4 sm:p-8 mb-7 rounded-2xl shadow-xl border border-amber-100 hover:shadow-2xl transition-all duration-300">
+  <div className="flex flex-col sm:flex-row items-center mb-6 sm:mb-8">
+    <div className="w-12 h-12 bg-gradient-to-br from-amber-500 to-amber-600 rounded-full flex items-center justify-center mb-4 sm:mb-0 sm:mr-4">
       <Zap className="w-6 h-6 text-white" />
     </div>
-    <h3 className="text-3xl font-bold text-gray-900">Software Training</h3>
+    <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center sm:text-left">Software Training</h3>
   </div>
-  <div className="space-y-4">
+  <div className="space-y-4 sm:space-y-4">
     {software.map((item, index) => (
-      <div key={index} className="group flex items-start p-6 bg-amber-50 rounded-xl border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all duration-300">
-        <div className="w-16 h-16 bg-white rounded-xl flex items-center justify-center mr-6 shadow-md group-hover:shadow-lg transition-shadow p-2">
-          <img src={item.icon} alt={item.name} className="w-full h-full object-contain" />
+      <div key={index} className="group flex flex-col sm:flex-row items-start p-4 sm:p-6 bg-amber-50 rounded-xl border border-amber-200 hover:border-amber-300 hover:shadow-md transition-all duration-300">
+        {/* Mobile: Icon and title in row, Desktop: Icon on left */}
+        <div className="flex items-center w-full sm:w-auto mb-3 sm:mb-0">
+          <div className="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-xl flex items-center justify-center mr-4 sm:mr-6 shadow-md group-hover:shadow-lg transition-shadow p-2 flex-shrink-0">
+            <img src={item.icon} alt={item.name} className="w-full h-full object-contain" />
+          </div>
+          <div className="sm:hidden flex-1">
+            <h4 className="text-lg font-semibold text-gray-900 group-hover:text-amber-700 transition-colors leading-tight">
+              {item.name}
+            </h4>
+          </div>
         </div>
-        <div className="flex-1">
-          <h4 className="text-xl font-semibold text-gray-900 group-hover:text-amber-700 transition-colors mb-2">
+        
+        {/* Content section */}
+        <div className="flex-1 w-full sm:w-auto">
+          {/* Desktop title (hidden on mobile) */}
+          <h4 className="hidden sm:block text-xl font-semibold text-gray-900 group-hover:text-amber-700 transition-colors mb-2">
             {item.name}
           </h4>
-          <p className="text-gray-600 text-sm mb-3">
+          
+          {/* Description */}
+          <p className="text-gray-600 text-sm sm:text-sm mb-3 leading-relaxed">
             {item.desc}
           </p>
+          
+          {/* Progress bar */}
           <div className="w-full bg-amber-200 rounded-full h-1.5">
             <div 
-              className="bg-gradient-to-r from-amber-500 to-amber-600 h-1.5 rounded-full" 
+              className="bg-gradient-to-r from-amber-500 to-amber-600 h-1.5 rounded-full transition-all duration-500" 
               style={{ width: `${Math.min(100, 80 + (index * 5))}%` }}
             ></div>
           </div>

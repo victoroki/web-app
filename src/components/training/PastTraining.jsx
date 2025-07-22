@@ -1,6 +1,6 @@
 import { Calendar, Linkedin } from 'lucide-react';
 
-const PastWebinars = () => {
+const PastTraining = () => {
   // Speaker LinkedIn profiles mapping
   const speakerLinkedIn = {
     "Dalton and Emmanuel": "https://linkedin.com/in/dalton-profile",
@@ -15,23 +15,29 @@ const PastWebinars = () => {
       "time": "8:00 - 9:00",
       "speaker": "Dalton and Emmanuel",
       "description": "Four weeks training for Solar EPRA T2 & T3: KSH 3500",
-      "registrationLink": "N/A"
+      "registrationLink": "N/A",
+      "recordingLink": "https://selar.com/5f9071",
+      "slidesLink": "https://selar.com/5f9071"
     },
+    // {
+    //   "title": "SOLAR EPRA T2 & T3 TRAINING",
+    //   "date": "March 5",
+    //   "time": "07:40 - 09:OO PM",
+    //   "speaker": "Dalton and Emmanuel",
+    //   "description": "Training on SOLAR EPRA T2 & T3. Cost:  KSH 3500.",
+    //   "registrationLink": "N/A",
+    //   "recordingLink":"https://selar.com/5f9071",
+    //   "slidesLink":"https://selar.com/5f9071"
+    // },
     {
       "title": "SOLAR EPRA T2 & T3 TRAINING",
       "date": "March 5",
       "time": "07:40 - 09:OO PM",
       "speaker": "Dalton and Emmanuel",
       "description": "Training on SOLAR EPRA T2 & T3. Cost:  KSH 3500.",
-      "registrationLink": "N/A"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3 TRAINING",
-      "date": "March 5",
-      "time": "07:40 - 09:OO PM",
-      "speaker": "Dalton and Emmanuel",
-      "description": "Training on SOLAR EPRA T2 & T3. Cost:  KSH 3500.",
-      "registrationLink": "N/A"
+      "registrationLink": "N/A",
+      "recordingLink": "https://selar.com/5f9071",
+      "slidesLink": "https://selar.com/5f9071"
     },
     {
       "title": "SOLAR EPRA T2 & T3 TRAINING",
@@ -39,7 +45,9 @@ const PastWebinars = () => {
       "time": "07:40 PM - 09:00 PM",
       "speaker": "Dalton and Emmanuel",
       "description": "Training on SOLAR SYSTEMS DESIGN AND SIZING PVSYST &SKETCHUP",
-      "registrationLink": ""
+      "registrationLink": "",
+      "recordingLink": "https://selar.com/5f9071",
+      "slidesLink": "https://selar.com/5f9071"
     },
     {
       "title": "SOLAR SYSTEM TESTING & COMMISSIONING",
@@ -75,9 +83,9 @@ const PastWebinars = () => {
                 <div className="flex items-center">
                   <p className="text-gray-700"><strong>Speaker:</strong> {webinar.speaker}</p>
                   {speakerLinkedIn[webinar.speaker] && (
-                    <a 
-                      href={speakerLinkedIn[webinar.speaker]} 
-                      target="_blank" 
+                    <a
+                      href={speakerLinkedIn[webinar.speaker]}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="ml-2 text-blue-600 hover:text-blue-800"
                     >
@@ -109,4 +117,4 @@ const PastWebinars = () => {
   );
 };
 
-export default PastWebinars;
+export default PastTraining;

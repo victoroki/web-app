@@ -11,7 +11,7 @@ const TrainersSection = () => {
       id: 1,
       name: "Ondora Mogere Dalton",
       role: "Technical Solar Engineer",
-      bio: "Specialized in solar sizing designing and training",
+      bio: "Specialized in solar, OSHA and Branding",
       image: ceo,
       link:"https://www.linkedin.com/in/ondora-mogere-dalton?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       courses: ["Solar Design", "EPRA Licensing", "OSHA"]
@@ -34,15 +34,15 @@ const TrainersSection = () => {
       link:"https://www.linkedin.com/in/mazin-ahmed-ibrahim-ahmed-162898315?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       courses: ["Solar Design", "electrical"]
     },
-        {
-      id: 4,
-      name: "Emmanuel Marindi",
-      role: "Energy consultant | Renewable Energy ",
-      bio: "skilled in PVsyst, SketchUp and Excel sheet",
-      image: emmanuel,
-      link:"https://www.linkedin.com/in/emmanuel-marindi-91a484266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BP8y2iigsR8qUcSjgZABxPw%3D%3D",
-      courses: ["Solar Technologies", "EPRA solar Training"]
-    }
+    //     {
+    //   id: 4,
+    //   name: "Emmanuel Marindi",
+    //   role: "Energy consultant | Renewable Energy ",
+    //   bio: "skilled in PVsyst, SketchUp and Excel sheet",
+    //   image: emmanuel,
+    //   link:"https://www.linkedin.com/in/emmanuel-marindi-91a484266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BP8y2iigsR8qUcSjgZABxPw%3D%3D",
+    //   courses: ["Solar Technologies", "EPRA solar Training"]
+    // }
   ];
 
   return (

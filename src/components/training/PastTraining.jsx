@@ -30,10 +30,10 @@ const PastTraining = () => {
     //   "slidesLink":"https://selar.com/5f9071"
     // },
     {
-      "title": "SOLAR EPRA T2 & T3 TRAINING",
+      "title": " SOLAR SYSTEMS  DESIGN AND SIZING PVSYST &SKETCHUP",
       "date": "March 5",
       "time": "07:40 - 09:OO PM",
-      "speaker": "Dalton and Emmanuel",
+      "speaker": "Mazin",
       "description": "Training on SOLAR EPRA T2 & T3. Cost:  KSH 3500.",
       "registrationLink": "N/A",
       "recordingLink": "https://selar.com/5f9071",
@@ -55,7 +55,9 @@ const PastTraining = () => {
       "time": "04:00 PM - 05:00 PM",
       "speaker": "Eng Hanane Oudli",
       "description": "Basics of solar system design Solar system . Cost: USD 13",
-      "registrationLink": "N/A"
+      "registrationLink": "N/A",
+      "recordingLink":"https://selar.com/1z1522",
+      "slidesLink":"https://selar.com/1z1522"
     },
     {
       "title": "SOLAR SYSTEM DESIGN & SIZING (PVSYST & SKETCHUP)",
@@ -63,8 +65,20 @@ const PastTraining = () => {
       "time": "07:30 PM - 09:30 PM",
       "speaker": "Dalton and Mazin",
       "description": "Solar system design and sizing training using PVSYST, SketchUp, and Excell Designing. Cost: 13 USD.",
-      "registrationLink": "N/A"
+      "registrationLink": "N/A",
+      "recordingLink":"https://selar.com/40144h",
+      "slidesLink":"https://selar.com/40144h"
     },
+      {
+    "title": "SOLAR T2 AND T3 EPRA TRAINING",
+    "date": "July 7 - 25",
+    "time": "08:00 PM - 09:00 PM",
+    "speaker": "Dalton and Emmanuel",
+    "description": "Get knowledge that will help you acquire your license",
+    "registrationLink": "N/A",
+    "recordingLink": "https://selar.com/5f9071",
+    "slidesLink": "https://selar.com/5f9071"
+  },
   ];
 
   return (

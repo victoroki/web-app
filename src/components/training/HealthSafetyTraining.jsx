@@ -9,7 +9,7 @@ import {
 import ilo from '../img/ilo.png'
 import iso from '../img/iso.png'
 import nec from '../img/nec.png'
-import nfpa from '../img/nfpa.png'
+import nfpa from '../img/british.png'
 import iee from '../img/ieee.png'
 import iec from '../img/iec.png'
 import epra from "../img/epra.png"
@@ -68,8 +68,8 @@ const HealthSafetyTraining = () => {
                 className="w-20 h-8 mb-3"
 
               />
-              <h4 className="font-bold text-lg text-gray-900 mb-2">NFPA Standards</h4>
-              <p className="text-gray-600">National Fire Protection Association codes and standards</p>
+              <h4 className="font-bold text-lg text-gray-900 mb-2">British Standards</h4>
+              <p className="text-gray-600">standard for electrical installation and the safety of electrical wiring systems.</p>
             </div>
 
             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-amber-500">

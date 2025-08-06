@@ -66,7 +66,7 @@ const Footer = () => {
 
           <div>
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-4">
               {quickLinks.map((link, index) => (
                 <li key={index}>
                   <a
@@ -81,7 +81,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div>
+          {/* <div>
             <h3 className="text-xl font-bold mb-6">Training Programs</h3>
             <ul className="space-y-3">
               {trainingPrograms.map((program, index) => (
@@ -96,7 +96,7 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           <div>
             <h3 className="text-xl font-bold mb-6">Contact Info</h3>

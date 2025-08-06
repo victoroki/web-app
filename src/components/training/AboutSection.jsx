@@ -10,7 +10,7 @@ const AboutSection = () => {
     // Function to animate counting
     const animateCount = (target: number, setter: React.Dispatch<React.SetStateAction<number>>, duration: number = 2000) => {
       const start = 0;
-      const increment = target / (duration / 16); // 60fps
+      const increment = target / (duration / 3); // 60fps
       let current = start;
       
       const timer = setInterval(() => {
@@ -55,7 +55,7 @@ const AboutSection = () => {
     {
       icon: <TrendingUp className="w-8 h-8" />,
       title: "Proven Success",
-      description: "Track record of successful graduates advancing in their careers"
+      description: "Track record of successful professionals advancing in their careers"
     }
   ];
 
@@ -78,13 +78,13 @@ const AboutSection = () => {
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
               Established with a commitment to excellence, we are dedicated to exceeding expectations by providing
-              cost-effective, innovative training solutions without compromising the quality of education that we deliver.
+              cost-effective, innovative training solutions without compromising the quality of training that we deliver.
               Our expertise encompasses every aspect of professional development needs including EPRA licensing, solar system
               design, electrical engineering, Occupational Safety and Health training and professional branding.
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
               Our team consists of experienced professionals and certified instructors with industry-standard expertise
-              and advanced teaching capabilities, ensuring you receive the highest quality education and practical skills
+              and advanced teaching capabilities, ensuring you receive the highest quality training and practical skills
               needed for career success.
             </p>
           </div>

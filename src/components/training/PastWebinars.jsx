@@ -7,24 +7,19 @@ const pastWebinars = [
     "date": "January 15",
     "time": "N/A",
     "speaker": "Dalton",
-    "description": "Free webinar for insights into solar and electrical EPRA licensing. For more info call/WhatsApp +254789173033.",
-    "registrationLink": "tel:+254789173033"
+    "description": "Free webinar for insights into solar and electrical EPRA licensing.",
+    "registrationLink": "tel:+254789173033",
+     "slidesLink":"https://drive.google.com/file/d/1jqeVvclOd7FHPoJ9nU0487vrmG6j09YU/view?usp=drive_link",
+     "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1"
   },
     {
     "title": "SOLAR AND SYSTEM DESIGN BASICS PVSYST AND SKETCHUP",
-    "date": "Jane 5",
-    "time": "N/A",
-    "speaker": "Dalton",
-    "description": "Free webinar for solar system design on Pvsyst and Sketchup",
-    "registrationLink": "tel:+254789173033"
-  },
-  {
-    "title": "SOLAR SYSTEM TESTING & COMMISSIONING",
     "date": "June 5",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Mazin and Dalton",
-    "description": "Free webinar on solar system testing and commissioning.",
-    "registrationLink": "N/A"
+    "time": "N/A",
+    "speaker": "Dalton and Mazin",
+    "description": "Free webinar for solar system design on Pvsyst and Sketchup",
+   "slidesLink":"https://drive.google.com/file/d/1BDI53Q-q-wnykLan6mHtvcP9fvxvdbvO/view?usp=sharing",
+    "recordingLink":"https://youtu.be/CKV7Xo2T0Co?si=7KuNFAL0II0bZUnd"
   },
   {
     "title": "SMA SUNNY DESIGN TOOL WEBINAR",
@@ -32,26 +27,31 @@ const pastWebinars = [
     "time": "07:40 PM - 09:00 PM",
     "speaker": "Dalton",
     "description": "Free webinar for Solar SMA sunny desgn Tool.",
-    "registrationLink": "tel:+254789173033"
+    "slidesLink":"https://drive.google.com/file/d/1BI1Gl9dIkJ6_kMEZiAUM1VZZossLJzCJ/view?usp=drive_link",
+  
   },
   {
-    "title": "SOLAR EPRA TRAINING T2, T3 AND ELECTRICAL TRAINING WEBINAR",
+    "title": "SOLAR EPRA T2, T3 AND ELECTRICAL TRAINING LICENSING",
     "date": "July 2",
     "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Mazin",
+    "speaker": "Dalton",
     "description": "Solar EPRA training t2, t3 and electrical training.",
     "registrationLink": "N/A",
-    "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1"
+    "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1",
+    "slidesLink":"https://drive.google.com/file/d/1jqeVvclOd7FHPoJ9nU0487vrmG6j09YU/view?usp=drive_link"
   },
-  {
-    "title": "Solar Design on Pvsyst and Sketchup",
+
+      {
+    "title": "Solar Design Basics - Pvysist and Sketchup",
     "date": "July 13",
     "time": "08:00 PM - 09:00 PM",
     "speaker": "Dalton and Aziz",
-    "description": "Solar Design on Pvsyst and Sketchup",
+    "description": "Training on Solar Design - Pvysist and Sketchup",
     "registrationLink": "N/A",
-    "slidesLink":"https://drive.google.com/file/d/1KqPCmPuLcK9bqb6FqiXxhw2Azq2cJKrr/view?usp=drive_link"
+    "slidesLink":"https://drive.google.com/file/d/1_tkz0gobPFcNT4wcVfFzykK19dTcn3Qa/view?usp=sharing",
+    "recordingLink":"https://youtu.be/aUiVeFGODG4?si=DUSuXOI6lXxYffTe"
   },
+
     {
     "title": "Solar Design - cable sizing",
     "date": "July 20",

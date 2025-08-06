@@ -12,7 +12,8 @@ const UpcomingTraining = () => {
       "Electrical Grade III, Grade II " 
     ],
     "price": "Ksh 1050",
-    "earlyBirdPrice": "N/A"
+    "earlyBirdPrice": "N/A",
+    "link":"https://forms.gle/VZmbdWH6P4bNm5X9A"
   },
   {
     "title": "Solar Design",
@@ -24,7 +25,8 @@ const UpcomingTraining = () => {
 
     ],
     "price": "60 USD",
-    "earlyBirdPrice": "N/A"
+    "earlyBirdPrice": "N/A",
+    "link":"https://docs.google.com/forms/d/e/1FAIpQLSdNyq1OFJoKCur8S0K9HWWaOnzkJb1slBsJY_nZH3HKqXIJ1g/viewform"
   },
   {
     "title": "PERSONAL BRANDING",
@@ -38,7 +40,8 @@ const UpcomingTraining = () => {
       "Company and Business Registration"
     ],
     "price": "KSH 1050",
-    "earlyBirdPrice": "N/A"
+    "earlyBirdPrice": "N/A",
+    "link":"https://forms.gle/Ym4kiBHmcheEZR799"
   },
   {
     "title": "Electrical Training",
@@ -51,7 +54,8 @@ const UpcomingTraining = () => {
       "class B Medium Volage",
     ],
     "price": "KSH 3000",
-    "earlyBirdPrice": "N/A"
+    "earlyBirdPrice": "N/A",
+    "link":"https://forms.gle/g61rdKTPuenbpYd96"
   },
   
   {

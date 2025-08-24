@@ -11,7 +11,6 @@ import {
 import { FaTwitter, FaTiktok } from 'react-icons/fa';
 import logo from '../img/torchbearer-logo.png'
 
-
 const Footer = () => {
   const quickLinks = [
     { name: 'Home', href: '/' },
@@ -34,10 +33,11 @@ const Footer = () => {
   return (
     <footer className="bg-[#dbceb8] text-[#99490c] pt-20 pb-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
-          <div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12 mb-12 text-center md:text-left">
+          {/* First Column - Logo and Social */}
+          <div className="flex flex-col items-center md:items-start">
             <div className="flex items-center mb-6">
-              <div className="w-12 h-12  rounded-full flex items-center justify-center mr-3">
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mr-3">
                 <img src={logo} alt="logo" />
               </div>
               <h3 className="text-2xl font-bold">Torchbearer Institute</h3>
@@ -45,26 +45,27 @@ const Footer = () => {
             <p className="text-#99490c pb-4">
               Professional training and development for electrical engineering, renewable energy, and career advancement.
             </p>
-            <div className="flex space-x-4">
-              <a href="https://www.facebook.com/profile.php?id=61572958352380" className=" p-2 rounded-full hover:bg-amber-600 transition-colors">
+            <div className="flex space-x-4 justify-center md:justify-start">
+              <a href="https://www.facebook.com/profile.php?id=61572958352380" className="p-2 rounded-full hover:bg-amber-600 transition-colors">
                 <Facebook className="w-6 h-6" />
               </a>
-              <a href="https://www.linkedin.com/company/torchbearer-institute-of-technologies" className=" p-2 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.linkedin.com/company/torchbearer-institute-of-technologies" className="p-2 rounded-full hover:bg-amber-600 transition-colors">
                 <Linkedin className="w-6 h-6" />
               </a>
-              <a href="https://www.tiktok.com/@torchbearersinstitute?_t=ZM-8y0qzId3szF&_r=1" className=" p-2 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.tiktok.com/@torchbearersinstitute?_t=ZM-8y0qzId3szF&_r=1" className="p-2 rounded-full hover:bg-amber-600 transition-colors">
                 <FaTiktok className="w-5 h-6" />
               </a>
-              <a href="https://x.com/TorchbearerIT?t=cE_m5tD0duaBL0_aSKQ0Bg&s=09" className=" p-2 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://x.com/TorchbearerIT?t=cE_m5tD0duaBL0_aSKQ0Bg&s=09" className="p-2 rounded-full hover:bg-amber-600 transition-colors">
                 <i className="fa-brands fa-x-twitter"></i>
               </a>
-              <a href="https://www.youtube.com/@TORCHBEARERINSITTUTE" className=" p-2 rounded-full hover:bg-amber-600 transition-colors">
+              <a href="https://www.youtube.com/@TORCHBEARERINSITTUTE" className="p-2 rounded-full hover:bg-amber-600 transition-colors">
                 <Youtube className="w-7 h-7" />
               </a>
             </div>
           </div>
 
-          <div>
+          {/* Second Column - Quick Links */}
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-6">Quick Links</h3>
             <ul className="space-y-4">
               {quickLinks.map((link, index) => (
@@ -81,7 +82,8 @@ const Footer = () => {
             </ul>
           </div>
 
-          {/* <div>
+          {/* Third Column - Training Programs (commented out) */}
+          {/* <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-6">Training Programs</h3>
             <ul className="space-y-3">
               {trainingPrograms.map((program, index) => (
@@ -98,13 +100,10 @@ const Footer = () => {
             </ul>
           </div> */}
 
-          <div>
+          {/* Fourth Column - Contact Info */}
+          <div className="flex flex-col items-center md:items-start">
             <h3 className="text-xl font-bold mb-6">Contact Info</h3>
             <ul className="space-y-4">
-              {/* <li className="flex items-start">
-                <MapPin className="w-5 h-5 text-amber-500 mr-3 mt-1" />
-                <span className="text-gray-400">Torchbearer Plaza, 5th Floor<br />Ngong Road, Nairobi, Kenya</span>
-              </li> */}
               <li className="flex items-center">
                 <Phone className="w-5 h-5 text-amber-500 mr-3" />
                 <span className="text-black">+254 789 173033</span>
@@ -117,11 +116,12 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Bottom Section */}
         <div className="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-black mb-4 md:mb-0">
+          <p className="text-black mb-4 md:mb-0 text-center md:text-left">
             &copy; {new Date().getFullYear()} Torchbearer Institute. All rights reserved.
           </p>
-          <div className="flex space-x-6">
+          <div className="flex space-x-6 justify-center">
             <a href="#" className="text-black hover:text-amber-500 transition-colors">Privacy Policy</a>
             <a href="#" className="text-black hover:text-amber-500 transition-colors">Terms of Service</a>
           </div>

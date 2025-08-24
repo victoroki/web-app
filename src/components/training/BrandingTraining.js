@@ -122,7 +122,7 @@ const BrandingTraining = () => {
             </div>
           </div>
           <div className="mt-8 text-center">
-            <a href="#contact" className="inline-block bg-amber-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg">
+            <a href="https://wa.me/+254789173033" className="inline-block bg-amber-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg">
               Start Your Branding Journey
             </a>
           </div>

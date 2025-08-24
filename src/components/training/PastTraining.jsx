@@ -10,6 +10,34 @@ const PastTraining = () => {
 
   const pastWebinars = [
     {
+    "title": "NITA EXAM COACHING",
+    "date": "July 31",
+    "time": "08:00 PM - 09:00 PM",
+    "description": "NITA exam coaching.",
+    "features": [
+      "Solar T1 and T2",
+      "Electrical Grade III, Grade II " 
+    ],
+    "price": "Ksh 1050",
+    "earlyBirdPrice": "N/A",
+    "link":"https://forms.gle/VZmbdWH6P4bNm5X9A"
+  },
+    {
+    "title": "PERSONAL BRANDING",
+    "date": "August 6 - 7",
+    "time": "07:00 PM - 08:00 PM",
+    "description": "Presonal Branding",
+    "features": [
+      "Proffesional Academic Research Tool",
+      "Online Presence",
+      "Graphic design tool",
+      "Company and Business Registration"
+    ],
+    "price": "KSH 1050",
+    "earlyBirdPrice": "N/A",
+    "link":"https://forms.gle/Ym4kiBHmcheEZR799"
+  },
+    {
       "title": "SOLAR EPRA T2 & T3 TRAINING",
       "date": "January 27",
       "time": "8:00 - 9:00",

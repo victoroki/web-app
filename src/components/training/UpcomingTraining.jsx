@@ -1,123 +1,120 @@
 import { Calendar, Clock, CheckCircle } from 'lucide-react';
 
 const UpcomingTraining = () => {
- const upcomingCourses = [
-  {
-    "title": "NITA EXAM COACHING",
-    "date": "July 31",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "NITA exam coaching.",
-    "features": [
-      "Solar T1 and T2",
-      "Electrical Grade III, Grade II " 
-    ],
-    "price": "Ksh 1050",
-    "earlyBirdPrice": "N/A",
-    "link":"https://forms.gle/VZmbdWH6P4bNm5X9A"
-  },
-  {
-    "title": "Solar Design",
-    "date": "August 4 - 22",
-    "time": "07:30 PM - 09:00 PM",
-    "description": "Designing and Simulating softwares",
-    "features": [
-      "SKETCHUP","PVSYST","AUTOCAD "
-
-    ],
-    "price": "60 USD",
-    "earlyBirdPrice": "N/A",
-    "link":"https://docs.google.com/forms/d/e/1FAIpQLSdNyq1OFJoKCur8S0K9HWWaOnzkJb1slBsJY_nZH3HKqXIJ1g/viewform"
-  },
-  {
-    "title": "PERSONAL BRANDING",
-    "date": "August 6 - 7",
-    "time": "07:00 PM - 08:00 PM",
-    "description": "Presonal Branding",
-    "features": [
-      "Proffesional Academic Research Tool",
-      "Online Presence",
-      "Graphic design tool",
-      "Company and Business Registration"
-    ],
-    "price": "KSH 1050",
-    "earlyBirdPrice": "N/A",
-    "link":"https://forms.gle/Ym4kiBHmcheEZR799"
-  },
-  {
-    "title": "Electrical Training",
-    "date": "August 18 - 22",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "Electrical training",
-    "features": [
-      "class C2 Low Voltage",
-      "class C1 Low Voltage",
-      "class B Medium Volage",
-    ],
-    "price": "KSH 3000",
-    "earlyBirdPrice": "N/A",
-    "link":"https://forms.gle/g61rdKTPuenbpYd96"
-  },
+  const upcomingCourses = [
   
   {
-    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
-    "date": "October 6 - 24",
-    "time": "07:30 PM - 09:00 PM",
-    "description": "Webinar on SketchUp, PVSYST, Homer & AutoCAD designs.",
-    "features": [
-      "SketchUp software insights",
-      "PVSYST software insights",
-      "Homer software insights",
-      "AutoCAD software insights"
-    ],
-    "price": "KSH 6000",
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "NITA EXAM COACHING",
-    "date": "November 10 - 14",
-    "time": "07:00 PM - 08:00 PM",
-    "description": "NITA exam coaching.",
-    "features": [
-      "Comprehensive NITA Syllabus Alignment",
-      "Topic-by-topic Training"
-    ],
-    "price": "KSH 3000",
-    "earlyBirdPrice": "N/A"
-  },
+      "title": "Solar Design",
+      "date": "August 4 - 22",
+      "time": "07:30 PM - 09:00 PM",
+      "description": "Designing and Simulating softwares",
+      "features": [
+        "SKETCHUP", "PVSYST", "AUTOCAD "
+
+      ],
+      "price": "60 USD",
+      "earlyBirdPrice": "N/A",
+      "link": "https://docs.google.com/forms/d/e/1FAIpQLSdNyq1OFJoKCur8S0K9HWWaOnzkJb1slBsJY_nZH3HKqXIJ1g/viewform"
+    },
+
     {
-    "title": "SOLAR EPRA TRAINING",
-    "date": "November 17 - December 5",
-    "time": "07:30 PM - 09:00 PM",
-    "description": " Training for Solar EPRA T2 & T3 licensing.",
-    "features": [
-      "Solar T2 & T3 ",
-    ],
-    "price": "T2 5000, T3 7000",
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "ELECTRICAL TRAINING",
-    "date": "December 8 - 12",
-    "time": "08:00 PM - 09:00 PM",
-    "description": "Electrical Training  for EPRA licensing",
-    "features": [
-      "EPRA C1","EPRA C2","EPRA B" 
-    ],
-    "price": "3000", 
-    "earlyBirdPrice": "N/A"
-  },
-  {
-    "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "January 12 to 30",
-    "time": "07:30 PM - 09:00 PM",
-    "description": " webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
-    "features": [
-      "solar EPRA T2", "solar EPRA T3" 
-    ],
-    "price": "T2 Ksh 5000, T3 Ksh 7000",
-    "earlyBirdPrice": "N/A"
-  },
-];
+      "title": "Electrical Training",
+      "date": "August 18 - 22",
+      "time": "08:00 PM - 09:00 PM",
+      "description": "Electrical training",
+      "features": [
+        "class C2 Low Voltage",
+        "class C1 Low Voltage",
+        "class B Medium Volage",
+      ],
+      "price": "KSH 3000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/g61rdKTPuenbpYd96"
+    },
+
+    {
+  "title": "Solar Systems Training | Cohort Four",
+  "date": "08 – 28 September 2025",
+  "time": "19:40 – 21:00 EAT",
+  "description": "Online training program preparing participants for EPRA T2 and T3 solar exams.",
+  "features": [
+    "In-depth modules on solar energy regulations",
+    "Interactive live sessions with Q&A",
+    "Access to resource materials"
+  ],
+  "price": 
+    "T2 KES 5000 and T3 KES 7000"
+  ,
+  "earlyBirdPrice": "N/A",
+  "link": "https://docs.google.com/forms/d/e/1FAIpQLSeQYKb8dDI28QspNyuZ6WcAWVaILdOjZ_YJxFGt2nLBYhTdBQ/viewform"
+},
+
+    {
+      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
+      "date": "October 6 - 24",
+      "time": "07:30 PM - 09:00 PM",
+      "description": "Webinar on SketchUp, PVSYST, Homer & AutoCAD designs.",
+      "features": [
+        "SketchUp software insights",
+        "PVSYST software insights",
+        "Homer software insights",
+        "AutoCAD software insights"
+      ],
+      "price": "KSH 6000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/6n4UoScZepqWG8Pr8"
+    },
+    {
+      "title": "NITA EXAM COACHING",
+      "date": "November 10 - 14",
+      "time": "07:00 PM - 08:00 PM",
+      "description": "NITA exam coaching.",
+      "features": [
+        "Comprehensive NITA Syllabus Alignment",
+        "Topic-by-topic Training"
+      ],
+      "price": "KSH 3000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/NJrsm3GzLL41SA9T6"
+    },
+    {
+      "title": "SOLAR EPRA TRAINING",
+      "date": "November 17 - December 5",
+      "time": "07:30 PM - 09:00 PM",
+      "description": " Training for Solar EPRA T2 & T3 licensing.",
+      "features": [
+        "Solar T2 & T3 ",
+      ],
+      "price": "T2 Ksh 5000, T3 Ksh 7000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/w1oLDgde9dzZjZhH8"
+    },
+    {
+      "title": "ELECTRICAL TRAINING",
+      "date": "December 8 - 12",
+      "time": "08:00 PM - 09:00 PM",
+      "description": "Electrical Training  for EPRA licensing",
+      "features": [
+        "EPRA C1", "EPRA C2", "EPRA B"
+      ],
+      "price": "Ksh 3000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/gehjmpxspBkX1Eu56"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "2026 January 12 to 30",
+      "time": "07:30 PM - 09:00 PM",
+      "description": " webinar for Solar EPRA T2 & T3 training. For more info call/WhatsApp +254789173033.",
+      "features": [
+        "solar EPRA T2", "solar EPRA T3"
+      ],
+      "price": "T2 Ksh 5000, T3 Ksh 7000",
+      "earlyBirdPrice": "N/A",
+      "link": "https://forms.gle/uUZyHCMtGswQwXB77"
+      
+    },
+  ];
 
   return (
     <section id="upcoming" className="py-20 bg-gradient-to-br from-amber-50 to-amber-100">
@@ -166,9 +163,13 @@ const UpcomingTraining = () => {
                     <span className="text-sm font-bold text-amber-600">{course.earlyBirdPrice}</span>
                   </div> */}
                 </div>
-                <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors shadow-lg">
-                  Register Now
-                </button>
+               
+                  <a href={course.link} target="_blank" rel="noopener noreferrer">
+                     <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors shadow-lg">
+                    Register Now
+                    </button>
+                  </a>
+                
               </div>
             </div>
           ))}

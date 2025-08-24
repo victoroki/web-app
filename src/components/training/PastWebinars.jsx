@@ -1,7 +1,20 @@
 import { Calendar } from 'lucide-react';
 
 const PastWebinars = () => {
+
+const physicalWeb = [
+      {
+      "title": "Youth in STEM Network | Solar Energy Skills for the Future",
+      "date": "August 11, 2025",
+      "event":"physical",
+      "time": "09:00 AM – 01:00 PM",
+      "description": "Hands-on workshop on solar design, installation, and networking with industry experts.",
+      "registrationLink": "https://www.linkedin.com/posts/john-njuguna-electrical-and-electronics-engineer_youthinstem-emobility-renewableenergy-activity-7361450857617383425-ANLN?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbvqH4BTIVs6W9ISoZhP6MR54VO9MArCyk"
+    },
+
+];
 const pastWebinars = [
+
   {
     "title": "SOLAR AND ELECTRICAL EPRA LICENSING INSIGHTS WEBINAR",
     "date": "January 15",
@@ -64,6 +77,9 @@ const pastWebinars = [
 
 ];
 
+
+
+
   return (
     <div>
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Webinar Recordings</h3>
@@ -77,7 +93,7 @@ const pastWebinars = [
                   <Calendar className="w-4 h-4 mr-2" />
                   <span>{webinar.date}</span>
                 </div>
-                <p className="text-gray-700"><strong>Speaker:</strong> {webinar.speaker}</p>
+                {/* <p className="text-gray-700"><strong>Speaker:</strong> {webinar.speaker}</p> */}
                 <p className="text-gray-700 mt-2">{webinar.description}</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
@@ -98,6 +114,27 @@ const pastWebinars = [
           </div>
         ))}
       </div>
+      {physicalWeb.map((webinar, index) => (
+        <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-6">
+          <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
+          <div className="flex items-center text-gray-600 mb-2">
+            <Calendar className="w-4 h-4 mr-2" />
+            <span>{webinar.date}</span> 
+          </div>
+          <p className="text-gray-700 mb-2"><strong>Time:</strong> {webinar.time}</p>
+          <p className="text-gray-700 mb-4">{webinar.description}</p>
+
+                        <div className="flex flex-col sm:flex-row gap-3">
+                <a
+                  href={webinar.registrationLink}
+                  className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
+                >
+                  View Event
+                </a>
+
+              </div>
+          </div>
+      ))}
     </div>
   );
 };

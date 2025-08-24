@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Design Certificate</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .certificate-container {
+            width: 1123px;  /* A4 landscape */
+            height: 794px;
+            background: white;
+            position: relative;
+            overflow: hidden; /* Clips all background elements */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 0; /* Keep sharp for print */
+        }
+        
+        /* Background Elements - Stay Outside Gold Border */
+        .bg-element {
+            position: absolute;
+            z-index: 1;
+        }
+        
+        /* Top Right Yellow Triangle - Outside only */
+        .bg-yellow-top {
+            top: 0;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 400px 300px 0;
+            border-color: transparent #FFD700 transparent transparent;
+        }
+        
+        /* Bottom Left Navy Triangle */
+        .bg-navy-bottom {
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 0 350px 450px;
+            border-color: transparent transparent #1e3a8a transparent;
+        }
+        
+        /* Right Side Navy Gradient Curve */
+        .bg-navy-right {
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100%;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #1d4ed8 100%);
+            clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 30% 100%);
+        }
+        
+        /* Bottom Left Navy Accent */
+        .bg-navy-left {
+            bottom: 0;
+            left: 0;
+            width: 250px;
+            height: 40%;
+            background: linear-gradient(45deg, #1e3a8a 0%, #1d4ed8 100%);
+            clip-path: polygon(0% 20%, 70% 0%, 100% 100%, 0% 100%);
+        }
+        
+        /* Corner Decorations */
+        .corner-decoration {
+            position: absolute;
+            z-index: 6;
+            width: 50px;
+            height: 50px;
+        }
+        
+        .corner-decoration.top-left {
+            top: 30px;
+            left: 30px;
+            border-left: 2px solid #DAA520;
+            border-top: 2px solid #DAA520;
+        }
+        
+        .corner-decoration.top-right {
+            top: 30px;
+            right: 30px;
+            border-right: 2px solid #DAA520;
+            border-top: 2px solid #DAA520;
+        }
+        
+        .corner-decoration.bottom-left {
+            bottom: 30px;
+            left: 30px;
+            border-left: 2px solid #DAA520;
+            border-bottom: 2px solid #DAA520;
+        }
+        
+        .corner-decoration.bottom-right {
+            bottom: 30px;
+            right: 30px;
+            border-right: 2px solid #DAA520;
+            border-bottom: 2px solid #DAA520;
+        }
+        
+        /* Gold Border - Defines Safe Content Zone */
+        .gold-border {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border: 3px solid #DAA520;
+            z-index: 5;
+            border-radius: 8px;
+            background: white;
+            pointer-events: none;
+        }
+        
+        .gold-border::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            left: -6px;
+            right: -6px;
+            bottom: -6px;
+            border: 1px solid #B8860B;
+            border-radius: inherit;
+        }
+        
+        .gold-border::after {
+            content: '';
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            right: 4px;
+            bottom: 4px;
+            border: 1px solid #F4C430;
+            border-radius: inherit;
+        }
+        
+        /* Certificate Content */
+        .certificate-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            text-align: center;
+        }
+        
+        /* Typography */
+        .main-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 68px;
+            font-weight: 700;
+            letter-spacing: 6px;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #DAA520, transparent);
+        }
+        
+        .subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            color: #4a4a4a;
+            margin-bottom: 50px;
+            text-transform: uppercase;
+        }
+        
+        .presented-to {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            color: #B8860B;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+            position: relative;
+        }
+        
+        .presented-to::before,
+        .presented-to::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40px;
+            height: 1px;
+            background: #DAA520;
+        }
+        
+        .presented-to::before {
+            left: -60px;
+        }
+        
+        .presented-to::after {
+            right: -60px;
+        }
+        
+        .recipient-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 52px;
+            font-weight: 400;
+            font-style: italic;
+            color: #1e3a8a;
+            margin-bottom: 40px;
+            line-height: 1.2;
+            text-shadow: 1px 1px 3px rgba(30, 58, 138, 0.1);
+            position: relative;
+        }
+        
+        .recipient-name::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #1e3a8a, transparent);
+        }
+        
+        .course-description {
+            font-family: 'Inter', sans-serif;
+            font-size: 18px;
+            color: #2d2d2d;
+            line-height: 1.7;
+            max-width: 580px;
+            margin-bottom: 60px;
+            text-align: center;
+        }
+        
+        .course-description .highlight {
+            font-weight: 600;
+            color: #1e3a8a;
+            text-decoration: underline;
+            text-decoration-color: #DAA520;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 3px;
+        }
+        
+        /* Signatures */
+        .signatures {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            width: 100%;
+            max-width: 650px;
+            margin-top: 50px;
+            padding: 0 20px;
+        }
+        
+        .signature-block {
+            text-align: center;
+            position: relative;
+        }
+        
+        .signature-line {
+            width: 160px;
+            height: 1px;
+            background: #333;
+            margin: 0 auto 12px;
+            position: relative;
+        }
+        
+        .signature-line::before {
+            content: '';
+            position: absolute;
+            top: -1px;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #333, transparent);
+        }
+        
+        .signature-title {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 500;
+            color: #444;
+            letter-spacing: 1px;
+            text-transform: lowercase;
+        }
+        
+        /* Logo Styling */
+        .logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            margin: 0 auto 15px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+        
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FFD700, #DAA520);
+            z-index: -1;
+        }
+        
+        .logo.torchbearer {
+            background: linear-gradient(135deg, #DAA520, #B8860B);
+            font-size: 12px;
+            line-height: 1.2;
+        }
+        
+        .logo.ah-creative {
+            background: linear-gradient(135deg, #2d2d2d, #1a1a1a);
+            font-size: 16px;
+        }
+        
+        /* Date */
+        .certificate-date {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #666;
+            z-index: 15;
+        }
+        
+        /* Decorative Line (optional) */
+        .decorative-line {
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #DAA520, #FFD700);
+            margin: 20px auto;
+        }
+        
+        /* Print Styles */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .certificate-container {
+                width: 11.7in;
+                height: 8.3in;
+                box-shadow: none;
+            }
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 1200px) {
+            .certificate-container {
+                transform: scale(0.85);
+                transform-origin: center;
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .certificate-container {
+                transform: scale(0.7);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="certificate-container">
+        <!-- Background Elements (Stay Outside Gold Border) -->
+        <div class="bg-element bg-yellow-top"></div>
+        <div class="bg-element bg-navy-bottom"></div>
+        <div class="bg-element bg-navy-right"></div>
+        <div class="bg-element bg-navy-left"></div>
+        
+        <!-- Corner Decorations -->
+        <div class="corner-decoration top-left"></div>
+        <div class="corner-decoration top-right"></div>
+        <div class="corner-decoration bottom-left"></div>
+        <div class="corner-decoration bottom-right"></div>
+        
+        <!-- Gold Border Frame -->
+        <div class="gold-border"></div>
+        
+        <!-- Certificate Content -->
+        <div class="certificate-content">
+            <h1 class="main-title">CERTIFICATE</h1>
+            <h2 class="subtitle">of achievement</h2>
+            
+            <p class="presented-to">this certificate is presented to</p>
+            
+            <h3 class="recipient-name" id="recipientName">Christian Karanga</h3>
+            
+            <div class="course-description">
+                Has successfully completed <span class="highlight">30 hours solar design masterclass</span> using pvsyst, sketch up and AUTO CAD
+            </div>
+            
+            <!-- Signature Section -->
+            <div class="signatures">
+                <div class="signature-block">
+                    <div class="logo torchbearer">
+                        <span>T<br>I</span>
+                    </div>
+                    <div class="signature-line"></div>
+                    <div class="signature-title">solar trainer</div>
+                </div>
+                
+                <div class="signature-block" style="margin-top: 40px;">
+                    <div class="signature-line"></div>
+                    <div class="signature-title">solar designer</div>
+                </div>
+                
+                <div class="signature-block">
+                    <div class="logo ah-creative">
+                        <span>AH</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Date -->
+        <div class="certificate-date" id="certificateDate">
+            Date: August 24, 2025
+        </div>
+    </div>
+
+    <script>
+        // Function to update certificate details
+        function updateCertificate(data) {
+            if (data.recipientName) {
+                document.getElementById('recipientName').textContent = data.recipientName;
+            }
+            if (data.date) {
+                document.getElementById('certificateDate').textContent = `Date: ${data.date}`;
+            }
+        }
+        
+        // Example usage:
+        // updateCertificate({ recipientName: 'John Doe', date: 'August 24, 2025' });
+    </script>
+</body>
+</html>

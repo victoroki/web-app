@@ -3,37 +3,60 @@ import { Calendar, Clock } from 'lucide-react';
 const UpcomingWebinars = () => {
   const upcomingWebinars = [
     {
-    "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-    "date": "August 31",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Emmanuel",
-    "description": "Solar EPRA T2 AND T3 Training",
-    "registrationLink": "N/A"
-  },
-  {
-    "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
-    "date": "October 2",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Mazin",
-    "description": "Training on SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS",
-    "registrationLink": "N/A"
-  },
+      "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "August 17",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "Dalton and Emmanuel",
+      "description": "Solar EPRA T2 AND T3 Training",
+      "registrationLink": "https://forms.gle/q9BTYTD6zVKMDu7j6"
+    },
+
     {
-    "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
-    "date": "November 2",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Mazin",
-    "description": "NITA Training",
-    "registrationLink": "N/A"
-  },
-      {
-    "title": "SOLAR EPRA T2 & T3  WEBINAR",
-    "date": "January 8",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Mazin",
-    "description": "Solar EPRA training",
-    "registrationLink": "N/A"
-  }
+      "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
+      "date": "August 31",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "Dalton and Emmanuel",
+      "description": "Solar EPRA T2 AND T3 Training",
+      "registrationLink": "https://forms.gle/pfe1hd3hM9eM7SXU8"
+    },
+    {
+      "title": "Project Management | Solar Plants Operation and Maintenance",
+      "date": "September 5, 2025",
+      "time": "13:00 – 14:00 EAT / 11:00 – 12:00 CET",
+      "description": "Managing solar plants with a focus on efficient operation and maintenance",
+      "features": [
+        "Operation best practices",
+        "Maintenance strategies",
+        "Project management insights"
+      ],
+      "price": "N/A",
+      "earlyBirdPrice": "N/A",
+      "registrationLink": "https://selar.com/8717336764"
+    },
+    {
+      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
+      "date": "October 2",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "Dalton and Mazin",
+      "description": "Training on SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS",
+      "registrationLink": "https://forms.gle/GjYMgP6yTjxvWMuz6"
+    },
+    {
+      "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
+      "date": "November 2",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "Dalton and Mazin",
+      "description": "NITA Training",
+      "registrationLink": "https://docs.google.com/forms/d/e/1FAIpQLSeaalg5gi_zhkwA4tYlfhQbQWjSv7TswY01lERnvDgjXMWCgg/viewform"
+    },
+    {
+      "title": "SOLAR EPRA T2 & T3  WEBINAR",
+      "date": "January 8 2026",
+      "time": "08:00 PM - 09:00 PM",
+      "speaker": "Dalton and Mazin",
+      "description": "Solar EPRA training",
+      "registrationLink": "https://forms.gle/vopftMooByv9kseBA"
+    }
   ];
 
   return (

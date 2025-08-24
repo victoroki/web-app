@@ -55,7 +55,6 @@ const ContactSection = () => {
               <div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">Phone</h3>
                 <p className="text-gray-700">+254 789 173033</p>
-                <p className="text-gray-700">+254 722 123456</p>
               </div>
             </div>
 

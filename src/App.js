@@ -31,6 +31,7 @@ import Whatsapp from './components/Whatsapp';
 import WhatsappTrainer from './components/training/WhatsappTrainer';
 import PastTraining from "./components/training/PastTraining"
 import CertificateGenerator from './components/training/certificate';
+import CertificateForm from "./components/CertificateForm"
 
 
 const TrainingHomepage = () => {
@@ -97,6 +98,7 @@ function App() {
           <Route path="/training/pastwebinars" element={<PastWebinars />} />
           <Route path="/training/pasttraining" element={<PastTraining />} />
           <Route path="/training/certificate" element={<CertificateGenerator />} />
+          <Route path="/training/certificate-form" element={<CertificateForm />} />
         </Route>
       </Routes>
     </Router>

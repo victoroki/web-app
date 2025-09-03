@@ -1,140 +1,234 @@
-import { Calendar } from 'lucide-react';
+import { Calendar, Loader } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const PastWebinars = () => {
+  const [pastWebinars, setPastWebinars] = useState([]);
+  const [physicalEvents, setPhysicalEvents] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-const physicalWeb = [
-      {
-      "title": "Youth in STEM Network | Solar Energy Skills for the Future",
-      "date": "August 11, 2025",
-      "event":"physical",
-      "time": "09:00 AM – 01:00 PM",
-      "description": "Hands-on workshop on solar design, installation, and networking with industry experts.",
-      "registrationLink": "https://www.linkedin.com/posts/john-njuguna-electrical-and-electronics-engineer_youthinstem-emobility-renewableenergy-activity-7361450857617383425-ANLN?utm_source=share&utm_medium=member_desktop&rcm=ACoAADbvqH4BTIVs6W9ISoZhP6MR54VO9MArCyk"
-    },
+  // Fetch past webinars from API
+  useEffect(() => {
+    const fetchPastWebinars = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:3000/api/training-programs/');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Filter for webinar programs only with status "completed"
+          const webinarPrograms = data.data.filter(program => {
+            const programType = program.program_type?.toLowerCase();
+            const status = program.status?.toLowerCase();
+            
+            return programType === 'webinar' && status === 'completed';
+          });
+          
+          // Filter for physical events (you might need to add a field to distinguish these)
+          const physicalEventsData = data.data.filter(program => {
+            // This is a placeholder - you might need to adjust this logic
+            // based on how you identify physical events in your data
+            return program.title.toLowerCase().includes('stem') || 
+                   program.description.toLowerCase().includes('physical') ||
+                   program.description.toLowerCase().includes('workshop');
+          });
+          
+          setPastWebinars(webinarPrograms);
+          setPhysicalEvents(physicalEventsData);
+        } else {
+          throw new Error(data.message || 'Failed to fetch webinar programs');
+        }
+      } catch (err) {
+        console.error('Error fetching webinar programs:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-];
-const pastWebinars = [
+    fetchPastWebinars();
+  }, []);
 
-  {
-    "title": "SOLAR AND ELECTRICAL EPRA LICENSING INSIGHTS WEBINAR",
-    "date": "January 15",
-    "time": "N/A",
-    "speaker": "Dalton",
-    "description": "Free webinar for insights into solar and electrical EPRA licensing.",
-    "registrationLink": "tel:+254789173033",
-     "slidesLink":"https://drive.google.com/file/d/1jqeVvclOd7FHPoJ9nU0487vrmG6j09YU/view?usp=drive_link",
-     "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1"
-  },
-    {
-    "title": "SOLAR AND SYSTEM DESIGN BASICS PVSYST AND SKETCHUP",
-    "date": "June 5",
-    "time": "N/A",
-    "speaker": "Dalton and Mazin",
-    "description": "Free webinar for solar system design on Pvsyst and Sketchup",
-   "slidesLink":"https://drive.google.com/file/d/1BDI53Q-q-wnykLan6mHtvcP9fvxvdbvO/view?usp=sharing",
-    "recordingLink":"https://youtu.be/CKV7Xo2T0Co?si=7KuNFAL0II0bZUnd"
-  },
-  {
-    "title": "SMA SUNNY DESIGN TOOL WEBINAR",
-    "date": "June 22",
-    "time": "07:40 PM - 09:00 PM",
-    "speaker": "Dalton",
-    "description": "Free webinar for Solar SMA sunny desgn Tool.",
-    "slidesLink":"https://drive.google.com/file/d/1BI1Gl9dIkJ6_kMEZiAUM1VZZossLJzCJ/view?usp=drive_link",
-  
-  },
-  {
-    "title": "SOLAR EPRA T2, T3 AND ELECTRICAL TRAINING LICENSING",
-    "date": "July 2",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton",
-    "description": "Solar EPRA training t2, t3 and electrical training.",
-    "registrationLink": "N/A",
-    "recordingLink":"https://youtu.be/RnhmLcWD6mA?si=PobjZjYuWCun2eV1",
-    "slidesLink":"https://drive.google.com/file/d/1jqeVvclOd7FHPoJ9nU0487vrmG6j09YU/view?usp=drive_link"
-  },
+  // Format date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { 
+      month: 'long', 
+      day: 'numeric',
+      year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+    };
+    return date.toLocaleDateString('en-US', options);
+  };
 
-      {
-    "title": "Solar Design Basics - Pvysist and Sketchup",
-    "date": "July 13",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Aziz",
-    "description": "Training on Solar Design - Pvysist and Sketchup",
-    "registrationLink": "N/A",
-    "slidesLink":"https://drive.google.com/file/d/1_tkz0gobPFcNT4wcVfFzykK19dTcn3Qa/view?usp=sharing",
-    "recordingLink":"https://youtu.be/aUiVeFGODG4?si=DUSuXOI6lXxYffTe"
-  },
+  // Format time
+  const formatTime = (startTime, endTime) => {
+    const formatTimeString = (timeString) => {
+      if (!timeString) return '';
+      const time = new Date(`2000-01-01T${timeString}`);
+      return time.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit', 
+        hour12: true 
+      });
+    };
 
-    {
-    "title": "Solar Design - cable sizing",
-    "date": "July 20",
-    "time": "08:00 PM - 09:00 PM",
-    "speaker": "Dalton and Aziz",
-    "description": "Training on Solar Design - cable sizing",
-    "registrationLink": "N/A",
-    "slidesLink":"https://ln5.sync.com/4.0/dl/bf76b9200#ensf64v5-9ghbbsrt-3uv4rtbz-jpcfp9ke"
-  },
+    const start = formatTimeString(startTime);
+    const end = formatTimeString(endTime);
+    
+    if (start && end) {
+      return `${start} - ${end}`;
+    }
+    return start || end || 'Time TBA';
+  };
 
-];
+  if (loading) {
+    return (
+      <div>
+        <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Webinar Recordings</h3>
+        <div className="text-center">
+          <Loader className="w-8 h-8 animate-spin mx-auto text-amber-600" />
+          <p className="mt-4 text-gray-600">Loading past webinars...</p>
+        </div>
+      </div>
+    );
+  }
 
-
-
+  if (error) {
+    return (
+      <div>
+        <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Webinar Recordings</h3>
+        <div className="text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+            <p className="text-red-600 font-medium">Unable to load webinars</p>
+            <p className="text-red-500 text-sm mt-2">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div>
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Webinar Recordings</h3>
-      <div className="space-y-6">
-        {pastWebinars.map((webinar, index) => (
-          <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between">
-              <div className="mb-4 md:mb-0">
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
-                <div className="flex items-center text-gray-600 mb-2">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>{webinar.date}</span>
+      
+      {pastWebinars.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Past Webinars</h3>
+            <p className="text-gray-600">
+              No completed webinars found in our records.
+            </p>
+          </div>
+        </div>
+      ) : (
+        <div className="space-y-6">
+          {pastWebinars.map((webinar) => (
+            <div key={webinar.id} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div className="mb-4 md:mb-0">
+                  <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
+                  <div className="flex items-center text-gray-600 mb-2">
+                    <Calendar className="w-4 h-4 mr-2" />
+                    <span>{formatDate(webinar.start_date)}</span>
+                  </div>
+                  {webinar.speaker && (
+                    <p className="text-gray-700"><strong>Speaker:</strong> {webinar.speaker}</p>
+                  )}
+                  <p className="text-gray-700 mt-2">{webinar.description}</p>
                 </div>
-                {/* <p className="text-gray-700"><strong>Speaker:</strong> {webinar.speaker}</p> */}
-                <p className="text-gray-700 mt-2">{webinar.description}</p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={webinar.recordingLink}
-                  className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
-                >
-                  Watch Recording
-                </a>
-                <a
-                  href={webinar.slidesLink}
-                  className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors text-center"
-                >
-                  Download Slides
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {webinar.recording_url ? (
+                    <a
+                      href={webinar.recording_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
+                    >
+                      Watch Recording
+                    </a>
+                  ) : (
+                    <button 
+                      className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
+                      disabled
+                    >
+                      Recording Unavailable
+                    </button>
+                  )}
+                  {webinar.slides_url ? (
+                    <a
+                      href={webinar.slides_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="border border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors text-center"
+                    >
+                      Download Slides
+                    </a>
+                  ) : (
+                    <button 
+                      className="border border-gray-300 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
+                      disabled
+                    >
+                      Slides Unavailable
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
-      </div>
-      {physicalWeb.map((webinar, index) => (
-        <div key={index} className="bg-gray-50 p-6 rounded-lg border border-gray-200 mt-6">
-          <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
-          <div className="flex items-center text-gray-600 mb-2">
-            <Calendar className="w-4 h-4 mr-2" />
-            <span>{webinar.date}</span> 
-          </div>
-          <p className="text-gray-700 mb-2"><strong>Time:</strong> {webinar.time}</p>
-          <p className="text-gray-700 mb-4">{webinar.description}</p>
+          ))}
+        </div>
+      )}
 
-                        <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href={webinar.registrationLink}
-                  className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
-                >
-                  View Event
-                </a>
+      {/* Physical Events Section */}
+      {physicalEvents.length > 0 && (
+        <div className="mt-12">
+          <h4 className="text-2xl font-bold text-gray-900 mb-6">Past Physical Events</h4>
+          <div className="space-y-6">
+            {physicalEvents.map((event) => (
+              <div key={event.id} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
+                <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
+                <div className="flex items-center text-gray-600 mb-2">
+                  <Calendar className="w-4 h-4 mr-2" />
+                  <span>{formatDate(event.start_date)}</span> 
+                </div>
+                <p className="text-gray-700 mb-2"><strong>Time:</strong> {formatTime(event.start_time, event.end_time)}</p>
+                <p className="text-gray-700 mb-4">{event.description}</p>
 
+                <div className="flex flex-col sm:flex-row gap-3">
+                  {event.registration_link ? (
+                    <a
+                      href={event.registration_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
+                    >
+                      View Event
+                    </a>
+                  ) : (
+                    <button 
+                      className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
+                      disabled
+                    >
+                      Event Details Unavailable
+                    </button>
+                  )}
+                </div>
               </div>
+            ))}
           </div>
-      ))}
+        </div>
+      )}
     </div>
   );
 };

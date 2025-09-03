@@ -1,99 +1,180 @@
-import { Calendar, Clock } from 'lucide-react';
+import { Calendar, Clock, CheckCircle, Loader } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 const UpcomingWebinars = () => {
-  const upcomingWebinars = [
-    {
-      "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "August 17",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "Dalton and Emmanuel",
-      "description": "Solar EPRA T2 AND T3 Training",
-      "registrationLink": "https://forms.gle/q9BTYTD6zVKMDu7j6"
-    },
+  const [upcomingWebinars, setUpcomingWebinars] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-    {
-      "title": " SOLAR EPRA T2 & T3 TRAINING WEBINAR",
-      "date": "August 31",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "Dalton and Emmanuel",
-      "description": "Solar EPRA T2 AND T3 Training",
-      "registrationLink": "https://forms.gle/pfe1hd3hM9eM7SXU8"
-    },
-    {
-      "title": "Project Management | Solar Plants Operation and Maintenance",
-      "date": "September 5, 2025",
-      "time": "13:00 – 14:00 EAT / 11:00 – 12:00 CET",
-      "description": "Managing solar plants with a focus on efficient operation and maintenance",
-      "features": [
-        "Operation best practices",
-        "Maintenance strategies",
-        "Project management insights"
-      ],
-      "price": "N/A",
-      "earlyBirdPrice": "N/A",
-      "registrationLink": "https://selar.com/8717336764"
-    },
-    {
-      "title": "SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS WEBINAR",
-      "date": "October 2",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "Dalton and Mazin",
-      "description": "Training on SKETCHUP, PVSYST, HOMER & AUTOCAD DESIGNS",
-      "registrationLink": "https://forms.gle/GjYMgP6yTjxvWMuz6"
-    },
-    {
-      "title": "NITA EXAM COACHING & EPRA T2 & T3 SOLAR WEBINAR",
-      "date": "November 2",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "Dalton and Mazin",
-      "description": "NITA Training",
-      "registrationLink": "https://docs.google.com/forms/d/e/1FAIpQLSeaalg5gi_zhkwA4tYlfhQbQWjSv7TswY01lERnvDgjXMWCgg/viewform"
-    },
-    {
-      "title": "SOLAR EPRA T2 & T3  WEBINAR",
-      "date": "January 8 2026",
-      "time": "08:00 PM - 09:00 PM",
-      "speaker": "Dalton and Mazin",
-      "description": "Solar EPRA training",
-      "registrationLink": "https://forms.gle/vopftMooByv9kseBA"
+  // Fetch upcoming webinars from API
+  useEffect(() => {
+    const fetchUpcomingWebinars = async () => {
+      try {
+        setLoading(true);
+        const response = await fetch('http://localhost:3000/api/training-programs/upcoming');
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        
+        if (data.success) {
+          // Filter for webinar programs only and future dates
+          const webinarPrograms = data.data.filter(program => {
+            const programType = program.program_type?.toLowerCase();
+            const startDate = new Date(program.start_date);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            return programType === 'webinar' && startDate >= today;
+          });
+          
+          setUpcomingWebinars(webinarPrograms);
+        } else {
+          throw new Error(data.message || 'Failed to fetch webinar programs');
+        }
+      } catch (err) {
+        console.error('Error fetching webinar programs:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUpcomingWebinars();
+  }, []);
+
+  // Format date
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const options = { 
+      month: 'long', 
+      day: 'numeric',
+      year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+    };
+    return date.toLocaleDateString('en-US', options);
+  };
+
+  // Format time
+  const formatTime = (startTime, endTime) => {
+    const formatTimeString = (timeString) => {
+      if (!timeString) return '';
+      const time = new Date(`2000-01-01T${timeString}`);
+      return time.toLocaleTimeString('en-US', { 
+        hour: 'numeric', 
+        minute: '2-digit', 
+        hour12: true 
+      });
+    };
+
+    const start = formatTimeString(startTime);
+    const end = formatTimeString(endTime);
+    
+    if (start && end) {
+      return `${start} - ${end}`;
     }
-  ];
+    return start || end || 'Time TBA';
+  };
+
+  if (loading) {
+    return (
+      <div className="mb-20">
+        <h3 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Webinars</h3>
+        <div className="text-center">
+          <Loader className="w-8 h-8 animate-spin mx-auto text-amber-600" />
+          <p className="mt-4 text-gray-600">Loading upcoming webinars...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="mb-20">
+        <h3 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Webinars</h3>
+        <div className="text-center">
+          <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
+            <p className="text-red-600 font-medium">Unable to load webinars</p>
+            <p className="text-red-500 text-sm mt-2">{error}</p>
+            <button 
+              onClick={() => window.location.reload()} 
+              className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
+            >
+              Retry
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="mb-20">
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Webinars</h3>
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {upcomingWebinars.map((webinar, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-shadow">
-            <div className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
-                  <div className="flex items-center text-gray-600 mb-1">
-                    <Calendar className="w-4 h-4 mr-2" />
-                    <span>{webinar.date}</span>
-                  </div>
-                  <div className="flex items-center text-gray-600 mb-3">
-                    <Clock className="w-4 h-4 mr-2" />
-                    <span>{webinar.time}</span>
-                  </div>
-                </div>
-                <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
-                  Upcoming
-                </span>
-              </div>
-              {/* <p className="text-gray-700 mb-4"><strong>Speaker:</strong> {webinar.speaker}</p> */}
-              <p className="text-gray-700 mb-6">{webinar.description}</p>
-              <a
-                href={webinar.registrationLink}
-                className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors"
-              >
-                Register Now
-              </a>
-            </div>
+      
+      {upcomingWebinars.length === 0 ? (
+        <div className="text-center py-12">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
+            <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
+            <h3 className="text-xl font-semibold text-gray-900 mb-2">No Upcoming Webinars</h3>
+            <p className="text-gray-600">
+              We're currently planning our next webinars. Check back soon for updates!
+            </p>
           </div>
-        ))}
-      </div>
+        </div>
+      ) : (
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {upcomingWebinars.map((webinar) => (
+            <div key={webinar.id} className="bg-white rounded-lg shadow-lg border border-gray-200 hover:shadow-xl transition-shadow">
+              <div className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div>
+                    <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
+                    <div className="flex items-center text-gray-600 mb-1">
+                      <Calendar className="w-4 h-4 mr-2" />
+                      <span>{formatDate(webinar.start_date)}</span>
+                    </div>
+                    <div className="flex items-center text-gray-600 mb-3">
+                      <Clock className="w-4 h-4 mr-2" />
+                      <span>{formatTime(webinar.start_time, webinar.end_time)}</span>
+                    </div>
+                  </div>
+                  <span className="bg-amber-100 text-amber-800 px-3 py-1 rounded-full text-sm font-medium">
+                    Upcoming
+                  </span>
+                </div>
+                
+                {webinar.speaker && (
+                  <p className="text-gray-700 mb-2"><strong>Speaker:</strong> {webinar.speaker}</p>
+                )}
+                
+                <p className="text-gray-700 mb-4">{webinar.description}</p>
+                
+                {webinar.features && webinar.features.length > 0 && (
+                  <ul className="space-y-1 mb-4">
+                    {webinar.features.map((feature, i) => (
+                      <li key={i} className="flex items-start">
+                        <CheckCircle className="w-4 h-4 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700 text-sm">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                
+                <a
+                  href={webinar.registration_link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors"
+                >
+                  Register Now
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

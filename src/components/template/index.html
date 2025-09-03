@@ -28,18 +28,16 @@
             height: 794px;
             background: white;
             position: relative;
-            overflow: hidden; /* Clips all background elements */
+            overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border-radius: 0; /* Keep sharp for print */
+            border-radius: 0;
         }
         
-        /* Background Elements - Stay Outside Gold Border */
         .bg-element {
             position: absolute;
             z-index: 1;
         }
         
-        /* Top Right Yellow Triangle - Outside only */
         .bg-yellow-top {
             top: 0;
             right: 0;
@@ -50,7 +48,6 @@
             border-color: transparent #FFD700 transparent transparent;
         }
         
-        /* Bottom Left Navy Triangle */
         .bg-navy-bottom {
             bottom: 0;
             left: 0;
@@ -61,7 +58,6 @@
             border-color: transparent transparent #1e3a8a transparent;
         }
         
-        /* Right Side Navy Gradient Curve */
         .bg-navy-right {
             top: 0;
             right: 0;
@@ -71,7 +67,6 @@
             clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 30% 100%);
         }
         
-        /* Bottom Left Navy Accent */
         .bg-navy-left {
             bottom: 0;
             left: 0;
@@ -81,7 +76,6 @@
             clip-path: polygon(0% 20%, 70% 0%, 100% 100%, 0% 100%);
         }
         
-        /* Corner Decorations */
         .corner-decoration {
             position: absolute;
             z-index: 6;
@@ -117,7 +111,6 @@
             border-bottom: 2px solid #DAA520;
         }
         
-        /* Gold Border - Defines Safe Content Zone */
         .gold-border {
             position: absolute;
             top: 30px;
@@ -153,7 +146,6 @@
             border-radius: inherit;
         }
         
-        /* Certificate Content */
         .certificate-content {
             position: relative;
             z-index: 10;
@@ -166,7 +158,6 @@
             text-align: center;
         }
         
-        /* Typography */
         .main-title {
             font-family: 'Playfair Display', serif;
             font-size: 68px;
@@ -270,7 +261,6 @@
             text-underline-offset: 3px;
         }
         
-        /* Signatures */
         .signatures {
             display: flex;
             justify-content: space-between;
@@ -313,7 +303,6 @@
             text-transform: lowercase;
         }
         
-        /* Logo Styling */
         .logo {
             width: 70px;
             height: 70px;
@@ -351,7 +340,6 @@
             font-size: 16px;
         }
         
-        /* Date */
         .certificate-date {
             position: absolute;
             bottom: 40px;
@@ -362,15 +350,6 @@
             z-index: 15;
         }
         
-        /* Decorative Line (optional) */
-        .decorative-line {
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #DAA520, #FFD700);
-            margin: 20px auto;
-        }
-        
-        /* Print Styles */
         @media print {
             body {
                 background: white;
@@ -385,7 +364,6 @@
             }
         }
         
-        /* Responsive Adjustments */
         @media (max-width: 1200px) {
             .certificate-container {
                 transform: scale(0.85);
@@ -402,7 +380,7 @@
 </head>
 <body>
     <div class="certificate-container">
-        <!-- Background Elements (Stay Outside Gold Border) -->
+        <!-- Background Elements -->
         <div class="bg-element bg-yellow-top"></div>
         <div class="bg-element bg-navy-bottom"></div>
         <div class="bg-element bg-navy-right"></div>
@@ -424,10 +402,12 @@
             
             <p class="presented-to">this certificate is presented to</p>
             
-            <h3 class="recipient-name" id="recipientName">Christian Karanga</h3>
+            <!-- This will be replaced by {{recipientName}} -->
+            <h3 class="recipient-name">{{recipientName}}</h3>
             
+            <!-- This will be replaced by {{courseDescription}} -->
             <div class="course-description">
-                Has successfully completed <span class="highlight">30 hours solar design masterclass</span> using pvsyst, sketch up and AUTO CAD
+                {{courseDescription}}
             </div>
             
             <!-- Signature Section -->
@@ -453,25 +433,10 @@
             </div>
         </div>
         
-        <!-- Date -->
-        <div class="certificate-date" id="certificateDate">
-            Date: August 24, 2025
+        <!-- Date will be replaced by {{issueDate}} -->
+        <div class="certificate-date">
+            Date: {{issueDate}}
         </div>
     </div>
-
-    <script>
-        // Function to update certificate details
-        function updateCertificate(data) {
-            if (data.recipientName) {
-                document.getElementById('recipientName').textContent = data.recipientName;
-            }
-            if (data.date) {
-                document.getElementById('certificateDate').textContent = `Date: ${data.date}`;
-            }
-        }
-        
-        // Example usage:
-        // updateCertificate({ recipientName: 'John Doe', date: 'August 24, 2025' });
-    </script>
 </body>
 </html>

@@ -8,24 +8,41 @@ const EpraComponent = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchLicenseClasses = async () => {
+useEffect(() => {
+  const fetchLicenseClasses = async () => {
+    const cachedData = localStorage.getItem("cachedSolarLicenseClasses");
+    const cacheTimestamp = localStorage.getItem("solarLicenseClassesTimestamp");
+    const now = Date.now();
+    if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+      setLicenseClasses(JSON.parse(cachedData));
+      setLoading(false);
+      return;
+    }
+    try {
+      let response;
       try {
-        const response = await fetch("http://localhost:3000/api/license-classes/solar");
-        if (!response.ok) {
-          throw new Error("Failed to fetch license classes");
-        }
-        const json = await response.json();
-        setLicenseClasses(json?.data || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        response = await fetch("https://api.torchbearer.co.ke/api/license-classes/solar");
+      } catch (err) {}
+      if (!response || !response.ok) {
+        response = await fetch("http://api.torchbearer.co.ke/api/license-classes/solar");
       }
-    };
+      if (!response.ok) {
+        throw new Error("Failed to fetch license classes");
+      }
+      const json = await response.json();
+      const data = json?.data || [];
+      localStorage.setItem("cachedSolarLicenseClasses", JSON.stringify(data));
+      localStorage.setItem("solarLicenseClassesTimestamp", now.toString());
+      setLicenseClasses(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchLicenseClasses();
+}, []);
 
-    fetchLicenseClasses();
-  }, []);
 
   return (
     <section id="epra" className="py-20 bg-gradient-to-br from-amber-50 to-amber-100">

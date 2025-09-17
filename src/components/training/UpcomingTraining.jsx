@@ -12,61 +12,70 @@ const UpcomingTraining = () => {
   // Fetch upcoming training programs from API
   useEffect(() => {
     const fetchUpcomingTraining = async () => {
+      const cachedData = localStorage.getItem("cachedUpcomingTrainings");
+      const cacheTimestamp = localStorage.getItem("upcomingTrainingsTimestamp");
+      const now = Date.now();
+      if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+        setUpcomingCourses(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/training-programs/upcoming');
-        
+        let response;
+        try {
+          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/upcoming");
+        } catch (err) { }
+        if (!response || !response.ok) {
+          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/upcoming");
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         const data = await response.json();
-        
         if (data.success) {
-          // Filter for training programs only (not webinars) and future dates
           const trainingPrograms = data.data.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const startDate = new Date(program.start_date);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            
-            return programType === 'training' && startDate >= today;
+            return programType === "training" && startDate >= today;
           });
-          
           setUpcomingCourses(trainingPrograms);
+          localStorage.setItem("cachedUpcomingTrainings", JSON.stringify(trainingPrograms));
+          localStorage.setItem("upcomingTrainingsTimestamp", now.toString());
         } else {
-          throw new Error(data.message || 'Failed to fetch training programs');
+          throw new Error(data.message || "Failed to fetch training programs");
         }
       } catch (err) {
-        console.error('Error fetching training programs:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchUpcomingTraining();
   }, []);
+
 
   // Format date range
   const formatDateRange = (startDate, endDate) => {
     const start = new Date(startDate);
     const end = new Date(endDate);
-    
-    const options = { 
-      month: 'long', 
+
+    const options = {
+      month: 'long',
       day: 'numeric',
       year: start.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
     };
-    
+
     if (start.toDateString() === end.toDateString()) {
       return start.toLocaleDateString('en-US', options);
     }
-    
+
     if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
       return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${end.getDate()}, ${start.getFullYear()}`;
     }
-    
+
     return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
   };
 
@@ -75,16 +84,16 @@ const UpcomingTraining = () => {
     const formatTimeString = (timeString) => {
       if (!timeString) return '';
       const time = new Date(`2000-01-01T${timeString}`);
-      return time.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true 
+      return time.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
       });
     };
 
     const start = formatTimeString(startTime);
     const end = formatTimeString(endTime);
-    
+
     if (start && end) {
       return `${start} - ${end}`;
     }
@@ -94,7 +103,7 @@ const UpcomingTraining = () => {
   // Handle newsletter subscription
   const handleSubscribe = async (e) => {
     e.preventDefault();
-    
+
     if (!email) {
       setSubscribeMessage('Please enter your email address');
       return;
@@ -148,8 +157,8 @@ const UpcomingTraining = () => {
             <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
               <p className="text-red-600 font-medium">Unable to load training programs</p>
               <p className="text-red-500 text-sm mt-2">{error}</p>
-              <button 
-                onClick={() => window.location.reload()} 
+              <button
+                onClick={() => window.location.reload()}
                 className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
               >
                 Retry
@@ -180,7 +189,7 @@ const UpcomingTraining = () => {
               <Calendar className="w-16 h-16 text-gray-400 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No Upcoming Training Programs</h3>
               <p className="text-gray-600 mb-6">
-                We're currently planning our next batch of training programs. 
+                We're currently planning our next batch of training programs.
                 Subscribe to get notified when new programs are announced!
               </p>
             </div>
@@ -202,7 +211,7 @@ const UpcomingTraining = () => {
                 </div>
                 <div className="p-6">
                   <p className="text-gray-700 mb-4">{course.description}</p>
-                  
+
                   {course.features && course.features.length > 0 && (
                     <ul className="space-y-2 mb-6">
                       {course.features.map((feature, i) => (
@@ -213,7 +222,7 @@ const UpcomingTraining = () => {
                       ))}
                     </ul>
                   )}
-                  
+
                   <div className="bg-amber-50 p-4 rounded-lg mb-6">
                     <div className="flex justify-between items-center">
                       <span className="text-lg font-semibold">Price:</span>
@@ -230,7 +239,7 @@ const UpcomingTraining = () => {
                       </div>
                     )} */}
                   </div>
-                  
+
                   {course.registration_link ? (
                     <a href={course.registration_link} target="_blank" rel="noopener noreferrer">
                       <button className="w-full bg-amber-600 text-white py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors shadow-lg">
@@ -238,7 +247,7 @@ const UpcomingTraining = () => {
                       </button>
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="w-full bg-gray-400 text-white py-3 rounded-lg font-bold cursor-not-allowed"
                       disabled
                     >
@@ -264,7 +273,7 @@ const UpcomingTraining = () => {
                 className="flex-grow px-4 py-3 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                 disabled={subscribing}
               />
-              <button 
+              <button
                 type="submit"
                 disabled={subscribing}
                 className="bg-amber-600 text-white px-6 py-3 rounded-r-lg font-bold hover:bg-amber-700 transition-colors disabled:bg-amber-400"

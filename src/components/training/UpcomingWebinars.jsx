@@ -9,47 +9,56 @@ const UpcomingWebinars = () => {
   // Fetch upcoming webinars from API
   useEffect(() => {
     const fetchUpcomingWebinars = async () => {
+      const cachedData = localStorage.getItem("cachedUpcomingWebinars");
+      const cacheTimestamp = localStorage.getItem("upcomingWebinarsTimestamp");
+      const now = Date.now();
+      if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+        setUpcomingWebinars(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/training-programs/upcoming');
-        
+        let response;
+        try {
+          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/upcoming");
+        } catch (err) { }
+        if (!response || !response.ok) {
+          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/upcoming");
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         const data = await response.json();
-        
         if (data.success) {
-          // Filter for webinar programs only and future dates
           const webinarPrograms = data.data.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const startDate = new Date(program.start_date);
             const today = new Date();
             today.setHours(0, 0, 0, 0);
-            
-            return programType === 'webinar' && startDate >= today;
+            return programType === "webinar" && startDate >= today;
           });
-          
           setUpcomingWebinars(webinarPrograms);
+          localStorage.setItem("cachedUpcomingWebinars", JSON.stringify(webinarPrograms));
+          localStorage.setItem("upcomingWebinarsTimestamp", now.toString());
         } else {
-          throw new Error(data.message || 'Failed to fetch webinar programs');
+          throw new Error(data.message || "Failed to fetch webinar programs");
         }
       } catch (err) {
-        console.error('Error fetching webinar programs:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchUpcomingWebinars();
   }, []);
+
 
   // Format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { 
-      month: 'long', 
+    const options = {
+      month: 'long',
       day: 'numeric',
       year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
     };
@@ -61,16 +70,16 @@ const UpcomingWebinars = () => {
     const formatTimeString = (timeString) => {
       if (!timeString) return '';
       const time = new Date(`2000-01-01T${timeString}`);
-      return time.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true 
+      return time.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
       });
     };
 
     const start = formatTimeString(startTime);
     const end = formatTimeString(endTime);
-    
+
     if (start && end) {
       return `${start} - ${end}`;
     }
@@ -97,8 +106,8 @@ const UpcomingWebinars = () => {
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
             <p className="text-red-600 font-medium">Unable to load webinars</p>
             <p className="text-red-500 text-sm mt-2">{error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
             >
               Retry
@@ -112,7 +121,7 @@ const UpcomingWebinars = () => {
   return (
     <div className="mb-20">
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Upcoming Webinars</h3>
-      
+
       {upcomingWebinars.length === 0 ? (
         <div className="text-center py-12">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
@@ -144,13 +153,13 @@ const UpcomingWebinars = () => {
                     Upcoming
                   </span>
                 </div>
-                
+
                 {webinar.speaker && (
                   <p className="text-gray-700 mb-2"><strong>Speaker:</strong> {webinar.speaker}</p>
                 )}
-                
+
                 <p className="text-gray-700 mb-4">{webinar.description}</p>
-                
+
                 {webinar.features && webinar.features.length > 0 && (
                   <ul className="space-y-1 mb-4">
                     {webinar.features.map((feature, i) => (
@@ -161,7 +170,7 @@ const UpcomingWebinars = () => {
                     ))}
                   </ul>
                 )}
-                
+
                 <a
                   href={webinar.registration_link}
                   target="_blank"

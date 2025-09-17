@@ -9,45 +9,54 @@ const PastTraining = () => {
   // Fetch past training programs from API
   useEffect(() => {
     const fetchPastTraining = async () => {
+      const cachedData = localStorage.getItem("cachedPastTrainings");
+      const cacheTimestamp = localStorage.getItem("pastTrainingsTimestamp");
+      const now = Date.now();
+      if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+        setPastTrainings(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/training-programs/');
-        
+        let response;
+        try {
+          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/");
+        } catch (err) { }
+        if (!response || !response.ok) {
+          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/");
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         const data = await response.json();
-        
         if (data.success) {
-          // Filter for training programs only with status "completed"
           const trainingPrograms = data.data.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const status = program.status?.toLowerCase();
-            
-            return programType === 'training' && status === 'completed';
+            return programType === "training" && status === "completed";
           });
-          
           setPastTrainings(trainingPrograms);
+          localStorage.setItem("cachedPastTrainings", JSON.stringify(trainingPrograms));
+          localStorage.setItem("pastTrainingsTimestamp", now.toString());
         } else {
-          throw new Error(data.message || 'Failed to fetch training programs');
+          throw new Error(data.message || "Failed to fetch training programs");
         }
       } catch (err) {
-        console.error('Error fetching training programs:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPastTraining();
   }, []);
+
 
   // Format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { 
-      month: 'long', 
+    const options = {
+      month: 'long',
       day: 'numeric',
       year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
     };
@@ -74,8 +83,8 @@ const PastTraining = () => {
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
             <p className="text-red-600 font-medium">Unable to load training programs</p>
             <p className="text-red-500 text-sm mt-2">{error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
             >
               Retry
@@ -89,7 +98,7 @@ const PastTraining = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Training Recordings</h3>
-      
+
       {pastTrainings.length === 0 ? (
         <div className="text-center py-12">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
@@ -139,7 +148,7 @@ const PastTraining = () => {
                       Watch Recording
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
                       disabled
                     >
@@ -156,7 +165,7 @@ const PastTraining = () => {
                       Download Slides
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="border border-gray-300 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
                       disabled
                     >

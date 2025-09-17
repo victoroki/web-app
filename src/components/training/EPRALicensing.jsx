@@ -10,13 +10,26 @@ const EpraComponent = () => {
 
   useEffect(() => {
     const fetchLicenseClasses = async () => {
+      const cachedData = localStorage.getItem('cachedLicenseClasses');
+      const cacheTimestamp = localStorage.getItem('licenseClassesTimestamp');
+      const now = Date.now();
+      if (cachedData && cacheTimestamp && (now - parseInt(cacheTimestamp)) < 3600000) {
+        setLicenseClasses(JSON.parse(cachedData));
+        setLoading(false);
+        return;
+      }
+
       try {
-        const response = await fetch("http://localhost:3000/api/license-classes/electrical");
+        const response = await fetch("https://api.torchbearer.co.ke/api/license-classes/electrical");
         if (!response.ok) {
           throw new Error("Failed to fetch license classes");
         }
         const json = await response.json();
-        setLicenseClasses(json?.data || []);
+        const data = json?.data || [];
+        localStorage.setItem('cachedLicenseClasses', JSON.stringify(data));
+        localStorage.setItem('licenseClassesTimestamp', now.toString());
+        
+        setLicenseClasses(data);
       } catch (err) {
         setError(err.message);
       } finally {

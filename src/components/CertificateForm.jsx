@@ -21,7 +21,7 @@ const CertificateForm = () => {
     setMessage('');
 
     try {
-      const response = await fetch('http://localhost:3000/api/certificates/register', {
+      const response = await fetch('https://api.torchbearer.co.ke/api/certificates/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

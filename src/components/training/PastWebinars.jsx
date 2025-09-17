@@ -10,55 +10,67 @@ const PastWebinars = () => {
   // Fetch past webinars from API
   useEffect(() => {
     const fetchPastWebinars = async () => {
+      const cachedData = localStorage.getItem("cachedPastWebinars");
+      const cacheTimestamp = localStorage.getItem("pastWebinarsTimestamp");
+      const now = Date.now();
+      if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+        const parsed = JSON.parse(cachedData);
+        setPastWebinars(parsed.webinars);
+        setPhysicalEvents(parsed.physicalEvents);
+        setLoading(false);
+        return;
+      }
       try {
         setLoading(true);
-        const response = await fetch('http://localhost:3000/api/training-programs/');
-        
+        let response;
+        try {
+          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/");
+        } catch (err) { }
+        if (!response || !response.ok) {
+          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/");
+        }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
         const data = await response.json();
-        
         if (data.success) {
-          // Filter for webinar programs only with status "completed"
           const webinarPrograms = data.data.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const status = program.status?.toLowerCase();
-            
-            return programType === 'webinar' && status === 'completed';
+            return programType === "webinar" && status === "completed";
           });
-          
-          // Filter for physical events (you might need to add a field to distinguish these)
           const physicalEventsData = data.data.filter(program => {
-            // This is a placeholder - you might need to adjust this logic
-            // based on how you identify physical events in your data
-            return program.title.toLowerCase().includes('stem') || 
-                   program.description.toLowerCase().includes('physical') ||
-                   program.description.toLowerCase().includes('workshop');
+            return (
+              program.title.toLowerCase().includes("stem") ||
+              program.description.toLowerCase().includes("physical") ||
+              program.description.toLowerCase().includes("workshop")
+            );
           });
-          
           setPastWebinars(webinarPrograms);
           setPhysicalEvents(physicalEventsData);
+          localStorage.setItem(
+            "cachedPastWebinars",
+            JSON.stringify({ webinars: webinarPrograms, physicalEvents: physicalEventsData })
+          );
+          localStorage.setItem("pastWebinarsTimestamp", now.toString());
         } else {
-          throw new Error(data.message || 'Failed to fetch webinar programs');
+          throw new Error(data.message || "Failed to fetch webinar programs");
         }
       } catch (err) {
-        console.error('Error fetching webinar programs:', err);
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
-
     fetchPastWebinars();
   }, []);
+
 
   // Format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
-    const options = { 
-      month: 'long', 
+    const options = {
+      month: 'long',
       day: 'numeric',
       year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
     };
@@ -70,16 +82,16 @@ const PastWebinars = () => {
     const formatTimeString = (timeString) => {
       if (!timeString) return '';
       const time = new Date(`2000-01-01T${timeString}`);
-      return time.toLocaleTimeString('en-US', { 
-        hour: 'numeric', 
-        minute: '2-digit', 
-        hour12: true 
+      return time.toLocaleTimeString('en-US', {
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
       });
     };
 
     const start = formatTimeString(startTime);
     const end = formatTimeString(endTime);
-    
+
     if (start && end) {
       return `${start} - ${end}`;
     }
@@ -106,8 +118,8 @@ const PastWebinars = () => {
           <div className="bg-red-50 border border-red-200 rounded-lg p-6 max-w-md mx-auto">
             <p className="text-red-600 font-medium">Unable to load webinars</p>
             <p className="text-red-500 text-sm mt-2">{error}</p>
-            <button 
-              onClick={() => window.location.reload()} 
+            <button
+              onClick={() => window.location.reload()}
               className="mt-4 bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors"
             >
               Retry
@@ -121,7 +133,7 @@ const PastWebinars = () => {
   return (
     <div>
       <h3 className="text-3xl font-bold text-gray-900 mb-8">Past Webinar Recordings</h3>
-      
+
       {pastWebinars.length === 0 ? (
         <div className="text-center py-12">
           <div className="bg-white rounded-lg shadow-lg p-8 max-w-md mx-auto">
@@ -159,7 +171,7 @@ const PastWebinars = () => {
                       Watch Recording
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
                       disabled
                     >
@@ -176,7 +188,7 @@ const PastWebinars = () => {
                       Download Slides
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="border border-gray-300 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
                       disabled
                     >
@@ -200,7 +212,7 @@ const PastWebinars = () => {
                 <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
                 <div className="flex items-center text-gray-600 mb-2">
                   <Calendar className="w-4 h-4 mr-2" />
-                  <span>{formatDate(event.start_date)}</span> 
+                  <span>{formatDate(event.start_date)}</span>
                 </div>
                 <p className="text-gray-700 mb-2"><strong>Time:</strong> {formatTime(event.start_time, event.end_time)}</p>
                 <p className="text-gray-700 mb-4">{event.description}</p>
@@ -216,7 +228,7 @@ const PastWebinars = () => {
                       View Event
                     </a>
                   ) : (
-                    <button 
+                    <button
                       className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
                       disabled
                     >

@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
-import { Users, Building2, TrendingUp, ChevronRight, Mail, Phone, MapPin, CheckCircle, Lightbulb, Target, Heart } from 'lucide-react';
+import { Users, Building2, TrendingUp, ChevronRight, CheckCircle, Loader2, AlertCircle, Check } from 'lucide-react';
 
 const GetInvolvedPage = () => {
   const [selectedRole, setSelectedRole] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null); // 'success', 'error', null
+  const [errorMessage, setErrorMessage] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -11,6 +15,9 @@ const GetInvolvedPage = () => {
     message: '',
     roleType: ''
   });
+
+  // Form validation errors
+  const [errors, setErrors] = useState({});
 
   const involvementOptions = [
     {
@@ -60,11 +67,56 @@ const GetInvolvedPage = () => {
     }
   ];
 
+  // Client-side validation
+  const validateForm = () => {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name = 'Name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
+    }
+
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (!formData.roleType) {
+      newErrors.roleType = 'Please select a role type';
+    }
+
+    if (formData.phone && formData.phone.length > 50) {
+      newErrors.phone = 'Phone number is too long';
+    }
+
+    if (formData.organization && formData.organization.length > 255) {
+      newErrors.organization = 'Organization name is too long';
+    }
+
+    if (formData.message && formData.message.length > 5000) {
+      newErrors.message = 'Message is too long (maximum 5000 characters)';
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleInputChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ''
+      });
+    }
   };
 
   const handleRoleSelection = (roleId) => {
@@ -73,15 +125,101 @@ const GetInvolvedPage = () => {
       ...formData,
       roleType: roleId
     });
+    
+    // Clear role type error
+    if (errors.roleType) {
+      setErrors({
+        ...errors,
+        roleType: ''
+      });
+    }
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    alert('Thank you for your interest! We will get back to you soon.');
+  const resetForm = () => {
+    setFormData({
+      name: '',
+      email: '',
+      organization: '',
+      phone: '',
+      message: '',
+      roleType: ''
+    });
+    setSelectedRole(null);
+    setErrors({});
   };
 
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  
+  // Reset status
+  setSubmitStatus(null);
+  setErrorMessage('');
+  setSuccessMessage('');
+
+  // Validate form
+  if (!validateForm()) {
+    setSubmitStatus('error');
+    setErrorMessage('Please correct the errors below and try again.');
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const API_URL = process.env.REACT_APP_API_URL || 'https://api.torchbearer.co.ke';
+    
+    const response = await fetch(`${API_URL}/api/involvement/submit`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: formData.name.trim(),
+        email: formData.email.toLowerCase().trim(),
+        organization: formData.organization.trim() || null,
+        phone: formData.phone.trim() || null,
+        message: formData.message.trim() || null,
+        roleType: formData.roleType // Change this line from role_type to roleType
+      })
+    });
+
+    const result = await response.json();
+
+    if (response.ok && result.success) {
+      setSubmitStatus('success');
+      setSuccessMessage(result.message || 'Thank you for your interest! We have received your application and will get back to you soon.');
+      resetForm();
+      
+      setTimeout(() => {
+        document.getElementById('submit-status')?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'center' 
+        });
+      }, 100);
+    } else {
+      setSubmitStatus('error');
+      
+      if (result.errors && Array.isArray(result.errors)) {
+        const backendErrors = {};
+        result.errors.forEach(error => {
+          if (error.path) {
+            backendErrors[error.path] = error.msg;
+          }
+        });
+        setErrors(backendErrors);
+        setErrorMessage('Please correct the errors below and try again.');
+      } else {
+        setErrorMessage(result.message || 'Something went wrong. Please try again.');
+      }
+    }
+  } catch (error) {
+    console.error('Network error:', error);
+    setSubmitStatus('error');
+    setErrorMessage('Network error. Please check your connection and try again.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#fff8d9' }}>
 
@@ -159,6 +297,51 @@ const GetInvolvedPage = () => {
           })}
         </div>
 
+        {/* Role Selection Error */}
+        {errors.roleType && (
+          <div className="max-w-4xl mx-auto mb-8">
+            <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+              <div className="flex items-center gap-3">
+                <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <p className="text-red-700">{errors.roleType}</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Submit Status Messages */}
+        {(submitStatus || errorMessage || successMessage) && (
+          <div id="submit-status" className="max-w-4xl mx-auto mb-8">
+            {submitStatus === 'success' && (
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <Check className="w-6 h-6 text-green-500" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-green-800 mb-2">Application Submitted Successfully!</h3>
+                    <p className="text-green-700">{successMessage}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {submitStatus === 'error' && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+                <div className="flex items-start gap-4">
+                  <div className="flex-shrink-0">
+                    <AlertCircle className="w-6 h-6 text-red-500" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-red-800 mb-2">Submission Error</h3>
+                    <p className="text-red-700">{errorMessage}</p>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
         {/* Contact Form */}
         {selectedRole && (
           <div className="max-w-4xl mx-auto">
@@ -184,9 +367,15 @@ const GetInvolvedPage = () => {
                       value={formData.name}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors duration-300"
+                      disabled={isSubmitting}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed ${
+                        errors.name ? 'border-red-300 focus:border-red-500' : 'border-gray-200 focus:border-orange-500'
+                      } focus:outline-none`}
                       placeholder="Enter your full name"
                     />
+                    {errors.name && (
+                      <p className="mt-1 text-sm text-red-600">{errors.name}</p>
+                    )}
                   </div>
                   
                   <div>
@@ -199,9 +388,15 @@ const GetInvolvedPage = () => {
                       value={formData.email}
                       onChange={handleInputChange}
                       required
-                      className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors duration-300"
+                      disabled={isSubmitting}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed ${
+                        errors.email ? 'border-red-300 focus:border-red-500' : 'border-gray-200 focus:border-orange-500'
+                      } focus:outline-none`}
                       placeholder="Enter your email"
                     />
+                    {errors.email && (
+                      <p className="mt-1 text-sm text-red-600">{errors.email}</p>
+                    )}
                   </div>
                 </div>
 
@@ -215,9 +410,15 @@ const GetInvolvedPage = () => {
                       name="organization"
                       value={formData.organization}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors duration-300"
+                      disabled={isSubmitting}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed ${
+                        errors.organization ? 'border-red-300 focus:border-red-500' : 'border-gray-200 focus:border-orange-500'
+                      } focus:outline-none`}
                       placeholder="Enter your organization"
                     />
+                    {errors.organization && (
+                      <p className="mt-1 text-sm text-red-600">{errors.organization}</p>
+                    )}
                   </div>
                   
                   <div>
@@ -229,34 +430,61 @@ const GetInvolvedPage = () => {
                       name="phone"
                       value={formData.phone}
                       onChange={handleInputChange}
-                      className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors duration-300"
+                      disabled={isSubmitting}
+                      className={`w-full px-4 py-3 rounded-lg border-2 transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed ${
+                        errors.phone ? 'border-red-300 focus:border-red-500' : 'border-gray-200 focus:border-orange-500'
+                      } focus:outline-none`}
                       placeholder="Enter your phone number"
                     />
+                    {errors.phone && (
+                      <p className="mt-1 text-sm text-red-600">{errors.phone}</p>
+                    )}
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-sm font-medium mb-2" style={{ color: '#ceb699' }}>
                     Tell Us More
+                    {formData.message && (
+                      <span className="ml-2 text-xs text-gray-500">
+                        ({formData.message.length}/5000 characters)
+                      </span>
+                    )}
                   </label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleInputChange}
                     rows={5}
-                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-orange-500 focus:outline-none transition-colors duration-300"
+                    disabled={isSubmitting}
+                    className={`w-full px-4 py-3 rounded-lg border-2 transition-colors duration-300 disabled:bg-gray-50 disabled:cursor-not-allowed ${
+                      errors.message ? 'border-red-300 focus:border-red-500' : 'border-gray-200 focus:border-orange-500'
+                    } focus:outline-none`}
                     placeholder="Share your experience, goals, or questions about getting involved..."
                   />
+                  {errors.message && (
+                    <p className="mt-1 text-sm text-red-600">{errors.message}</p>
+                  )}
                 </div>
 
                 <div className="text-center">
                   <button
                     type="submit"
-                    className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform"
+                    disabled={isSubmitting}
+                    className="inline-flex items-center gap-3 px-8 py-4 rounded-xl text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg transform disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:scale-100"
                     style={{ backgroundColor: '#d97707' }}
                   >
-                    <span>Submit Application</span>
-                    <ChevronRight className="w-5 h-5" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-5 h-5 animate-spin" />
+                        <span>Submitting...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Submit Application</span>
+                        <ChevronRight className="w-5 h-5" />
+                      </>
+                    )}
                   </button>
                 </div>
               </form>

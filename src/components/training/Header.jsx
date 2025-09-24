@@ -32,6 +32,13 @@ const Header = () => {
     { name: 'Past Webinar Recordings', href: '/training/pastwebinars' },
   ];
 
+const communityItems = [
+  { name: 'Events', href: '/training/community/events' },
+  { name: 'Resources', href: '/training/community/resources' },
+  { name: 'Links', href: '/training/community/links' },
+  { name: 'Gallery', href: '/training/community/gallery' },
+];
+
   const navItems = [
     { name: 'Home', href: '/institute' },
     { name: 'About Us', href: '/training/about' },
@@ -50,6 +57,11 @@ const Header = () => {
       href: '/training/webinars',
       dropdown: webinarItems
     },
+    {
+    name: 'Community',
+    href: '/community',
+    dropdown: communityItems
+  },
     { name: 'Contact', href: '/training/contact' }
   ];
 

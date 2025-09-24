@@ -33,6 +33,10 @@ import PastTraining from "./components/training/PastTraining"
 import CertificateGenerator from './components/training/certificate';
 import CertificateForm from "./components/CertificateForm"
 import GetInvolvedPage from './components/training/GetInvolved';
+import UsefulLinksPage from './components/training/UsefullLink';
+import EventsPage from './components/training/Events';
+import ResourcesPage from './components/training/Resources';
+import GalleryPage from './components/training/Gallery';
 
 
 const TrainingHomepage = () => {
@@ -100,6 +104,10 @@ function App() {
           <Route path="/training/pasttraining" element={<PastTraining />} />
           <Route path="/training/certificate" element={<CertificateGenerator />} />
           <Route path="/training/certificate-form" element={<CertificateForm />} />
+          <Route path="/training/community/events" element={<EventsPage />} />
+          <Route path="/training/community/resources" element={<ResourcesPage />} />
+          <Route path="/training/community/links" element={<UsefulLinksPage />} />
+          <Route path="/training/community/gallery" element={<GalleryPage />} />
         </Route>
       </Routes>
     </Router>

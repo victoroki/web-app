@@ -11,40 +11,95 @@ const FormModal = ({
   successMessage = "Thank you for your interest. You can now access the training materials.",
   accessLink = "https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link",
   accessLinkText = "Access Training Outline",
-  formspreeEndpoint = "https://formspree.io/f/myyqrvvk",
+  // Backend integration props (replaces Formspree)
+  apiEndpoint = "http://localhost:3000/api/form-submissions",
+  formType = "general",
+  // Optional: still support Formspree as fallback
+  formspreeEndpoint = null,
   emailSubject = "Training Outline Request"
 }) => {
   const [formData, setFormData] = useState({ email: '', phone: '' });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [error, setError] = useState('');
 
   const handleSubmit = async () => {
-    if (!formData.email || !formData.phone) return;
+    if (!formData.email || !formData.phone) {
+      setError('Please fill in all required fields');
+      return;
+    }
     
+    // Basic email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+      setError('Please enter a valid email address');
+      return;
+    }
+
+    // Basic phone validation
+    if (formData.phone.length < 10) {
+      setError('Please enter a valid phone number');
+      return;
+    }
+
     setIsSubmitting(true);
+    setError('');
 
     try {
-      const response = await fetch(formspreeEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          phone: formData.phone,
-          subject: emailSubject,
-          message: `New request from ${formData.email}. Phone: ${formData.phone}`
-        }),
-      });
+      let response;
+      
+      // Try backend API first
+      if (apiEndpoint) {
+        response = await fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: formData.email.trim(),
+            phone: formData.phone.trim(),
+            subject: emailSubject,
+            message: `New ${formType} request from ${formData.email}. Phone: ${formData.phone}`,
+            form_type: formType,
+            access_link: accessLink
+          }),
+        });
 
-      if (response.ok) {
-        setShowSuccess(true);
-      } else {
-        alert('There was an error submitting your request. Please try again.');
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+          setShowSuccess(true);
+        } else {
+          throw new Error(data.message || 'Failed to submit form');
+        }
       }
+      // Fallback to Formspree if backend fails or not configured
+      else if (formspreeEndpoint) {
+        response = await fetch(formspreeEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            phone: formData.phone,
+            subject: emailSubject,
+            message: `New request from ${formData.email}. Phone: ${formData.phone}`
+          }),
+        });
+
+        if (response.ok) {
+          setShowSuccess(true);
+        } else {
+          throw new Error('Failed to submit form');
+        }
+      } else {
+        throw new Error('No submission endpoint configured');
+      }
+
     } catch (error) {
-      console.error('Error:', error);
-      alert('There was an error submitting your request. Please try again.');
+      console.error('Form submission error:', error);
+      setError(error.message || 'There was an error submitting your request. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -54,6 +109,7 @@ const FormModal = ({
     setShowSuccess(false);
     setFormData({ email: '', phone: '' });
     setIsSubmitting(false);
+    setError('');
     onClose();
   };
 
@@ -75,11 +131,18 @@ const FormModal = ({
             <h3 className="text-2xl font-bold text-gray-900 mb-2">{title}</h3>
             <p className="text-gray-600 mb-6">{description}</p>
             
+            {/* Error Message */}
+            {error && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 rounded-md text-sm">
+                {error}
+              </div>
+            )}
+            
             <div className="space-y-4">
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                   <Mail className="w-4 h-4 mr-2" />
-                  Email Address
+                  Email Address *
                 </label>
                 <input
                   type="email"
@@ -88,13 +151,14 @@ const FormModal = ({
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   placeholder="your.email@example.com"
+                  disabled={isSubmitting}
                 />
               </div>
               
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                   <Phone className="w-4 h-4 mr-2" />
-                  Phone Number
+                  Phone Number *
                 </label>
                 <input
                   type="tel"
@@ -103,6 +167,7 @@ const FormModal = ({
                   onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-transparent"
                   placeholder="+254 700 000 000"
+                  disabled={isSubmitting}
                 />
               </div>
               
@@ -111,8 +176,19 @@ const FormModal = ({
                 disabled={isSubmitting || !formData.email || !formData.phone}
                 className="w-full bg-amber-600 text-white py-3 px-4 rounded-md font-semibold hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
-                {isSubmitting ? 'Submitting...' : submitText}
+                {isSubmitting ? (
+                  <div className="flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                    Submitting...
+                  </div>
+                ) : (
+                  submitText
+                )}
               </button>
+              
+              <p className="text-xs text-gray-500 text-center">
+                * Required fields. Your information is secure and will not be shared.
+              </p>
             </div>
           </>
         ) : (
@@ -121,15 +197,26 @@ const FormModal = ({
             <h3 className="text-2xl font-bold text-gray-900 mb-2">{successTitle}</h3>
             <p className="text-gray-600 mb-6">{successMessage}</p>
             {accessLink && (
-              <a
-                href={accessLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block bg-amber-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-amber-700 transition-colors"
-              >
-                {accessLinkText}
-              </a>
+              <div className="space-y-3">
+                <a
+                  href={accessLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block bg-amber-600 text-white py-3 px-6 rounded-md font-semibold hover:bg-amber-700 transition-colors"
+                >
+                  {accessLinkText}
+                </a>
+                <p className="text-sm text-gray-500">
+                  You can also bookmark this page to access the materials later.
+                </p>
+              </div>
             )}
+            <button
+              onClick={resetForm}
+              className="mt-4 text-sm text-gray-500 hover:text-gray-700 underline"
+            >
+              Close
+            </button>
           </div>
         )}
       </div>

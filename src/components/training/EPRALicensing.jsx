@@ -20,7 +20,7 @@ const EpraComponent = () => {
       }
 
       try {
-        const response = await fetch("https://api.torchbearer.co.ke/api/license-classes/electrical");
+        const response = await fetch("https://admin.torchbearer.co.ke/api/license-classes/electrical");
         if (!response.ok) {
           throw new Error("Failed to fetch license classes");
         }

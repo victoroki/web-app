@@ -10,7 +10,7 @@ const ResourcesPage = () => {
   const [error, setError] = useState(null);
   const [stats, setStats] = useState({ totalResources: 0, totalDownloads: 0, averageRating: 0 });
 
-  const API_BASE_URL = 'https://api.torchbearer.co.ke';
+  const API_BASE_URL = 'https://admin.torchbearer.co.ke';
 
   useEffect(() => {
     fetchCategories();

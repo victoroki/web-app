@@ -19,7 +19,7 @@ const UsefulLinksPage = () => {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('https://api.torchbearer.co.ke/api/links?limit=0');
+      const response = await fetch('https://admin.torchbearer.co.ke/api/useful-links?limit=0');
       const data = await response.json();
       const allItems = data.links;
 
@@ -63,7 +63,7 @@ const UsefulLinksPage = () => {
   const fetchLinks = async () => {
     try {
       const params = new URLSearchParams({ category: selectedCategory, search: searchTerm });
-      const response = await fetch(`https://api.torchbearer.co.ke/api/links?${params}`);
+      const response = await fetch(`https://admin.torchbearer.co.ke/api/useful-links?${params}`);
       const data = await response.json();
       setLinks(data.links);
     } catch (error) {
@@ -80,7 +80,7 @@ const UsefulLinksPage = () => {
 
   const handleLinkClick = async (id, url) => {
     try {
-      const response = await fetch(`https://api.torchbearer.co.ke/api/links/${id}?action=visit`);
+      const response = await fetch(`https://admin.torchbearer.co.ke/api/useful-links/${id}?action=visit`);
       const updatedLink = await response.json();
       setLinks(links.map(link => link.id === id ? updatedLink : link)); // Update visits count
       window.open(url, '_blank', 'noopener,noreferrer');

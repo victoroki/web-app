@@ -10,51 +10,59 @@ const UpcomingTraining = () => {
   const [subscribeMessage, setSubscribeMessage] = useState('');
 
   // Fetch upcoming training programs from API
-  useEffect(() => {
-    const fetchUpcomingTraining = async () => {
-      const cachedData = localStorage.getItem("cachedUpcomingTrainings");
-      const cacheTimestamp = localStorage.getItem("upcomingTrainingsTimestamp");
-      const now = Date.now();
-      if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
-        setUpcomingCourses(JSON.parse(cachedData));
-        setLoading(false);
-        return;
-      }
+useEffect(() => {
+  const fetchUpcomingTraining = async () => {
+    const cachedData = localStorage.getItem("cachedUpcomingTrainings");
+    const cacheTimestamp = localStorage.getItem("upcomingTrainingsTimestamp");
+    const now = Date.now();
+    // Use cache if available and not older than 1 hour (3600000 ms)
+    if (cachedData && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+      setUpcomingCourses(JSON.parse(cachedData));
+      setLoading(false);
+      return;
+    }
+    try {
+      setLoading(true);
+      let response;
       try {
-        setLoading(true);
-        let response;
-        try {
-          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/upcoming");
-        } catch (err) { }
-        if (!response || !response.ok) {
-          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/upcoming");
-        }
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        const data = await response.json();
-        if (data.success) {
-          const trainingPrograms = data.data.filter(program => {
-            const programType = program.program_type?.toLowerCase();
-            const startDate = new Date(program.start_date);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            return programType === "training" && startDate >= today;
-          });
-          setUpcomingCourses(trainingPrograms);
-          localStorage.setItem("cachedUpcomingTrainings", JSON.stringify(trainingPrograms));
-          localStorage.setItem("upcomingTrainingsTimestamp", now.toString());
-        } else {
-          throw new Error(data.message || "Failed to fetch training programs");
-        }
+        // Try the new endpoint
+        response = await fetch("https://admin.torchbearer.co.ke/api/training-programs");
       } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        // Fallback to HTTP if HTTPS fails (optional, remove if not needed)
+        response = await fetch("http://admin.torchbearer.co.ke/api/training-programs");
       }
-    };
-    fetchUpcomingTraining();
-  }, []);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data.success) {
+        // Filter for training programs with a start date on or after today
+        const trainingPrograms = data.data.filter(program => {
+          const programType = program.program_type?.toLowerCase();
+          const startDate = new Date(program.start_date);
+          const today = new Date('2025-09-28T00:00:00.000000Z'); // Set to current date
+          today.setHours(0, 0, 0, 0); // Normalize to midnight for comparison
+          return programType === "training" && startDate >= today && program.status === "upcoming";
+        });
+        // Parse features from string to array for each program
+        const parsedPrograms = trainingPrograms.map(program => ({
+          ...program,
+          features: program.features ? JSON.parse(program.features) : [],
+        }));
+        setUpcomingCourses(parsedPrograms);
+        localStorage.setItem("cachedUpcomingTrainings", JSON.stringify(parsedPrograms));
+        localStorage.setItem("upcomingTrainingsTimestamp", now.toString());
+      } else {
+        throw new Error(data.message || "Failed to fetch training programs");
+      }
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+  fetchUpcomingTraining();
+}, []);
 
 
   // Format date range

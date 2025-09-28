@@ -12,7 +12,7 @@ const GalleryPage = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
 
-  const API_BASE_URL = 'https://api.torchbearer.co.ke';
+  const API_BASE_URL = 'https://admin.torchbearer.co.ke';
 
   useEffect(() => {
     fetchCategories();
@@ -68,7 +68,7 @@ const GalleryPage = () => {
         search: searchTerm 
       });
       
-      const response = await fetch(`${API_BASE_URL}/api/gallery?${params}`);
+      const response = await fetch(`${API_BASE_URL}/api/gallery-items?${params}`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -85,7 +85,7 @@ const GalleryPage = () => {
   const handleView = async (item) => {
     try {
       // Increment view count
-      const response = await fetch(`${API_BASE_URL}/api/gallery/${item.id}?action=view`);
+      const response = await fetch(`${API_BASE_URL}/api/gallery-items/${item.id}?action=view`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

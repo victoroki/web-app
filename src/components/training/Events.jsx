@@ -21,7 +21,7 @@ const EventsPage = () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch('http://localhost:3000/api/events?limit=100');
+      const response = await fetch('https://admin.torchbearer.co.ke/api/events?limit=100');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -65,7 +65,7 @@ const EventsPage = () => {
         page: 1,
         limit: 20,
       });
-      const response = await fetch(`http://localhost:3000/api/events?${params.toString()}`);
+      const response = await fetch(`https://admin.torchbearer.co.ke/api/events?${params.toString()}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

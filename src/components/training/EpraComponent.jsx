@@ -21,10 +21,10 @@ useEffect(() => {
     try {
       let response;
       try {
-        response = await fetch("https://api.torchbearer.co.ke/api/license-classes/solar");
+        response = await fetch("https://admin.torchbearer.co.ke/api/license-classes/solar");
       } catch (err) {}
       if (!response || !response.ok) {
-        response = await fetch("http://api.torchbearer.co.ke/api/license-classes/solar");
+        response = await fetch("http://admin.torchbearer.co.ke/api/license-classes/solar");
       }
       if (!response.ok) {
         throw new Error("Failed to fetch license classes");

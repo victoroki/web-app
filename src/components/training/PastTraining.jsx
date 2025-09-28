@@ -21,10 +21,9 @@ const PastTraining = () => {
         setLoading(true);
         let response;
         try {
-          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/");
-        } catch (err) { }
-        if (!response || !response.ok) {
-          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/");
+          response = await fetch("https://admin.torchbearer.co.ke/api/training-programs");
+        } catch (err) {
+          response = await fetch("http://admin.torchbearer.co.ke/api/training-programs");
         }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -36,8 +35,28 @@ const PastTraining = () => {
             const status = program.status?.toLowerCase();
             return programType === "training" && status === "completed";
           });
-          setPastTrainings(trainingPrograms);
-          localStorage.setItem("cachedPastTrainings", JSON.stringify(trainingPrograms));
+          // Parse features safely
+          const parsedPrograms = trainingPrograms.map(program => {
+            let parsedFeatures = [];
+            if (program.features) {
+              try {
+                parsedFeatures = typeof program.features === 'string'
+                  ? JSON.parse(program.features)
+                  : Array.isArray(program.features)
+                    ? program.features
+                    : [];
+              } catch (e) {
+                console.error(`Failed to parse features for program ${program.id}:`, e);
+                parsedFeatures = [];
+              }
+            }
+            return {
+              ...program,
+              features: parsedFeatures,
+            };
+          });
+          setPastTrainings(parsedPrograms);
+          localStorage.setItem("cachedPastTrainings", JSON.stringify(parsedPrograms));
           localStorage.setItem("pastTrainingsTimestamp", now.toString());
         } else {
           throw new Error(data.message || "Failed to fetch training programs");
@@ -51,16 +70,26 @@ const PastTraining = () => {
     fetchPastTraining();
   }, []);
 
+  // Format date range
+  const formatDateRange = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-  // Format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
     const options = {
       month: 'long',
       day: 'numeric',
-      year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+      year: start.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined,
     };
-    return date.toLocaleDateString('en-US', options);
+
+    if (start.toDateString() === end.toDateString()) {
+      return start.toLocaleDateString('en-US', options);
+    }
+
+    if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+      return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${end.getDate()}, ${start.getFullYear()}`;
+    }
+
+    return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
   };
 
   if (loading) {
@@ -118,24 +147,25 @@ const PastTraining = () => {
                   <h4 className="text-xl font-bold text-gray-900 mb-2">{training.title}</h4>
                   <div className="flex items-center text-gray-600 mb-2">
                     <Calendar className="w-4 h-4 mr-2" />
-                    <span>{formatDate(training.start_date)}</span>
+                    <span>{formatDateRange(training.start_date, training.end_date)}</span>
                   </div>
                   {training.speaker && (
                     <div className="flex items-center">
                       <p className="text-gray-700"><strong>Speaker:</strong> {training.speaker}</p>
-                      {training.trainer_linkedin && (
-                        <a
-                          href={training.trainer_linkedin}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="ml-2 text-blue-600 hover:text-blue-800"
-                        >
-                          <Linkedin className="w-4 h-4" />
-                        </a>
-                      )}
                     </div>
                   )}
                   <p className="text-gray-700 mt-2">{training.description}</p>
+                  {/* Optional: Display features if needed */}
+                  {training.features && Array.isArray(training.features) && training.features.length > 0 && (
+                    <ul className="mt-4 space-y-2">
+                      {training.features.map((feature, i) => (
+                        <li key={i} className="flex items-start">
+                          <span className="text-amber-500 mr-2">•</span>
+                          <span className="text-gray-700">{feature}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-3">
                   {training.recording_url ? (

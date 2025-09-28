@@ -21,10 +21,9 @@ const UpcomingWebinars = () => {
         setLoading(true);
         let response;
         try {
-          response = await fetch("https://api.torchbearer.co.ke/api/training-programs/upcoming");
-        } catch (err) { }
-        if (!response || !response.ok) {
-          response = await fetch("http://api.torchbearer.co.ke/api/training-programs/upcoming");
+          response = await fetch("https://admin.torchbearer.co.ke/api/training-programs");
+        } catch (err) {
+          response = await fetch("http://admin.torchbearer.co.ke/api/training-programs");
         }
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
@@ -34,12 +33,32 @@ const UpcomingWebinars = () => {
           const webinarPrograms = data.data.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const startDate = new Date(program.start_date);
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            return programType === "webinar" && startDate >= today;
+            const today = new Date('2025-09-28T22:15:00.000Z'); // September 28, 2025, 10:15 PM EAT
+            today.setHours(0, 0, 0, 0); // Normalize to midnight for date comparison
+            return programType === "webinar" && startDate >= today && program.status?.toLowerCase() === "upcoming";
           });
-          setUpcomingWebinars(webinarPrograms);
-          localStorage.setItem("cachedUpcomingWebinars", JSON.stringify(webinarPrograms));
+          // Parse features safely
+          const parsedPrograms = webinarPrograms.map(program => {
+            let parsedFeatures = [];
+            if (program.features) {
+              try {
+                parsedFeatures = typeof program.features === 'string'
+                  ? JSON.parse(program.features)
+                  : Array.isArray(program.features)
+                    ? program.features
+                    : [];
+              } catch (e) {
+                console.error(`Failed to parse features for program ${program.id}:`, e);
+                parsedFeatures = [];
+              }
+            }
+            return {
+              ...program,
+              features: parsedFeatures,
+            };
+          });
+          setUpcomingWebinars(parsedPrograms);
+          localStorage.setItem("cachedUpcomingWebinars", JSON.stringify(parsedPrograms));
           localStorage.setItem("upcomingWebinarsTimestamp", now.toString());
         } else {
           throw new Error(data.message || "Failed to fetch webinar programs");
@@ -53,16 +72,26 @@ const UpcomingWebinars = () => {
     fetchUpcomingWebinars();
   }, []);
 
+  // Format date range
+  const formatDateRange = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
 
-  // Format date
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
     const options = {
       month: 'long',
       day: 'numeric',
-      year: date.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined
+      year: start.getFullYear() !== new Date().getFullYear() ? 'numeric' : undefined,
     };
-    return date.toLocaleDateString('en-US', options);
+
+    if (start.toDateString() === end.toDateString()) {
+      return start.toLocaleDateString('en-US', options);
+    }
+
+    if (start.getMonth() === end.getMonth() && start.getFullYear() === end.getFullYear()) {
+      return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric' })} - ${end.getDate()}, ${start.getFullYear()}`;
+    }
+
+    return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
   };
 
   // Format time
@@ -73,7 +102,7 @@ const UpcomingWebinars = () => {
       return time.toLocaleTimeString('en-US', {
         hour: 'numeric',
         minute: '2-digit',
-        hour12: true
+        hour12: true,
       });
     };
 
@@ -142,7 +171,7 @@ const UpcomingWebinars = () => {
                     <h4 className="text-xl font-bold text-gray-900 mb-2">{webinar.title}</h4>
                     <div className="flex items-center text-gray-600 mb-1">
                       <Calendar className="w-4 h-4 mr-2" />
-                      <span>{formatDate(webinar.start_date)}</span>
+                      <span>{formatDateRange(webinar.start_date, webinar.end_date)}</span>
                     </div>
                     <div className="flex items-center text-gray-600 mb-3">
                       <Clock className="w-4 h-4 mr-2" />
@@ -155,12 +184,14 @@ const UpcomingWebinars = () => {
                 </div>
 
                 {webinar.speaker && (
-                  <p className="text-gray-700 mb-2"><strong>Speaker:</strong> {webinar.speaker}</p>
+                  <p className="text-gray-700 mb-2">
+                    <strong>Speaker:</strong> {webinar.speaker}
+                  </p>
                 )}
 
                 <p className="text-gray-700 mb-4">{webinar.description}</p>
 
-                {webinar.features && webinar.features.length > 0 && (
+                {webinar.features && Array.isArray(webinar.features) && webinar.features.length > 0 && (
                   <ul className="space-y-1 mb-4">
                     {webinar.features.map((feature, i) => (
                       <li key={i} className="flex items-start">
@@ -171,14 +202,23 @@ const UpcomingWebinars = () => {
                   </ul>
                 )}
 
-                <a
-                  href={webinar.registration_link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors"
-                >
-                  Register Now
-                </a>
+                {webinar.registration_link ? (
+                  <a
+                    href={webinar.registration_link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full bg-amber-600 text-white text-center py-3 rounded-lg font-bold hover:bg-amber-700 transition-colors"
+                  >
+                    Register Now
+                  </a>
+                ) : (
+                  <button
+                    className="block w-full bg-gray-400 text-white text-center py-3 rounded-lg font-bold cursor-not-allowed"
+                    disabled
+                  >
+                    Registration Opens Soon
+                  </button>
+                )}
               </div>
             </div>
           ))}

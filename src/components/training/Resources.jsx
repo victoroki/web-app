@@ -6,101 +6,133 @@ const ResourcesPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [resourceCategories, setResourceCategories] = useState([]);
   const [resources, setResources] = useState([]);
+  const [filteredResources, setFilteredResources] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [stats, setStats] = useState({ totalResources: 0, totalDownloads: 0, averageRating: 0 });
 
   const API_BASE_URL = 'https://admin.torchbearer.co.ke';
 
   useEffect(() => {
-    fetchCategories();
+    fetchResources();
   }, []);
 
   useEffect(() => {
-    fetchResources();
-  }, [selectedCategory, searchTerm]);
+    filterResources();
+  }, [selectedCategory, searchTerm, resources]);
 
-  const fetchCategories = async () => {
+  const parseResourceData = (resource) => {
+    // Parse tags if they're in JSON string format
+    let parsedTags = [];
+    if (resource.tags) {
+      try {
+        parsedTags = typeof resource.tags === 'string' ? JSON.parse(resource.tags) : resource.tags;
+      } catch (e) {
+        parsedTags = [];
+      }
+    }
+    
+    return {
+      ...resource,
+      tags: parsedTags
+    };
+  };
+
+  const fetchResources = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${API_BASE_URL}/api/resources?limit=0`);
+      const response = await fetch(`${API_BASE_URL}/api/resources`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
-      const allItems = data.resources || [];
+      const result = await response.json();
+      const allResources = (result.data || []).map(parseResourceData);
+
+      // Build categories from the resources
+      const categoryMap = allResources.reduce((acc, resource) => {
+        const cat = resource.category || 'uncategorized';
+        acc[cat] = (acc[cat] || 0) + 1;
+        return acc;
+      }, {});
 
       const categories = [
-        { id: 'all', name: 'All Resources', count: allItems.length },
-        ...Object.entries(
-          allItems.reduce((acc, item) => {
-            acc[item.category] = (acc[item.category] || 0) + 1;
-            return acc;
-          }, {})
-        ).map(([id, count]) => ({
+        { id: 'all', name: 'All Resources', count: allResources.length },
+        ...Object.entries(categoryMap).map(([id, count]) => ({
           id,
-          name: {
-            guides: 'Training Guides',
-            videos: 'Video Tutorials',
-            templates: 'Templates & Forms',
-            research: 'Research Papers',
-          }[id] || id,
+          name: getCategoryName(id),
           count,
         })),
       ];
 
       setResourceCategories(categories);
-      setResources(allItems);
-      setStats(data.stats || { totalResources: 0, totalDownloads: 0, averageRating: 0 });
+      setResources(allResources);
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error('Error fetching resources:', error);
       setError('Failed to load resources. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchResources = async () => {
-    try {
-      setError(null);
-      const params = new URLSearchParams({ category: selectedCategory, search: searchTerm });
-      const response = await fetch(`${API_BASE_URL}/api/resources?${params}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      setResources(data.resources || []);
-    } catch (error) {
-      console.error('Error fetching resources:', error);
-      setError('Failed to filter resources. Please try again.');
+  const getCategoryName = (id) => {
+    const nameMap = {
+      guides: 'Training Guides',
+      videos: 'Video Tutorials',
+      templates: 'Templates & Forms',
+      research: 'Research Papers',
+      documents: 'Documents',
+    };
+    return nameMap[id.toLowerCase()] || id.charAt(0).toUpperCase() + id.slice(1);
+  };
+
+  const filterResources = () => {
+    let filtered = [...resources];
+
+    // Filter by category
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(resource => resource.category === selectedCategory);
     }
+
+    // Filter by search term
+    if (searchTerm) {
+      const search = searchTerm.toLowerCase();
+      filtered = filtered.filter(resource =>
+        resource.title?.toLowerCase().includes(search) ||
+        resource.description?.toLowerCase().includes(search) ||
+        resource.author?.toLowerCase().includes(search) ||
+        (resource.tags && resource.tags.some(tag => tag.toLowerCase().includes(search)))
+      );
+    }
+
+    setFilteredResources(filtered);
   };
 
   const handleDownload = async (id) => {
     try {
-      const response = await fetch(`${API_BASE_URL}/api/resources/${id}?action=download`);
+      // Increment download count
+      const response = await fetch(`${API_BASE_URL}/api/resources/${id}/download`, {
+        method: 'POST',
+      });
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.ok) {
+        // Update downloads count in UI
+        setResources(resources.map(r => 
+          r.id === id ? { ...r, downloads: (r.downloads || 0) + 1 } : r
+        ));
       }
       
-      const resource = await response.json();
-      
-      // Update downloads count in UI
-      setResources(resources.map(r => r.id === id ? resource : r));
-      
       // Trigger actual download
-      const link = document.createElement('a');
-      link.href = `${API_BASE_URL}${resource.file_url}`;
-      link.setAttribute('download', '');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      const resource = resources.find(r => r.id === id);
+      if (resource) {
+        const link = document.createElement('a');
+        link.href = `${API_BASE_URL}${resource.file_url}`;
+        link.setAttribute('download', '');
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
     } catch (error) {
       console.error('Error downloading resource:', error);
       setError('Failed to download resource. Please try again.');
@@ -108,11 +140,7 @@ const ResourcesPage = () => {
   };
 
   const handlePreview = (resource) => {
-    if (resource.type === 'MP4') {
-      window.open(`${API_BASE_URL}${resource.file_url}`, '_blank');
-    } else {
-      window.open(`${API_BASE_URL}${resource.file_url}`, '_blank');
-    }
+    window.open(`${API_BASE_URL}${resource.file_url}`, '_blank');
   };
 
   const getTypeIcon = (type) => {
@@ -145,10 +173,17 @@ const ResourcesPage = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fff8d9' }}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#d97707' }}></div>
+          <p className="text-lg" style={{ color: '#d97707' }}>Loading resources...</p>
+        </div>
+      </div>
+    );
   }
 
-  const featuredResources = resources.filter(resource => resource.featured);
+  const featuredResources = filteredResources.filter(resource => resource.featured);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#fff8d9' }}>
@@ -234,12 +269,14 @@ const ResourcesPage = () => {
                           </div>
                         </div>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
-                        <span className="text-sm font-medium" style={{ color: '#d97707' }}>
-                          {resource.rating || '0.0'}
-                        </span>
-                      </div>
+                      {resource.rating && (
+                        <div className="flex items-center gap-1">
+                          <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
+                          <span className="text-sm font-medium" style={{ color: '#d97707' }}>
+                            {resource.rating}
+                          </span>
+                        </div>
+                      )}
                     </div>
                     
                     <h3 className="text-xl font-bold mb-3 group-hover:text-orange-600 transition-colors duration-300" 
@@ -316,16 +353,16 @@ const ResourcesPage = () => {
         {/* All Resources */}
         <div>
           <h2 className="text-2xl font-bold mb-6" style={{ color: '#d97707' }}>
-            All Resources ({resources.length})
+            All Resources ({filteredResources.length})
           </h2>
           
-          {resources.length === 0 ? (
+          {filteredResources.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-lg" style={{ color: '#ceb699' }}>No resources found. Try a different search or category.</p>
             </div>
           ) : (
             <div className="space-y-4">
-              {resources.map((resource) => (
+              {filteredResources.map((resource) => (
                 <div key={resource.id} className="rounded-xl p-6 shadow-lg hover:shadow-xl transition-all duration-300"
                      style={{ backgroundColor: 'white' }}>
                   <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
@@ -365,10 +402,12 @@ const ResourcesPage = () => {
                             <Download className="w-4 h-4" />
                             <span>{(resource.downloads || 0).toLocaleString()} downloads</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
-                            <span>{resource.rating || '0.0'}</span>
-                          </div>
+                          {resource.rating && (
+                            <div className="flex items-center gap-1">
+                              <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
+                              <span>{resource.rating}</span>
+                            </div>
+                          )}
                         </div>
                         
                         {resource.tags && resource.tags.length > 0 && (

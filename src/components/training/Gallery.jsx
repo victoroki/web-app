@@ -6,8 +6,8 @@ const GalleryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [categories, setCategories] = useState([]);
   const [items, setItems] = useState([]);
+  const [filteredItems, setFilteredItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [stats, setStats] = useState({ totalItems: 0, totalViews: 0, averageRating: 0 });
   const [error, setError] = useState(null);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showModal, setShowModal] = useState(false);
@@ -15,34 +15,36 @@ const GalleryPage = () => {
   const API_BASE_URL = 'https://admin.torchbearer.co.ke';
 
   useEffect(() => {
-    fetchCategories();
+    fetchItems();
   }, []);
 
   useEffect(() => {
-    fetchItems();
-  }, [selectedCategory, searchTerm]);
+    filterItems();
+  }, [selectedCategory, searchTerm, items]);
 
-  const fetchCategories = async () => {
+  const fetchItems = async () => {
     try {
       setLoading(true);
       setError(null);
-      const response = await fetch(`${API_BASE_URL}/api/gallery?limit=0`);
+      const response = await fetch(`${API_BASE_URL}/api/gallery-items`);
       
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       
-      const data = await response.json();
-      const allItems = data.items;
+      const result = await response.json();
+      const allItems = result.data || [];
+
+      // Build categories from the items
+      const categoryMap = allItems.reduce((acc, item) => {
+        const cat = item.category || 'uncategorized';
+        acc[cat] = (acc[cat] || 0) + 1;
+        return acc;
+      }, {});
 
       const categories = [
         { id: 'all', name: 'All Items', count: allItems.length },
-        ...Object.entries(
-          allItems.reduce((acc, item) => {
-            acc[item.category] = (acc[item.category] || 0) + 1;
-            return acc;
-          }, {})
-        ).map(([id, count]) => ({
+        ...Object.entries(categoryMap).map(([id, count]) => ({
           id,
           name: id.charAt(0).toUpperCase() + id.slice(1),
           count,
@@ -51,58 +53,55 @@ const GalleryPage = () => {
 
       setCategories(categories);
       setItems(allItems);
-      setStats(data.stats || { totalItems: 0, totalViews: 0, averageRating: 0 });
     } catch (error) {
-      console.error('Error fetching categories:', error);
+      console.error('Error fetching items:', error);
       setError('Failed to load gallery. Please try again later.');
     } finally {
       setLoading(false);
     }
   };
 
-  const fetchItems = async () => {
-    try {
-      setError(null);
-      const params = new URLSearchParams({ 
-        category: selectedCategory, 
-        search: searchTerm 
-      });
-      
-      const response = await fetch(`${API_BASE_URL}/api/gallery-items?${params}`);
-      
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      
-      const data = await response.json();
-      setItems(data.items || []);
-    } catch (error) {
-      console.error('Error fetching items:', error);
-      setError('Failed to filter items. Please try again.');
+  const filterItems = () => {
+    let filtered = [...items];
+
+    // Filter by category
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(item => item.category === selectedCategory);
     }
+
+    // Filter by search term
+    if (searchTerm) {
+      const search = searchTerm.toLowerCase();
+      filtered = filtered.filter(item =>
+        item.title?.toLowerCase().includes(search) ||
+        item.description?.toLowerCase().includes(search) ||
+        (item.tags && item.tags.some(tag => tag.toLowerCase().includes(search)))
+      );
+    }
+
+    setFilteredItems(filtered);
   };
 
   const handleView = async (item) => {
+    // Increment view count (adjust endpoint as needed based on your API)
     try {
-      // Increment view count
-      const response = await fetch(`${API_BASE_URL}/api/gallery-items/${item.id}?action=view`);
+      const response = await fetch(`${API_BASE_URL}/api/gallery-items/${item.id}/view`, {
+        method: 'POST',
+      });
       
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      if (response.ok) {
+        const result = await response.json();
+        // Update the item with new view count
+        setItems(items.map(i => i.id === item.id ? { ...i, views: (i.views || 0) + 1 } : i));
       }
-      
-      const updatedItem = await response.json();
-      setItems(items.map(i => i.id === item.id ? updatedItem : i));
-      
-      // Show modal with the item
-      setSelectedItem(updatedItem);
-      setShowModal(true);
     } catch (error) {
       console.error('Error incrementing views:', error);
-      // Still show modal even if view count fails
-      setSelectedItem(item);
-      setShowModal(true);
+      // Continue to show modal even if view count fails
     }
+
+    // Show modal with the item
+    setSelectedItem(item);
+    setShowModal(true);
   };
 
   const closeModal = () => {
@@ -148,18 +147,11 @@ const GalleryPage = () => {
           <div className="p-6 overflow-y-auto max-h-[70vh]">
             <div className="relative mb-6">
               {selectedItem.type === 'VIDEO' ? (
-                <div className="relative">
-                  <video 
-                    src={`${API_BASE_URL}${selectedItem.file_url}`} 
-                    controls 
-                    className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-16 h-16 bg-white bg-opacity-80 rounded-full flex items-center justify-center">
-                      <Play className="w-8 h-8 fill-current" style={{ color: '#d97707' }} />
-                    </div>
-                  </div>
-                </div>
+                <video 
+                  src={`${API_BASE_URL}${selectedItem.file_url}`} 
+                  controls 
+                  className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
+                />
               ) : (
                 <img 
                   src={`${API_BASE_URL}${selectedItem.file_url}`} 
@@ -182,15 +174,17 @@ const GalleryPage = () => {
                 </div>
               </div>
               
-              <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
-                <Star className="w-6 h-6 fill-current" style={{ color: '#d97707' }} />
-                <div>
-                  <p className="text-sm font-medium">Rating</p>
-                  <p className="font-bold" style={{ color: '#d97707' }}>
-                    {selectedItem.rating}/5.0
-                  </p>
+              {selectedItem.rating && (
+                <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
+                  <Star className="w-6 h-6 fill-current" style={{ color: '#d97707' }} />
+                  <div>
+                    <p className="text-sm font-medium">Rating</p>
+                    <p className="font-bold" style={{ color: '#d97707' }}>
+                      {selectedItem.rating}/5.0
+                    </p>
+                  </div>
                 </div>
-              </div>
+              )}
               
               <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
                 <Eye className="w-6 h-6" style={{ color: '#d97707' }} />
@@ -239,7 +233,7 @@ const GalleryPage = () => {
     );
   };
 
-  // Gallery Item Component to avoid code duplication
+  // Gallery Item Component
   const GalleryItem = ({ item }) => (
     <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
       <div className="p-6 h-full" style={{ backgroundColor: 'white' }}>
@@ -271,12 +265,14 @@ const GalleryPage = () => {
               </span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
-            <span className="text-sm font-medium" style={{ color: '#d97707' }}>
-              {item.rating}
-            </span>
-          </div>
+          {item.rating && (
+            <div className="flex items-center gap-1">
+              <Star className="w-4 h-4 fill-current" style={{ color: '#d97707' }} />
+              <span className="text-sm font-medium" style={{ color: '#d97707' }}>
+                {item.rating}
+              </span>
+            </div>
+          )}
         </div>
 
         <h3 className="text-xl font-bold mb-3 group-hover:text-orange-600 transition-colors duration-300"
@@ -324,10 +320,17 @@ const GalleryPage = () => {
   );
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: '#fff8d9' }}>
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 mx-auto mb-4" style={{ borderColor: '#d97707' }}></div>
+          <p className="text-lg" style={{ color: '#d97707' }}>Loading gallery...</p>
+        </div>
+      </div>
+    );
   }
 
-  const featuredItems = items.filter(item => item.featured);
+  const featuredItems = filteredItems.filter(item => item.featured);
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#fff8d9' }}>
@@ -395,16 +398,16 @@ const GalleryPage = () => {
 
         <div>
           <h2 className="text-2xl font-bold mb-6" style={{ color: '#d97707' }}>
-            All Items ({items.length})
+            All Items ({filteredItems.length})
           </h2>
 
-          {items.length === 0 ? (
+          {filteredItems.length === 0 ? (
             <div className="text-center py-12">
               <p className="text-lg" style={{ color: '#ceb699' }}>No items found. Try a different search or category.</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {items.map((item) => (
+              {filteredItems.map((item) => (
                 <GalleryItem key={item.id} item={item} />
               ))}
             </div>

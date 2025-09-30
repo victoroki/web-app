@@ -12,7 +12,7 @@ const FormModal = ({
   accessLink = "https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link",
   accessLinkText = "Access Training Outline",
   // Backend integration props (replaces Formspree)
-  apiEndpoint = "http://localhost:3000/api/form-submissions",
+  apiEndpoint = "https://api.torchbearer.co.ke/api/form-submissions",
   formType = "general",
   // Optional: still support Formspree as fallback
   formspreeEndpoint = null,

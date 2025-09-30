@@ -43,11 +43,11 @@ const TrainingHomepage = () => {
   return (
     <>
       <HeroSection />
-      <AboutSection />
+      {/* <AboutSection /> */}
       <Partners />
       <Testimonials />
       <WhatsappTrainer />
-      <TrainerProfile />
+      {/* <TrainerProfile /> */}
     </>
   );
 };
@@ -90,7 +90,7 @@ function App() {
           <Route path="/institute" element={<TrainingHomepage />} />
           
 
-          <Route path="/training/about" element={<AboutSection />} />
+          <Route path="/training/about" element={<><AboutSection /><TrainerProfile /></>} />
           <Route path="/training/epra" element={<EPRALicensing />} />
           <Route path="/training/solar" element={<SolarDesignTraining />} />
           <Route path="/training/electrical" element={<ElectricalDesign />} />

@@ -1,0 +1,122 @@
+[
+  {
+    "type": "header",
+    "version": "5.2.2",
+    "comment": "Export to JSON plugin for PHPMyAdmin"
+  },
+  {
+    "type": "database",
+    "name": "poqqnabc_torchbearer"
+  },
+  {
+    "type": "table",
+    "name": "license_classes",
+    "database": "poqqnabc_torchbearer",
+    "data": [
+      {
+        "id": "1",
+        "license_type": "solar",
+        "class": "T1",
+        "scope": "Solar PV system installation work for small systems or single battery DC systems of up to 100Wp (watts peak).",
+        "min_qualification": "KCPE",
+        "technical_qualification": "[\"Electrical Government Trade Test 2 and basic solar training\"]",
+        "experience_requirements": "2 years of verifiable solar installation experience",
+        "starting_license": "T1",
+        "highest_achievable": "T3",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "2",
+        "license_type": "solar",
+        "class": "T2",
+        "scope": "Solar PV system installation work for medium systems or multiple batteries which may include an inverter.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Certificate in Electrical/Electronic and Intermediate Solar Training with 4 years of experience\", \"Diploma in Electrical/Electronic and Intermediate Solar Training with 2 years of experience\", \"BSc Electrical Engineering or relevant degree or Higher National Diploma with 1 year of experience\"]",
+        "experience_requirements": "2–4 years depending on qualification",
+        "starting_license": "T2",
+        "highest_achievable": "T3",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "3",
+        "license_type": "solar",
+        "class": "T3",
+        "scope": "Solar PV system installation work for advanced projects, including grid-connected and hybrid systems.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Diploma in Electrical and/or Electronic and Advanced Solar Training with 4 years of solar installation experience\", \"BSc Electrical Engineering or relevant degree or Higher National Diploma with 2 years of solar installation experience\"]",
+        "experience_requirements": "2–4 years depending on qualification",
+        "starting_license": "T3",
+        "highest_achievable": "T3",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "4",
+        "license_type": "electrical",
+        "class": "C2",
+        "scope": "Electrical installation work for connection to a single-phase supply at low voltage. Restricted to two-storey residential and commercial buildings.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Electrician Wireman Grade II and other equivalent certificates\"]",
+        "experience_requirements": "2 years experience",
+        "starting_license": "C2",
+        "highest_achievable": "C2",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "5",
+        "license_type": "electrical",
+        "class": "C1",
+        "scope": "Electrical installation work for connection to a single & three-phase supply at low voltage. Restricted to four-storey residential and commercial buildings.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Electrician Wireman Grade II and other equivalent certificates\"]",
+        "experience_requirements": "3 years experience",
+        "starting_license": "C2",
+        "highest_achievable": "C1",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "6",
+        "license_type": "electrical",
+        "class": "B",
+        "scope": "Electrical installation work for connection to any phase supply at medium voltage. No restrictions on number of storeys.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Electrician Wireman Grade I and other equivalent certificates\"]",
+        "experience_requirements": "5 years experience",
+        "starting_license": "C2",
+        "highest_achievable": "B",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "7",
+        "license_type": "electrical",
+        "class": "A2",
+        "scope": "Specialized electrical installation work e.g. lifts, escalators, generators.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Electrician Wireman Grade II and other equivalent certificate\"]",
+        "experience_requirements": "4 years experience",
+        "starting_license": "A2",
+        "highest_achievable": "A2",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      },
+      {
+        "id": "8",
+        "license_type": "electrical",
+        "class": "A1",
+        "scope": "All Electrical installation works.",
+        "min_qualification": "KCSE",
+        "technical_qualification": "[\"Higher National Diploma, BSc in Electrical Engineering and other equivalent certificates\"]",
+        "experience_requirements": "6 years experience",
+        "starting_license": "C1",
+        "highest_achievable": "A1",
+        "created_at": "2025-08-24 10:12:25",
+        "updated_at": "2025-08-24 10:12:25"
+      }
+    ]
+  }
+]

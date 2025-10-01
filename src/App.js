@@ -37,6 +37,10 @@ import UsefulLinksPage from './components/training/UsefullLink';
 import EventsPage from './components/training/Events';
 import ResourcesPage from './components/training/Resources';
 import GalleryPage from './components/training/Gallery';
+import ElectricVehicle from './components/training/ElectricVehicle';
+import GreenHydrogen from './components/training/GreenHydrogen';
+import Home2 from './components/training/Home2';
+import ContactForm from './components/ContactForm';
 
 
 const TrainingHomepage = () => {
@@ -44,8 +48,9 @@ const TrainingHomepage = () => {
     <>
       <HeroSection />
       {/* <AboutSection /> */}
-      <Partners />
-      <Testimonials />
+      <Home2 />
+      {/* <Partners />
+      <Testimonials /> */}
       <WhatsappTrainer />
       {/* <TrainerProfile /> */}
     </>
@@ -108,6 +113,9 @@ function App() {
           <Route path="/training/community/resources" element={<ResourcesPage />} />
           <Route path="/training/community/links" element={<UsefulLinksPage />} />
           <Route path="/training/community/gallery" element={<GalleryPage />} />
+          <Route path="/training/electric-vehicles" element={<ElectricVehicle />} />
+          <Route path="/training/green-hydrogen" element={<GreenHydrogen />} />
+          <Route path="/training/contactform" element={<ContactForm />} />
         </Route>
       </Routes>
     </Router>

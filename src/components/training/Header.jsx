@@ -16,6 +16,8 @@ const Header = () => {
   };
 
   const servicesItems = [
+    { name: 'Green Hydrogen', href: '/training/green-hydrogen' },
+    { name: 'Electric Vehicle', href: '/training/electric-vehicles' },
     { name: 'Solar System', href: '/training/solar' },
     { name: 'Electrical', href: '/training/electrical' },
     { name: 'Occupation  Safety and Health training', href: '/training/safety-training' },

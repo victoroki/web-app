@@ -71,10 +71,10 @@ export default function GreenEnergyLanding() {
                                     transform that challenge into opportunity.
                                 </p>
                                 <Link to="/training/contactform">
-                                <button className="bg-[#D97706] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#B45309] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 group">
-                                    Start Your Journey
-                                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                                </button>
+                                    <button className="bg-[#D97706] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#B45309] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 group">
+                                        Start Your Journey
+                                        <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                                    </button>
                                 </Link>
                             </div>
 
@@ -166,39 +166,53 @@ export default function GreenEnergyLanding() {
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8">
-                        {sectors.map((sector, index) => (
-                            <div
-                                key={index}
-                                className={`group relative transform transition-all duration-500 hover:-translate-y-2 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}
-                                style={{ transitionDelay: `${index * 150}ms` }}
-                                onMouseEnter={() => setActiveCard(index)}
-                                onMouseLeave={() => setActiveCard(null)}
-                            >
-                                <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent group-hover:border-[#D97706] h-full">
-                                    <div className="bg-gradient-to-br from-[#D97706]/10 to-orange-100 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-[#D97706] group-hover:scale-110 transition-transform duration-300">
-                                        {sector.icon}
+                        {sectors.map((sector, index) => {
+                            // Map each sector to its route
+                            const routes = [
+                                "/training/solar",
+                                "/training/green-hydrogen",
+                                "/training/electric-vehicles"
+                            ];
+
+                            return (
+                                <div
+                                    key={index}
+                                    className={`group relative transform transition-all duration-500 hover:-translate-y-2 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                                        }`}
+                                    style={{ transitionDelay: `${index * 150}ms` }}
+                                    onMouseEnter={() => setActiveCard(index)}
+                                    onMouseLeave={() => setActiveCard(null)}
+                                >
+                                    <div className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-transparent group-hover:border-[#D97706] h-full">
+                                        <div className="bg-gradient-to-br from-[#D97706]/10 to-orange-100 w-20 h-20 rounded-2xl flex items-center justify-center mb-6 text-[#D97706] group-hover:scale-110 transition-transform duration-300">
+                                            {sector.icon}
+                                        </div>
+
+                                        <h3 className="text-2xl font-bold text-gray-900 mb-4">{sector.title}</h3>
+                                        <p className="text-gray-600 mb-6 leading-relaxed">{sector.description}</p>
+
+                                        <div className="space-y-2">
+                                            {sector.skills.map((skill, idx) => (
+                                                <div key={idx} className="flex items-center gap-2 text-sm text-gray-700">
+                                                    <div className="w-2 h-2 bg-[#D97706] rounded-full"></div>
+                                                    {skill}
+                                                </div>
+                                            ))}
+                                        </div>
+
+                                        {/* ✅ Link to route */}
+                                        <Link to={routes[index]}>
+                                            <button className="mt-6 text-[#D97706] font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
+                                                Learn More
+                                                <ArrowRight className="w-4 h-4" />
+                                            </button>
+                                        </Link>
                                     </div>
-
-                                    <h3 className="text-2xl font-bold text-gray-900 mb-4">{sector.title}</h3>
-                                    <p className="text-gray-600 mb-6 leading-relaxed">{sector.description}</p>
-
-                                    <div className="space-y-2">
-                                        {sector.skills.map((skill, idx) => (
-                                            <div key={idx} className="flex items-center gap-2 text-sm text-gray-700">
-                                                <div className="w-2 h-2 bg-[#D97706] rounded-full"></div>
-                                                {skill}
-                                            </div>
-                                        ))}
-                                    </div>
-
-                                    <button className="mt-6 text-[#D97706] font-semibold flex items-center gap-2 group-hover:gap-3 transition-all">
-                                        Learn More
-                                        <ArrowRight className="w-4 h-4" />
-                                    </button>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
+
                 </div>
             </section>
 
@@ -212,9 +226,9 @@ export default function GreenEnergyLanding() {
                         Join thousands of professionals mastering the skills that power our sustainable future
                     </p>
                     <Link to="/training/contactform">
-                    <button className="bg-white text-[#D97706] px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#FFFAE5] transition-all duration-300 transform hover:scale-105 shadow-xl">
-                        Get Started Today
-                    </button>
+                        <button className="bg-white text-[#D97706] px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#FFFAE5] transition-all duration-300 transform hover:scale-105 shadow-xl">
+                            Get Started Today
+                        </button>
                     </Link>
                 </div>
             </section>

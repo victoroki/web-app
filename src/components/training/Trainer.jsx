@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import ceo from '../img/ceo.png';
 import moha from '../img/moha.png';
 import karimi from '../img/karimi.png';
+import emmanuel from '../img/emmanuel-marindi.jpeg';
 import Aziz from '../img/Aziz.png';
 import { FaChalkboardTeacher, FaLinkedin, FaBookOpen, FaChevronLeft, FaChevronRight, FaGraduationCap } from 'react-icons/fa';
 
@@ -45,6 +46,16 @@ const TrainersSection = () => {
       image: karimi,
       link: "https://www.linkedin.com/in/rosemary-karimi-458304332/",
       courses: ["Graphic Design", "Social Media Marketing"],
+      // experience: "4+ Years"
+    },
+        {
+      id: 5,
+      name: "Emmanuel Marindi",
+      role: "Energy consultant|Electronic Expert | Renewable Energy",
+      bio: "Energy consultant and electronics expert specializing in renewable energy solutions",
+      image: emmanuel,
+      link: "https://www.linkedin.com/in/emmanuel-marindi-91a484266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BP8y2iigsR8qUcSjgZABxPw%3D%3D",
+      courses: ["Energy Consulting", "Electronics", "Renewable Energy", "Solar Training"],
       // experience: "4+ Years"
     }
   ];

@@ -12,7 +12,7 @@ const AboutSection = () => {
       const start = 0;
       const increment = target / (duration / 3); // 60fps
       let current = start;
-      
+
       const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
@@ -21,7 +21,7 @@ const AboutSection = () => {
         }
         setter(Math.floor(current));
       }, 16);
-      
+
       return timer;
     };
 
@@ -71,23 +71,23 @@ const AboutSection = () => {
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="space-y-6">
-            <p className="text-lg text-gray-700 leading-relaxed">
+            {/* <p className="text-lg text-gray-700 leading-relaxed">
               Torchbearer Institute provides professional training and development services to individuals and organizations
-              seeking to excel in renewable energy, and professional development. We offer comprehensive
+              seeking to excel in renewable energy and professional development. We offer comprehensive
               solutions and expert guidance from entry-level certification to advanced professional development programs.
-            </p>
+            </p> */}
+
             <p className="text-lg text-gray-700 leading-relaxed">
-              Established with a commitment to excellence, we are dedicated to exceeding expectations by providing
-              cost-effective, innovative training solutions without compromising the quality of training that we deliver.
-              Our expertise encompasses every aspect of professional development needs including EPRA licensing, solar system
-              design, electrical engineering, Occupational Safety and Health training and professional branding.
+              The global transition to clean energy is accelerating, but a significant lack of green skills in critical areas such as solar energy, green hydrogen, and e-mobility poses a major challenge. This skills gap hinders the industrial growth needed to address climate change, comply with environmental standards, and ensure safety compliance under frameworks such as OSHA. For instance, renewable energy sectors require specialized knowledge in system design, operation, and maintenance, while emerging fields like green hydrogen demand expertise in electrolysis technologies and integration with renewable power sources. Similarly, e-mobility expansion needs trained technicians and engineers to develop and maintain electric vehicle infrastructure.
             </p>
+
             <p className="text-lg text-gray-700 leading-relaxed">
               Our team consists of experienced professionals and certified instructors with industry-standard expertise
               and advanced teaching capabilities, ensuring you receive the highest quality training and practical skills
               needed for career success.
             </p>
           </div>
+
           <div className="bg-gradient-to-br from-amber-50 to-amber-100 p-8 rounded-lg">
             <div className="space-y-6">
               <div className="flex items-center">

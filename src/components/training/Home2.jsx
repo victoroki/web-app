@@ -70,7 +70,7 @@ export default function GreenEnergyLanding() {
                                     of green skills in critical areas poses a major challenge. We're here to
                                     transform that challenge into opportunity.
                                 </p>
-                                <Link to="/training/contactform">
+                                <Link to="/training/upcoming">
                                     <button className="bg-[#D97706] text-white px-8 py-4 rounded-full font-semibold text-lg hover:bg-[#B45309] transition-all duration-300 transform hover:scale-105 shadow-lg flex items-center gap-2 group">
                                         Start Your Journey
                                         <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

@@ -3,28 +3,26 @@ import { useState, useEffect } from 'react';
 
 const PastWebinars = () => {
   const [pastWebinars, setPastWebinars] = useState([]);
-  const [physicalEvents, setPhysicalEvents] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch past webinars and physical events from API
+  // Fetch past webinars from API
   useEffect(() => {
     const fetchPastWebinars = async () => {
       const cachedWebinars = localStorage.getItem("cachedPastWebinars");
-      const cachedPhysicalEvents = localStorage.getItem("cachedPhysicalEvents");
       const cacheTimestamp = localStorage.getItem("pastWebinarsTimestamp");
       const now = Date.now();
-      if (cachedWebinars && cachedPhysicalEvents && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
+      if (cachedWebinars && cacheTimestamp && now - parseInt(cacheTimestamp) < 3600000) {
         setPastWebinars(JSON.parse(cachedWebinars));
-        setPhysicalEvents(JSON.parse(cachedPhysicalEvents));
         setLoading(false);
         return;
       }
+
       try {
         setLoading(true);
         let response;
         try {
-          response = await fetch("https://admin.torchbearer.co.ke/api/training-programs");
+          response = await fetch("https://admin.torchbearer.co.ke/api/training-programs  ");
         } catch (err) {
           response = await fetch("http://admin.torchbearer.co.ke/api/training-programs");
         }
@@ -53,25 +51,16 @@ const PastWebinars = () => {
               features: parsedFeatures,
             };
           });
-          // Filter webinars
+
+          // Filter ONLY webinars that are completed
           const webinarPrograms = parsedPrograms.filter(program => {
             const programType = program.program_type?.toLowerCase();
             const status = program.status?.toLowerCase();
             return programType === "webinar" && status === "completed";
           });
-          // Filter physical events (refined to avoid misclassification)
-          const physicalEventsData = parsedPrograms.filter(program => {
-            const title = program.title?.toLowerCase();
-            const description = program.description?.toLowerCase();
-            return (
-              (title.includes("stem") || description.includes("physical") || description.includes("workshop")) &&
-              program.status?.toLowerCase() === "completed"
-            );
-          });
+
           setPastWebinars(webinarPrograms);
-          setPhysicalEvents(physicalEventsData);
           localStorage.setItem("cachedPastWebinars", JSON.stringify(webinarPrograms));
-          localStorage.setItem("cachedPhysicalEvents", JSON.stringify(physicalEventsData));
           localStorage.setItem("pastWebinarsTimestamp", now.toString());
         } else {
           throw new Error(data.message || "Failed to fetch webinar programs");
@@ -82,6 +71,7 @@ const PastWebinars = () => {
         setLoading(false);
       }
     };
+
     fetchPastWebinars();
   }, []);
 
@@ -243,63 +233,6 @@ const PastWebinars = () => {
               </div>
             </div>
           ))}
-        </div>
-      )}
-
-      {/* Physical Events Section */}
-      {physicalEvents.length > 0 && (
-        <div className="mt-12">
-          <h4 className="text-2xl font-bold text-gray-900 mb-6">Past Physical Events</h4>
-          <div className="space-y-6">
-            {physicalEvents.map((event) => (
-              <div key={event.id} className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-                <h4 className="text-xl font-bold text-gray-900 mb-2">{event.title}</h4>
-                <div className="flex items-center text-gray-600 mb-2">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  <span>{formatDateRange(event.start_date, event.end_date)}</span>
-                </div>
-                <p className="text-gray-700 mb-2">
-                  <strong>Time:</strong> {formatTime(event.start_time, event.end_time)}
-                </p>
-                {event.speaker && (
-                  <p className="text-gray-700 mb-2">
-                    <strong>Speaker:</strong> {event.speaker}
-                  </p>
-                )}
-                <p className="text-gray-700 mb-4">{event.description}</p>
-                {/* Optional: Display features */}
-                {event.features && Array.isArray(event.features) && event.features.length > 0 && (
-                  <ul className="mt-4 space-y-2">
-                    {event.features.map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="w-5 h-5 text-amber-500 mr-2 mt-0.5 flex-shrink-0" />
-                        <span className="text-gray-700">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                <div className="flex flex-col sm:flex-row gap-3">
-                  {event.registration_link ? (
-                    <a
-                      href={event.registration_link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
-                    >
-                      View Event
-                    </a>
-                  ) : (
-                    <button
-                      className="bg-gray-400 text-white px-6 py-3 rounded-lg font-medium cursor-not-allowed text-center"
-                      disabled
-                    >
-                      Event Details Unavailable
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
         </div>
       )}
     </div>

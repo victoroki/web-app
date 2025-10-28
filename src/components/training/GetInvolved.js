@@ -148,78 +148,66 @@ const GetInvolvedPage = () => {
     setErrors({});
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  // Reset status
-  setSubmitStatus(null);
-  setErrorMessage('');
-  setSuccessMessage('');
-
-  // Validate form
-  if (!validateForm()) {
-    setSubmitStatus('error');
-    setErrorMessage('Please correct the errors below and try again.');
-    return;
-  }
-
-  setIsSubmitting(true);
-
-  try {
-    const API_URL = process.env.REACT_APP_API_URL || 'https://api.torchbearer.co.ke';
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     
-    const response = await fetch(`${API_URL}/api/involvement/submit`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        name: formData.name.trim(),
-        email: formData.email.toLowerCase().trim(),
-        organization: formData.organization.trim() || null,
-        phone: formData.phone.trim() || null,
-        message: formData.message.trim() || null,
-        roleType: formData.roleType // Change this line from role_type to roleType
-      })
-    });
+    // Reset status
+    setSubmitStatus(null);
+    setErrorMessage('');
+    setSuccessMessage('');
 
-    const result = await response.json();
-
-    if (response.ok && result.success) {
-      setSubmitStatus('success');
-      setSuccessMessage(result.message || 'Thank you for your interest! We have received your application and will get back to you soon.');
-      resetForm();
-      
-      setTimeout(() => {
-        document.getElementById('submit-status')?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      }, 100);
-    } else {
+    // Validate form
+    if (!validateForm()) {
       setSubmitStatus('error');
-      
-      if (result.errors && Array.isArray(result.errors)) {
-        const backendErrors = {};
-        result.errors.forEach(error => {
-          if (error.path) {
-            backendErrors[error.path] = error.msg;
-          }
-        });
-        setErrors(backendErrors);
-        setErrorMessage('Please correct the errors below and try again.');
-      } else {
-        setErrorMessage(result.message || 'Something went wrong. Please try again.');
-      }
+      setErrorMessage('Please correct the errors below and try again.');
+      return;
     }
-  } catch (error) {
-    console.error('Network error:', error);
-    setSubmitStatus('error');
-    setErrorMessage('Network error. Please check your connection and try again.');
-  } finally {
-    setIsSubmitting(false);
-  }
-};
+
+    setIsSubmitting(true);
+
+    try {
+      // Use the same endpoint as ContactSection
+      const response = await fetch('https://admin.torchbearer.co.ke/api/form-submissions', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email.trim(),
+          phone: formData.phone.trim() || '',
+          subject: `Get Involved - ${formData.roleType.charAt(0).toUpperCase() + formData.roleType.slice(1)}`,
+          message: `Name: ${formData.name}\nOrganization: ${formData.organization || 'Not specified'}\nRole Type: ${formData.roleType}\nMessage: ${formData.message || 'No message provided'}`,
+          form_type: 'get_involved',
+          status: 'pending'
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setSuccessMessage(data.message || 'Thank you for your interest! We have received your application and will get back to you soon.');
+        resetForm();
+        
+        setTimeout(() => {
+          document.getElementById('submit-status')?.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+          });
+        }, 100);
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (error) {
+      console.error('Network error:', error);
+      setSubmitStatus('error');
+      setErrorMessage(error.message || 'Network error. Please check your connection and try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div className="min-h-screen" style={{ backgroundColor: '#fff8d9' }}>
 

@@ -2,6 +2,7 @@ import { Star, Linkedin } from 'lucide-react';
 import deborah from '../img/deborah.png'
 import ezekiel from '../img/ezekiel.png'
 import roy from '../img/roy.jpeg'
+import ephantus from '../img/ephantus.png'
 
 const Testimonials = () => {
   const testimonials = [
@@ -9,23 +10,31 @@ const Testimonials = () => {
       quote: "Torchberear delivered exceptional, tailored training that was instrumental in helping me earn my T2 license. The well-structured, practical sessions and knowledgeable instructors made complex topics easy to grasp and built my confidence. I highly recommend Torchberear for effective, professional training in the renewable energy sector.",
       author: "Ezekiel Omae",
       role: "Site Electromechanical Engineer",
-      link:"https://www.linkedin.com/in/ezekiel-omae-229945199?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
+      link: "https://www.linkedin.com/in/ezekiel-omae-229945199?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
       image: ezekiel
     },
     {
       quote: "Torchbearer Institute's solar training was practical, well‑structured, and made complex concepts easy to grasp. With their expert guidance, I passed my NITA T1 exam and quickly landed a job in the solar industry. I highly recommend Torchbearer Institute to anyone looking to launch a career in renewable energy.",
       author: "Deborah Nyakinyua",
       role: "Electrical and Electronic Engineer",
-      link:'https://www.linkedin.com/in/deborah-nyakinyua-6066h5037?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_recommendations_details%3B%2F7jPjEO0T7K%2FiFPTZK6p%2Bg%3D%3D',
+      link: 'https://www.linkedin.com/in/deborah-nyakinyua-6066h5037?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_recommendations_details%3B%2F7jPjEO0T7K%2FiFPTZK6p%2Bg%3D%3D',
       image: deborah
     },
     {
       quote: "Torchbearer offers hands-on, practical training that makes complex concepts easy to understand while building real-world skills. Their program covers key areas like solar energy conversion, system sizing, and commissioning, with strong mentorship and support. I highly recommend them for anyone pursuing a career in renewable energy.",
       author: "Roy Otieno",
       role: "Agricultural & Biosystems Engineer",
-      link:'https://www.linkedin.com/in/roy-otieno-60b190174?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bw3xM3kuXTiaQyD1p865guQ%3D%3D',
+      link: 'https://www.linkedin.com/in/roy-otieno-60b190174?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base%3Bw3xM3kuXTiaQyD1p865guQ%3D%3D',
       image: roy
+    },
+    {
+      quote: "I can say Torchbearer opened my door when it comes to understanding solar systems. I gained a lot starting with basics and now proudly I can say I am very comfortable with solar systems even though I am still learning. Currently, I can design, install, and troubleshoot solar systems.",
+      author: "Ephantus Ngugi",
+      role: "Solar Technician",
+      link: "https://www.linkedin.com/in/ephantus-ngugi?miniProfileUrn=urn%3Ali%3Afsd_profile%3AACoAAC_4FtUBh88kw7_XbAKbyU1i2nnOkjv89VA&lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_recent_activity_content_view%3BLK9HXZgiSlGrJXhPSRF%2FeQ%3D%3D",
+      image: ephantus
     }
+
   ];
 
   return (
@@ -59,9 +68,9 @@ const Testimonials = () => {
                     <a href={testimonial.link} target="_blank" rel="noopener noreferrer">
                       <h4 className="font-bold text-gray-900 hover:text-amber-600 transition-colors">{testimonial.author}</h4>
                     </a>
-                    <a 
-                      href={testimonial.link} 
-                      target="_blank" 
+                    <a
+                      href={testimonial.link}
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-blue-600 hover:text-blue-800 transition-colors"
                       title="View LinkedIn Profile"

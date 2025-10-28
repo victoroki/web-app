@@ -21,7 +21,7 @@ useEffect(() => {
     try {
       let response;
       try {
-        response = await fetch("https://admin.torchbearer.co.ke/api/license-classes/solar");
+        response = await fetch("https://admin.torchbearer.co.ke/api/license-classes?license_type=solar");
       } catch (err) {}
       if (!response || !response.ok) {
         response = await fetch("http://admin.torchbearer.co.ke/api/license-classes/solar");
@@ -136,7 +136,8 @@ useEffect(() => {
           successMessage="Thank you for your interest. You can now access the training materials."
           accessLink="https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link"
           accessLinkText="Access Training Outline"
-          formspreeEndpoint="https://formspree.io/f/myyqrvvk"
+          apiEndpoint="https://admin.torchbearer.co.ke/api/form-submissions"
+          formType="solar_training"
           emailSubject="EPRA Solar Training Outline Request"
         />
       </div>

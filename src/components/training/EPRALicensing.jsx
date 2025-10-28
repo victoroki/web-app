@@ -20,7 +20,7 @@ const EpraComponent = () => {
       }
 
       try {
-        const response = await fetch("https://admin.torchbearer.co.ke/api/license-classes/electrical");
+        const response = await fetch("https://admin.torchbearer.co.ke/api/license-classes?license_type=electrical");
         if (!response.ok) {
           throw new Error("Failed to fetch license classes");
         }
@@ -128,7 +128,8 @@ const EpraComponent = () => {
           successMessage="Thank you for your interest. You can now access the training materials."
           accessLink="https://drive.google.com/file/d/1m4Bf9RDh-LzwtuZ9e38w2z90FCV1a2nL/view?usp=sharing"
           accessLinkText="Access Training Outline"
-          formspreeEndpoint="https://formspree.io/f/myyqrvvk"
+          apiEndpoint="https://admin.torchbearer.co.ke/api/form-submissions"
+          formType="electrical_training"
           emailSubject="EPRA Electrical Training Outline Request"
         />
       </div>

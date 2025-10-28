@@ -1,25 +1,31 @@
 import React from 'react';
 import { Droplets, Zap, Shield, Users, ArrowRight, CheckCircle } from 'lucide-react';
+import watercommunity from './img/tank.png';
+import gridsolar from './img/gridsolar.png';
+import cctvs from './img/cctvstate.png';
+import assestment from './img/assesment.png'
+import installation from './img/support.png'
+import support from './img/support2.png'
 
 const Projects = () => {
   const projects = [
     {
       id: 1,
       title: "Community Water Project",
-      description: "Solar-powered water systems for rural communities, improving access and sustainability",
+      description: "Solar-powered water systems for rural communities, improving access and sustainability in Agriculture Health and Education",
       icon: <Droplets className="w-8 h-8" />,
       category: "Solar Water Systems",
-      impact: "Provided clean water access to 500+ households",
+      impact: "Provided clean water access to 150+ households",
       features: [
         "Solar-powered water pumps",
         "Storage tank systems",
         "Remote monitoring",
         "Maintenance training"
       ],
-      image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600&h=400&fit=crop",
+      image: watercommunity,
       results: {
-        households: "500+",
-        waterSaved: "10,000L daily",
+        households: "150+",
+        waterSupplied: "10,000L daily",
         energySaved: "80%"
       }
     },
@@ -36,10 +42,10 @@ const Projects = () => {
         "Energy monitoring systems",
         "Net metering setup"
       ],
-      image: "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=600&h=400&fit=crop",
+      image: gridsolar,
       results: {
-        businesses: "25+",
-        energyGenerated: "500kW",
+        businesses: "30+",
+        energyGenerated: "950kW",
         costReduction: "70%"
       }
     },
@@ -56,10 +62,10 @@ const Projects = () => {
         "Motion detection",
         "Mobile app access"
       ],
-      image: "https://images.unsplash.com/photo-1558618666-fbd9c999e950?w=600&h=400&fit=crop",
+      image: cctvs,
       results: {
         estates: "15+",
-        cameras: "200+",
+        cameras: "1000+",
         incidents: "90% reduction"
       }
     }
@@ -92,17 +98,23 @@ const Projects = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             {projects.map((project) => (
               <div key={project.id} className="bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-xl transition-shadow">
-                <div className="relative h-48 bg-gradient-to-br from-red-800 to-red-900 flex items-center justify-center">
-                  <div className="text-white text-center">
-                    {project.icon}
-                    <div className="mt-2 text-sm font-medium">{project.category}</div>
+                <div className="relative h-48 bg-gradient-to-br from-red-800 to-red-900 flex items-center justify-center overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="absolute inset-0 w-full p-2 h-full object-cover opacity-80"
+                  />
+                  <div className="relative text-white text-center">
+                    {/* <h3 className="text-lg font-semibold">{project.title}</h3> */}
+                    {/* <div className="mt-2 text-sm font-medium">{project.category}</div> */}
                   </div>
                 </div>
-                
+
+
                 <div className="p-6">
                   <h3 className="text-xl font-bold text-gray-800 mb-3">{project.title}</h3>
                   <p className="text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-                  
+
                   <div className="mb-4">
                     <div className="flex items-center text-green-600 mb-2">
                       <CheckCircle className="w-4 h-4 mr-2" />
@@ -147,7 +159,7 @@ const Projects = () => {
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Impact</h2>
             <p className="text-lg text-gray-600">Numbers that speak for themselves</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center p-6 bg-gray-50 rounded-lg">
               <div className="text-4xl font-bold text-red-800 mb-2">40+</div>
@@ -170,28 +182,58 @@ const Projects = () => {
       </section>
 
       {/* Process Section */}
-      <section className="py-16 bg-gray-100">
+      <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Our Process</h2>
-            <p className="text-lg text-gray-600">How we deliver successful projects</p>
+          <div className="text-center mb-16">
+            <h2 className="text-5xl font-bold text-gray-900 mb-4 tracking-tight">Our Process</h2>
+            <div className="w-20 h-1 bg-gradient-to-r from-red-700 to-red-900 mx-auto mb-6 rounded-full"></div>
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed">How we deliver successful projects with precision and care</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-red-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">1</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Assessment</h3>
-              <p className="text-gray-600">We evaluate your needs and site conditions to design the perfect solution</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {/* Card 1 */}
+            <div className="group bg-white rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-200">
+              <div className="relative h-72 overflow-hidden">
+                <img src={assestment} alt="Assessment" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div className="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-red-700 to-red-900 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
+                  1
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Assessment</h3>
+                <p className="text-gray-600 leading-relaxed">We evaluate your needs and site conditions to design the perfect solution</p>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-red-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">2</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Installation</h3>
-              <p className="text-gray-600">Our skilled technicians install your system with precision and care</p>
+
+            {/* Card 2 */}
+            <div className="group bg-white rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-200">
+              <div className="relative h-72 overflow-hidden">
+                <img src={installation} alt="Installation" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div className="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-red-700 to-red-900 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
+                  2
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Installation</h3>
+                <p className="text-gray-600 leading-relaxed">Our skilled technicians install your system with precision and care</p>
+              </div>
             </div>
-            <div className="text-center">
-              <div className="w-16 h-16 bg-red-800 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">3</div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-2">Support</h3>
-              <p className="text-gray-600">We provide ongoing maintenance and 24/7 support for your peace of mind</p>
+
+            {/* Card 3 */}
+            <div className="group bg-white rounded-3xl shadow-md hover:shadow-2xl transition-all duration-500 overflow-hidden border border-gray-100 hover:border-red-200">
+              <div className="relative h-72 overflow-hidden">
+                <img src={support} alt="Support" className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                <div className="absolute top-6 right-6 w-16 h-16 bg-gradient-to-br from-red-700 to-red-900 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg transform group-hover:rotate-12 transition-transform duration-300">
+                  3
+                </div>
+              </div>
+              <div className="p-8">
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Support</h3>
+                <p className="text-gray-600 leading-relaxed">We provide ongoing maintenance and 24/7 support for your peace of mind</p>
+              </div>
             </div>
           </div>
         </div>

@@ -95,7 +95,7 @@ function App() {
           <Route path="/institute" element={<TrainingHomepage />} />
           
 
-          <Route path="/training/about" element={<><AboutSection /><TrainerProfile /></>} />
+          <Route path="/training/about" element={<><AboutSection /><TrainerProfile /><Partners /><Testimonials/></>} />
           <Route path="/training/epra" element={<EPRALicensing />} />
           <Route path="/training/solar" element={<SolarDesignTraining />} />
           <Route path="/training/electrical" element={<ElectricalDesign />} />

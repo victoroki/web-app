@@ -1,13 +1,16 @@
 import { useNavigate } from 'react-router-dom'
 import React, { useState, useEffect } from 'react'
-import solar from "./img/SOLar.jpg"
+import solar from "./img/services-solar.png"
 import electrical from "./img/electrical.jpg"
 import hvac from "./img/hvac.jpeg"
-import cctvService from "./img/cctv.png"
-import cctvhidden from "./img/cctvhidden.png"
 import cctvhkvision from "./img/cctvhkvision.png"
 import cctvaudio from "./img/cctvaudio.png"
-import cctvspy from "./img/cctvspy.png"
+import inverter from "./img/inverter.png";
+import solar2 from "./img/solar-service2.png";
+import hvac2 from "./img/hvac2.png";
+import hvac3 from "./img/hvac3.png";
+import cctv1 from "./img/cctv-serivices.png";
+import cctv2 from "./img/cctv-service1.png";
 import { X } from 'lucide-react'
 
 // Service categories with their sub-services
@@ -16,6 +19,7 @@ const serviceCategories = [
     id: 1,
     title: "Solar Technologies",
     image: solar,
+    galleryImages: [solar, inverter, solar2],
     description: "Go green and harness the power of the sun with our comprehensive solar solutions. From residential panels to commercial installations, we provide cutting-edge technology for sustainable energy.",
     subServices: [
       {
@@ -47,8 +51,8 @@ const serviceCategories = [
   {
     id: 2,
     title: "CCTV Cameras",
-    image: cctvService,
-    galleryImages: [cctvService, cctvhidden, cctvhkvision, cctvaudio, cctvspy],
+    image: cctv1,
+    galleryImages: [cctvhkvision, cctvaudio, cctv1, cctv2],
     description: "Enhance the security of your property with our comprehensive CCTV solutions. From hidden surveillance to advanced IP cameras, we provide cutting-edge security systems.",
     subServices: [
       {
@@ -113,6 +117,7 @@ const serviceCategories = [
     id: 4,
     title: "HVAC",
     image: hvac,
+    galleryImages: [hvac, hvac2, hvac3],
     description: "Complete heating, ventilation, and air conditioning solutions. We provide comfort and climate control for all types of properties.",
     subServices: [
       {
@@ -158,18 +163,18 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
             <X size={24} className="text-gray-500" />
           </button>
         </div>
-        
+
         <div className="p-6">
-          <img 
-            src={service.image} 
+          <img
+            src={service.image}
             alt={service.title}
             className="w-full h-48 object-cover rounded-lg mb-4"
           />
-          
+
           <p className="text-gray-600 mb-6 text-lg">{service.description}</p>
-          
+
           <h3 className="text-xl font-semibold text-[#712B35] mb-4">Our Services Include:</h3>
-          
+
           <div className="space-y-3">
             {service.subServices.map((subService) => (
               <div
@@ -177,17 +182,24 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
                 onClick={() => handleSubServiceClick(subService)}
                 className="p-4 border border-gray-200 rounded-lg hover:bg-[#712B35] hover:text-white cursor-pointer transition-all duration-300 group"
               >
-                <h4 className="font-semibold text-lg mb-2 group-hover:text-white">
-                  {subService.name}
-                </h4>
+                <div className="flex justify-between items-start mb-2">
+                  <h4 className="font-semibold text-lg group-hover:text-white">
+                    {subService.name}
+                  </h4>
+                  <span className="text-[#712B35] font-medium group-hover:text-white transition-all duration-200">
+                    View pricing →
+                  </span>
+                </div>
                 <p className="text-gray-600 group-hover:text-gray-200">
                   {subService.description}
                 </p>
               </div>
             ))}
           </div>
-          
-          {service.id === 1 && (
+
+
+
+          {/* {service.id === 1 && (
             <div className="mt-8 p-6 bg-gray-50 rounded-lg">
               <h4 className="text-xl font-semibold text-[#712B35] mb-4">Solar Water Pumps</h4>
               <div className="space-y-4 text-gray-700">
@@ -199,7 +211,7 @@ const ServiceModal = ({ isOpen, onClose, service }) => {
                 </p>
               </div>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
@@ -214,7 +226,7 @@ const ServiceCard = ({ service, onClick }) => {
   useEffect(() => {
     if (images.length > 1) {
       const interval = setInterval(() => {
-        setCurrentImageIndex((prevIndex) => 
+        setCurrentImageIndex((prevIndex) =>
           prevIndex === images.length - 1 ? 0 : prevIndex + 1
         )
       }, 3000)
@@ -223,17 +235,17 @@ const ServiceCard = ({ service, onClick }) => {
   }, [images.length])
 
   return (
-    <div 
+    <div
       onClick={onClick}
       className="bg-white transition-all ease-in-out duration-400 overflow-hidden text-gray-700 hover:bg-[#712B35] hover:text-white rounded-lg shadow-2xl p-3 group border-2 border-transparent hover:border-[#8d3640] cursor-pointer"
     >
       <div className="m-2 text-justify text-sm">
         <div className="rounded-t overflow-hidden relative h-48">
           {images.map((image, index) => (
-            <img 
+            <img
               key={index}
-              alt={`${service.title} service`} 
-              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`} 
+              alt={`${service.title} service`}
+              className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ${index === currentImageIndex ? 'opacity-100' : 'opacity-0'}`}
               src={image}
               loading="lazy"
             />
@@ -291,11 +303,11 @@ function Another() {
             <h2 className="my-2 text-center text-3xl text-[#712B35] uppercase font-bold">
               Services
             </h2>
-            
+
             <div className='flex justify-center'>
               <div className='w-24 border-b-4 border-[#712B35]' aria-hidden="true"></div>
             </div>
-            
+
             <h3 className="mt-4 mx-12 text-center text-xl lg:text-2xl font-semibold text-[#5a2129]">
               We are deeply committed to the growth and success of our clients.
             </h3>
@@ -304,9 +316,9 @@ function Another() {
           <div className="px-12" data-aos="fade-down" data-aos-delay="600">
             <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
               {serviceCategories.map((service) => (
-                <ServiceCard 
-                  key={service.id} 
-                  service={service} 
+                <ServiceCard
+                  key={service.id}
+                  service={service}
                   onClick={() => handleServiceClick(service)}
                 />
               ))}
@@ -315,7 +327,7 @@ function Another() {
         </div>
       </section>
 
-      <ServiceModal 
+      <ServiceModal
         isOpen={isModalOpen}
         onClose={closeModal}
         service={selectedService}

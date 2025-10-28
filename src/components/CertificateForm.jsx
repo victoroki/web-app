@@ -1,4 +1,3 @@
-// src/components/CertificateForm.jsx
 import React, { useState } from 'react';
 
 const CertificateForm = () => {
@@ -9,38 +8,49 @@ const CertificateForm = () => {
 
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors((prev) => ({ ...prev, [name]: null }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setMessage('');
+    setErrors({});
 
     try {
-      const response = await fetch('https://api.torchbearer.co.ke/api/certificates/register', {
+      const response = await fetch('https://admin.torchbearer.co.ke/api/certificates/register', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
         body: JSON.stringify(formData)
       });
 
       const data = await response.json();
+      
       if (data.success) {
-        setMessage('✅ Certificate registered successfully!');
+        setMessage('✅ Certificate registered successfully! Check your email.');
         setFormData({
           recipient_name: '',
-          recipient_email: '',
-          course_name: '30 hours solar design masterclass',
-          course_description: 'Has successfully completed 30 hours solar design masterclass using pvsyst, sketch up and AUTO CAD',
-          issue_date: ''
+          recipient_email: ''
         });
       } else {
-        setMessage(`❌ Error: ${data.message}`);
+        // Handle validation errors
+        if (data.errors) {
+          setErrors(data.errors);
+          setMessage('❌ Please fix the errors below');
+        } else {
+          setMessage(`❌ Error: ${data.message}`);
+        }
       }
     } catch (error) {
       setMessage(`❌ Error: ${error.message}`);
@@ -76,9 +86,16 @@ const CertificateForm = () => {
             value={formData.recipient_name}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors ${
+              errors.recipient_name 
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500' 
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+            }`}
             placeholder="Enter recipient's full name"
           />
+          {errors.recipient_name && (
+            <p className="text-red-600 text-sm mt-1">{errors.recipient_name[0]}</p>
+          )}
         </div>
 
         <div className="space-y-2">
@@ -91,9 +108,16 @@ const CertificateForm = () => {
             value={formData.recipient_email}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
+            className={`w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none focus:ring-2 transition-colors ${
+              errors.recipient_email 
+                ? 'border-red-500 focus:ring-red-500 focus:border-red-500' 
+                : 'border-gray-300 focus:ring-blue-500 focus:border-blue-500'
+            }`}
             placeholder="Enter recipient's email"
           />
+          {errors.recipient_email && (
+            <p className="text-red-600 text-sm mt-1">{errors.recipient_email[0]}</p>
+          )}
         </div>
 
         <button

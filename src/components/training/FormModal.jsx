@@ -12,10 +12,8 @@ const FormModal = ({
   accessLink = "https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link",
   accessLinkText = "Access Training Outline",
   // Backend integration props (replaces Formspree)
-  apiEndpoint = "https://api.torchbearer.co.ke/api/form-submissions",
+  apiEndpoint = "https://admin.torchbearer.co.ke/api/form-submissions",
   formType = "general",
-  // Optional: still support Formspree as fallback
-  formspreeEndpoint = null,
   emailSubject = "Training Outline Request"
 }) => {
   const [formData, setFormData] = useState({ email: '', phone: '' });
@@ -46,57 +44,30 @@ const FormModal = ({
     setError('');
 
     try {
-      let response;
+      // Always use backend API
+      const response = await fetch(apiEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+          email: formData.email.trim(),
+          phone: formData.phone.trim(),
+          subject: emailSubject,
+          message: `New ${formType} request from ${formData.email}. Phone: ${formData.phone}`,
+          form_type: formType,
+          status: 'pending'
+        }),
+      });
+
+      const data = await response.json().catch(() => ({}));
       
-      // Try backend API first
-      if (apiEndpoint) {
-        response = await fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: formData.email.trim(),
-            phone: formData.phone.trim(),
-            subject: emailSubject,
-            message: `New ${formType} request from ${formData.email}. Phone: ${formData.phone}`,
-            form_type: formType,
-            access_link: accessLink
-          }),
-        });
-
-        const data = await response.json();
-        
-        if (response.ok && data.success) {
-          setShowSuccess(true);
-        } else {
-          throw new Error(data.message || 'Failed to submit form');
-        }
-      }
-      // Fallback to Formspree if backend fails or not configured
-      else if (formspreeEndpoint) {
-        response = await fetch(formspreeEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            email: formData.email,
-            phone: formData.phone,
-            subject: emailSubject,
-            message: `New request from ${formData.email}. Phone: ${formData.phone}`
-          }),
-        });
-
-        if (response.ok) {
-          setShowSuccess(true);
-        } else {
-          throw new Error('Failed to submit form');
-        }
+      if (response.ok) {
+        setShowSuccess(true);
       } else {
-        throw new Error('No submission endpoint configured');
+        throw new Error(data.message || 'Failed to submit form');
       }
-
     } catch (error) {
       console.error('Form submission error:', error);
       setError(error.message || 'There was an error submitting your request. Please try again.');

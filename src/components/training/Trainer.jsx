@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import ceo from '../img/ceo.png';
 import moha from '../img/moha.png';
 import karimi from '../img/karimi.png';
-import emmanuel from '../img/emmanuel-marindi.jpeg';
+import emmanuel from '../img/emmanuel-marindi.png';
 import Aziz from '../img/Aziz.png';
+import Victor from '../img/imgi_2_profile.png'
 import { FaChalkboardTeacher, FaLinkedin, FaBookOpen, FaChevronLeft, FaChevronRight, FaGraduationCap } from 'react-icons/fa';
 
 const TrainersSection = () => {
@@ -30,7 +31,7 @@ const TrainersSection = () => {
     },
     {
       id: 3,
-      name: "mazin-ahmed Ibrahim ahmed",
+      name: "Mazin-Ahmed Ibrahim Ahmed",
       role: "Solar Design Engineer ",
       bio: "skilled in PVsyst, SketchUp and Excel sheet",
       image: moha,
@@ -56,6 +57,16 @@ const TrainersSection = () => {
       image: emmanuel,
       link: "https://www.linkedin.com/in/emmanuel-marindi-91a484266?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BP8y2iigsR8qUcSjgZABxPw%3D%3D",
       courses: ["Energy Consulting", "Electronics", "Renewable Energy", "Solar Training"],
+      // experience: "4+ Years"
+    },
+            {
+      id: 6,
+      name: "Victor Mongare",
+      role: "Website Developer | Fullstack developer | Mobile App Developer",
+      bio: "Specialized in web development and software engineering",
+      image: Victor,
+      link: "https://victor-mongare.netlify.app",
+      courses: ["Backend development", "Frontend development", "Fullstack development", "Cloud Computing", "AI & ML"],
       // experience: "4+ Years"
     }
   ];

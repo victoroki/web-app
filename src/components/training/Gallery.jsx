@@ -27,11 +27,11 @@ const GalleryPage = () => {
       setLoading(true);
       setError(null);
       const response = await fetch(`${API_BASE_URL}/api/gallery-items`);
-      
+
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-      
+
       const result = await response.json();
       const allItems = result.data || [];
 
@@ -88,7 +88,7 @@ const GalleryPage = () => {
       const response = await fetch(`${API_BASE_URL}/api/gallery-items/${item.id}/view`, {
         method: 'POST',
       });
-      
+
       if (response.ok) {
         const result = await response.json();
         // Update the item with new view count
@@ -136,31 +136,31 @@ const GalleryPage = () => {
             <h3 className="text-xl font-bold" style={{ color: '#d97707' }}>
               {selectedItem.title}
             </h3>
-            <button 
+            <button
               onClick={closeModal}
               className="p-2 rounded-full hover:bg-gray-100 transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
           </div>
-          
+
           <div className="p-6 overflow-y-auto max-h-[70vh]">
             <div className="relative mb-6">
               {selectedItem.type === 'VIDEO' ? (
-                <video 
-                  src={`${API_BASE_URL}${selectedItem.file_url}`} 
-                  controls 
+                <video
+                  src={`${API_BASE_URL}${selectedItem.file_url}`}
+                  controls
                   className="w-full h-auto max-h-[50vh] object-contain rounded-lg"
                 />
               ) : (
-                <img 
-                  src={`${API_BASE_URL}${selectedItem.file_url}`} 
-                  alt={selectedItem.title} 
+                <img
+                  src={`${API_BASE_URL}${selectedItem.file_url}`}
+                  alt={selectedItem.title}
                   className="w-full h-auto max-h-[50vh] object-contain rounded-lg mx-auto"
                 />
               )}
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
               <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
                 <div className="p-2 rounded-lg" style={{ backgroundColor: 'white', color: getTypeColor(selectedItem.type) }}>
@@ -173,7 +173,7 @@ const GalleryPage = () => {
                   </p>
                 </div>
               </div>
-              
+
               {selectedItem.rating && (
                 <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
                   <Star className="w-6 h-6 fill-current" style={{ color: '#d97707' }} />
@@ -185,7 +185,7 @@ const GalleryPage = () => {
                   </div>
                 </div>
               )}
-              
+
               <div className="flex items-center gap-2 p-3 rounded-lg" style={{ backgroundColor: '#ede1ce' }}>
                 <Eye className="w-6 h-6" style={{ color: '#d97707' }} />
                 <div>
@@ -196,19 +196,19 @@ const GalleryPage = () => {
                 </div>
               </div>
             </div>
-            
+
             <div className="mb-6">
               <h4 className="text-lg font-bold mb-2" style={{ color: '#d97707' }}>Description</h4>
               <p className="text-gray-700">{selectedItem.description}</p>
             </div>
-            
+
             {selectedItem.tags && selectedItem.tags.length > 0 && (
               <div className="mb-6">
                 <h4 className="text-lg font-bold mb-2" style={{ color: '#d97707' }}>Tags</h4>
                 <div className="flex flex-wrap gap-2">
                   {selectedItem.tags.map((tag, index) => (
-                    <span 
-                      key={index} 
+                    <span
+                      key={index}
                       className="px-3 py-1 rounded-full text-sm"
                       style={{ backgroundColor: '#ede1ce', color: '#ceb699' }}
                     >
@@ -218,7 +218,7 @@ const GalleryPage = () => {
                 </div>
               </div>
             )}
-            
+
             <div className="flex justify-between items-center text-sm text-gray-500">
               <div>
                 <span className="font-medium">Category:</span> {selectedItem.category}
@@ -238,10 +238,10 @@ const GalleryPage = () => {
     <div className="rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 group">
       <div className="p-6 h-full" style={{ backgroundColor: 'white' }}>
         <div className="relative">
-          <img 
-            src={`${API_BASE_URL}${item.file_url}`} 
-            alt={item.title} 
-            className="w-full h-48 object-cover mb-4 rounded-lg" 
+          <img
+            src={`${API_BASE_URL}${item.file_url}`}
+            alt={item.title}
+            className="w-full h-48 object-cover mb-4 rounded-lg"
             onError={(e) => {
               e.target.src = 'https://via.placeholder.com/300x200?text=Image+Not+Found';
             }}
@@ -284,7 +284,7 @@ const GalleryPage = () => {
           {item.description}
         </p>
 
-        {item.tags && item.tags.length > 0 && (
+        {item.tags && Array.isArray(item.tags) && item.tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mb-4">
             {item.tags.slice(0, 3).map((tag, index) => (
               <span key={index} className="px-2 py-1 rounded-full text-xs"
@@ -361,8 +361,8 @@ const GalleryPage = () => {
                 key={category.id}
                 onClick={() => setSelectedCategory(category.id)}
                 className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${selectedCategory === category.id
-                    ? 'text-white shadow-lg transform scale-105'
-                    : 'text-gray-600 hover:scale-105'
+                  ? 'text-white shadow-lg transform scale-105'
+                  : 'text-gray-600 hover:scale-105'
                   }`}
                 style={{
                   backgroundColor: selectedCategory === category.id ? '#d97707' : '#ede1ce',
@@ -414,7 +414,7 @@ const GalleryPage = () => {
           )}
         </div>
       </div>
-      
+
       <ItemModal />
     </div>
   );

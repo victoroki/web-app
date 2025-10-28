@@ -20,20 +20,29 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Formspree integration
-      const response = await fetch('https://formspree.io/f/myyqrvvk', {
+    const response = await fetch('http://admin.torchbearer.co.ke/api/form-submissions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Accept': 'application/json'
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          email: formData.email,
+          phone: formData.phone || '',
+          subject: 'Contact Request',
+          message: formData.message || `Contact request from ${formData.name}`,
+          form_type: 'contact_form',
+          status: 'pending'
+        }),
       });
+
+      const data = await response.json().catch(() => ({}));
 
       if (response.ok) {
         alert('Message sent successfully! We\'ll get back to you soon.');
         setFormData({ name: '', email: '', phone: '', message: '' });
       } else {
-        throw new Error('Form submission failed');
+        throw new Error(data.message || 'Form submission failed');
       }
     } catch (error) {
       console.error('Error submitting form:', error);

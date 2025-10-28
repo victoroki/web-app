@@ -9,6 +9,22 @@ import img8kw from './img/8kw.jpeg'
 import img5kw from './img/5kw.jpeg'
 import img3kw from './img/3kw.jpeg'
 
+import cctv4 from './img/4cctv.png'
+import cctv3 from './img/3cctvs.png'
+import cctv5 from './img/5cctvs.png'
+import cctv6 from './img/6cctvs.png'
+import cctv7 from './img/7cctvs.png'
+import cctv8 from './img/8cctv.png'
+import cctv10 from './img/10cctv.png'
+import cctv13 from './img/13cctv.png'
+
+import hvac from './img/hvac1.png'
+import waterheat from './img/waterheat.png'
+import waterheat2 from './img/waterheater2.png'
+import waterheat3 from './img/waterheater3.png'
+import waterheat5 from './img/waterheater5.png'
+
+
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState('solar');
 
@@ -78,15 +94,37 @@ const Pricing = () => {
   ];
 
   const solarKitImages = {
-  '1 kW': img1kw,
-  '3 kW': img3kw,
-  '5 kW': img5kw,
-  '8 kW': img8kw,
-  '10 kW': img10kw,
-  '15 kW': img15kw,
-  '20 kW': img20kw,
-  '30 kW': img30kw,
-};
+    '1 kW': img1kw,
+    '3 kW': img3kw,
+    '5 kW': img5kw,
+    '8 kW': img8kw,
+    '10 kW': img10kw,
+    '15 kW': img15kw,
+    '20 kW': img20kw,
+    '30 kW': img30kw,
+  };
+
+  const cctvImages = {
+    '4': cctv4,
+    '3': cctv3,
+    '5': cctv5,
+    '6': cctv6,
+    '7': cctv7,
+    '8': cctv8,
+    '9': cctv8,
+    '10': cctv10,
+    '11': cctv13,
+    '12': cctv13,
+    '13': cctv13,
+  };
+
+  const solarHeatImages = {
+    '100 Liters': hvac,
+    '150 Liters': waterheat,
+    '200 Liters': waterheat2,
+    '300 Liters': waterheat3,
+    '500 Liters': waterheat5
+  };
 
   const cctvPackages = [
     { cameras: 3, price: 28000 },
@@ -163,7 +201,7 @@ const Pricing = () => {
       if (element) {
         // Small delay to ensure the content is rendered
         setTimeout(() => {
-          element.scrollIntoView({ 
+          element.scrollIntoView({
             behavior: 'smooth',
             block: 'start'
           });
@@ -203,11 +241,10 @@ const Pricing = () => {
               <button
                 key={tab.id}
                 onClick={() => handleTabClick(tab.id)}
-                className={`flex items-center px-6 py-3 mx-2 mb-2 rounded-lg font-semibold transition-colors ${
-                  activeTab === tab.id
-                    ? 'bg-red-800 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
+                className={`flex items-center px-6 py-3 mx-2 mb-2 rounded-lg font-semibold transition-colors ${activeTab === tab.id
+                  ? 'bg-red-800 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  }`}
               >
                 {tab.icon}
                 <span className="ml-2">{tab.label}</span>
@@ -222,7 +259,7 @@ const Pricing = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Kit Pricing</h2>
                 <p className="text-gray-600">Complete solar packages with installation included</p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {solarKits.map((kit) => (
                   <div key={kit.size} className={`bg-white rounded-lg shadow-lg overflow-hidden relative ${kit.popular ? 'ring-2 ring-red-800' : ''}`}>
@@ -234,7 +271,7 @@ const Pricing = () => {
                         </span>
                       </div>
                     )}
-                    
+
                     {/* Image Section */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <img
@@ -248,17 +285,17 @@ const Pricing = () => {
                         }}
                       />
                       {/* Fallback content if image fails to load */}
-                      <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{display: 'none'}}>
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
                         <Sun className="w-16 h-16 text-red-800 opacity-50" />
                       </div>
                     </div>
-                    
+
                     <div className="p-6">
                       <div className="text-center">
                         <h3 className="text-2xl font-bold text-gray-800 mb-2">{kit.size} Kit</h3>
                         <div className="text-3xl font-bold text-red-800 mb-4">{formatPrice(kit.price)}</div>
                         <div className="text-gray-600 mb-6">Complete installation included</div>
-                        
+
                         <div className="text-left mb-6">
                           <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
                           <ul className="text-sm text-gray-600 space-y-1">
@@ -270,7 +307,7 @@ const Pricing = () => {
                             ))}
                           </ul>
                         </div>
-                        
+
                         <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                           Get Quote
                         </button>
@@ -279,7 +316,7 @@ const Pricing = () => {
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-gray-700">
                   <strong>Note:</strong> Price may vary depending on the brands and specific requirements.
@@ -295,7 +332,7 @@ const Pricing = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Water Pumps</h2>
                 <p className="text-gray-600">Efficient water pumping solutions for irrigation and domestic use</p>
               </div>
-              
+
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {solarPumps.map((pump, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-lg p-6">
@@ -303,7 +340,7 @@ const Pricing = () => {
                       <h3 className="text-xl font-bold text-gray-800">{pump.model}</h3>
                       <div className="text-2xl font-bold text-red-800">{formatPrice(pump.price)}</div>
                     </div>
-                    
+
                     <div className="grid grid-cols-2 gap-4 mb-4">
                       <div>
                         <div className="text-sm text-gray-500">Max Head</div>
@@ -314,17 +351,17 @@ const Pricing = () => {
                         <div className="font-semibold">{pump.maxFlow}</div>
                       </div>
                     </div>
-                    
+
                     <div className="mb-4">
                       <div className="text-sm text-gray-500">Suitable For</div>
                       <div className="font-semibold text-green-600">{pump.suitableFor}</div>
                     </div>
-                    
+
                     <div className="mb-6">
                       <div className="text-sm text-gray-500 mb-2">Includes</div>
                       <div className="text-sm text-gray-700">{pump.includes}</div>
                     </div>
-                    
+
                     <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                       Get Quote
                     </button>
@@ -341,14 +378,31 @@ const Pricing = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">CCTV Systems</h2>
                 <p className="text-gray-600">Professional security camera installations</p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cctvPackages.map((pkg) => (
                   <div key={pkg.cameras} className="bg-white rounded-lg shadow-lg p-6 text-center">
+                    {/* Image Section */}
+                    <div className="relative h-48 bg-gray-100 overflow-hidden">
+                      <img
+                        src={cctvImages[pkg.cameras]}
+                        alt={`${pkg.cameras} CCTV Kit`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback if image doesn't load
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      {/* Fallback content if image fails to load */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
+                        <Sun className="w-16 h-16 text-red-800 opacity-50" />
+                      </div>
+                    </div>
                     <div className="text-4xl font-bold text-red-800 mb-2">{pkg.cameras}</div>
                     <div className="text-gray-600 mb-4">Cameras</div>
                     <div className="text-2xl font-bold text-gray-800 mb-6">{formatPrice(pkg.price)}</div>
-                    
+
                     <div className="text-left mb-6">
                       <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
                       <ul className="text-sm text-gray-600 space-y-1">
@@ -360,14 +414,14 @@ const Pricing = () => {
                         ))}
                       </ul>
                     </div>
-                    
+
                     <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                       Get Quote
                     </button>
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-gray-700">
                   <strong>Note:</strong> TV monitor not included in the package.
@@ -383,25 +437,42 @@ const Pricing = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">Solar Water Heating</h2>
                 <p className="text-gray-600">Eco-friendly water heating solutions</p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {solarHeating.map((system) => (
                   <div key={system.size} className="bg-white rounded-lg shadow-lg p-6">
+                    {/* Image Section */}
+                    <div className="relative h-48 bg-gray-100 overflow-hidden">
+                      <img
+                        src={solarHeatImages[system.size]}
+                        alt={`${system.size} Solar Heating Kit`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          // Fallback if image doesn't load
+                          e.target.style.display = 'none';
+                          e.target.nextSibling.style.display = 'flex';
+                        }}
+                      />
+                      {/* Fallback content if image fails to load */}
+                      <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
+                        <Sun className="w-16 h-16 text-red-800 opacity-50" />
+                      </div>
+                    </div>
                     <div className="flex justify-between items-start mb-4">
                       <h3 className="text-xl font-bold text-gray-800">{system.size}</h3>
                       <div className="text-2xl font-bold text-red-800">{formatPrice(system.price)}</div>
                     </div>
-                    
+
                     <div className="mb-4">
                       <div className="text-sm text-gray-500">Capacity</div>
                       <div className="font-semibold text-green-600">{system.capacity}</div>
                     </div>
-                    
+
                     <div className="mb-6">
                       <div className="text-sm text-gray-500">Type</div>
                       <div className="text-sm text-gray-700">{system.notes}</div>
                     </div>
-                    
+
                     <div className="mb-6">
                       <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
                       <ul className="text-sm text-gray-600 space-y-1">
@@ -413,14 +484,14 @@ const Pricing = () => {
                         ))}
                       </ul>
                     </div>
-                    
+
                     <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                       Get Quote
                     </button>
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-gray-700">
                   <strong>Note:</strong> Price may vary depending on the brand, roof type, and plumbing requirements.
@@ -436,7 +507,7 @@ const Pricing = () => {
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">HVAC Services</h2>
                 <p className="text-gray-600">Heating, ventilation, and air conditioning solutions</p>
               </div>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {hvacServices.map((service, index) => (
                   <div key={index} className="bg-white rounded-lg shadow-lg p-6">
@@ -445,14 +516,14 @@ const Pricing = () => {
                       <div className="text-2xl font-bold text-red-800">{formatPrice(service.price)}</div>
                       <div className="text-sm text-gray-500">({service.note})</div>
                     </div>
-                    
+
                     <button className="w-full bg-red-800 text-white py-3 rounded-lg font-semibold hover:bg-red-700 transition-colors">
                       Get Quote
                     </button>
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-8 p-6 bg-yellow-50 border border-yellow-200 rounded-lg">
                 <p className="text-sm text-gray-700">
                   <strong>Note:</strong> Prices vary depending on brand, capacity, and site conditions. Contact us for a tailored quote.
@@ -470,7 +541,7 @@ const Pricing = () => {
             <h2 className="text-3xl font-bold text-gray-800 mb-4">Why Choose Our Services?</h2>
             <p className="text-lg text-gray-600">Quality products, professional installation, and ongoing support</p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="text-center p-6">
               <div className="w-16 h-16 bg-red-800 text-white rounded-full flex items-center justify-center mx-auto mb-4">
@@ -502,7 +573,7 @@ const Pricing = () => {
         <div className="container mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold mb-6">Ready to Get Started?</h2>
           <p className="text-xl mb-8">Contact us today for a personalized quote and consultation</p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <a href="tel:0743076376" className="bg-white text-red-900 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
               <Phone className="w-5 h-5 mr-2" />
@@ -513,7 +584,7 @@ const Pricing = () => {
               Email Us
             </a>
           </div>
-          
+
           <p className="text-lg">
             Get a free consultation and customized quote for your specific needs
           </p>

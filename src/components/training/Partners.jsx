@@ -3,6 +3,7 @@ import "slick-carousel/slick/slick-theme.css";
 import AH from '../img/ah.jpeg';
 import Denidev from '../img/senidev.jpeg';
 import notion from '../img/notion.jpeg';
+import gogreen from '../img/gogreen.png';
 import React, { useState } from 'react';
 import Slider from 'react-slick';
 
@@ -32,6 +33,7 @@ const LogoSlider = () => {
     { src: AH, alt: 'AH Logo', url: 'https://www.linkedin.com/company/engr-aziz-ul-hassan/' },
     { src: Denidev, alt: 'Senidev Logo', url: 'https://senidev.org/' },
     { src: notion, alt: 'Notions Logo', url: 'https://www.solarnotions.com' },
+    { src: gogreen, alt: 'GoGreen Logo', url: 'https://greengoldsolarsolutions.co.ke/' },
   ];
 
   return (

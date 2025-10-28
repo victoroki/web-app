@@ -1,5 +1,5 @@
 import React from 'react'
-import solar from "./img/solar1.jpg"
+import solar from "./img/solar-hero.png"
 import slogo from "./img/slogo.png"
 import quality from "./img/quality.jpg"
 

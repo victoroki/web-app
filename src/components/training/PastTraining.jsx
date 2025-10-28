@@ -175,7 +175,7 @@ const PastTraining = () => {
                       rel="noopener noreferrer"
                       className="bg-gray-800 text-white px-6 py-3 rounded-lg font-medium hover:bg-gray-900 transition-colors text-center"
                     >
-                      Watch Recording
+                      Buy Recording
                     </a>
                   ) : (
                     <button

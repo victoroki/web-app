@@ -107,8 +107,7 @@ const ElectricalDesign = () => {
               successMessage="Thank you for your interest. You can now access the training materials."
               accessLink="https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link"
               accessLinkText="Access Training Outline"
-          apiEndpoint="http://admin.torchbearer.co.ke/api/form-submissions"
-              formType="electrical_design_training"
+              formspreeEndpoint="https://formspree.io/f/myyqrvvk"
               emailSubject="Electrical Training Outline Request"
             />
           </div>

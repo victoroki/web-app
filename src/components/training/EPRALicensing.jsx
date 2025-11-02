@@ -128,8 +128,7 @@ const EpraComponent = () => {
           successMessage="Thank you for your interest. You can now access the training materials."
           accessLink="https://drive.google.com/file/d/1m4Bf9RDh-LzwtuZ9e38w2z90FCV1a2nL/view?usp=sharing"
           accessLinkText="Access Training Outline"
-          apiEndpoint="https://admin.torchbearer.co.ke/api/form-submissions"
-          formType="electrical_training"
+          formspreeEndpoint="https://formspree.io/f/myyqrvvk"
           emailSubject="EPRA Electrical Training Outline Request"
         />
       </div>

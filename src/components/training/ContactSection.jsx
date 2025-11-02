@@ -19,47 +19,18 @@ const ContactSection = () => {
     }));
   };
 
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
-
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    setError('');
-    setSuccess('');
-
-    try {
-    const response = await fetch('https://admin.torchbearer.co.ke/api/form-submissions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          phone: formData.phone || '',
-          subject: formData.subject || 'Training Contact',
-          message: formData.message || '',
-          interest: formData.interest || '',
-          form_type: 'training_contact',
-          status: 'pending'
-        }),
-      });
-
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok) {
-        setSuccess('Thank you for your message! We will contact you soon.');
-        setFormData({ name: '', email: '', phone: '', interest: '', message: '' });
-      } else {
-        throw new Error(data.message || 'Submission failed');
-      }
-    } catch (err) {
-      setError(err.message || 'There was an error submitting your request.');
-    } finally {
-      setIsSubmitting(false);
-    }
+    // Form submission logic would go here
+    console.log('Form submitted:', formData);
+    alert('Thank you for your message! We will contact you soon.');
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      interest: '',
+      message: ''
+    });
   };
 
   return (
@@ -201,12 +172,9 @@ const ContactSection = () => {
               <button
                 type="submit"
                 className="w-full bg-amber-600 text-white py-4 rounded-lg font-bold text-lg hover:bg-amber-700 transition-colors shadow-lg"
-                disabled={isSubmitting}
               >
-                {isSubmitting ? 'Sending...' : 'Send Message'}
+                Send Message
               </button>
-              {error && <p className="mt-3 text-red-600 text-sm">{error}</p>}
-              {success && <p className="mt-3 text-green-600 text-sm">{success}</p>}
             </form>
           </div>
         </div>

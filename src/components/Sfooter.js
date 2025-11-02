@@ -163,7 +163,7 @@ function Footer() {
               <p className="text-[14px] text-gray-300 text-center md:text-left">
                 © {new Date().getFullYear()} Torchbearers Technologies. All rights reserved.
               </p>
-              <div className="flex gap-6 text-[14px] text-gray-300">
+              <div className="flex items-center gap-6 text-[14px] text-gray-300">
                 <span className="hover:text-white cursor-pointer transition-colors duration-300">
                   Privacy Policy
                 </span>
@@ -173,6 +173,15 @@ function Footer() {
                 <span className="hover:text-white cursor-pointer transition-colors duration-300">
                   Contact Us
                 </span>
+                <a
+                  href="https://www.garikon.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors duration-300"
+                  title="Visit Garikon"
+                >
+                  Site made by Garikon
+                </a>
               </div>
             </div>
           </div>

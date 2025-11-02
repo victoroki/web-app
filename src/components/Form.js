@@ -19,30 +19,14 @@ const Form = () => {
     setIsSubmitting(true);
 
     try {
-    const response = await fetch('http://admin.torchbearer.co.ke/api/form-submissions', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formData.email,
-          phone: '',
-          subject: 'Contact Request',
-          message: formData.message || `Contact request from ${formData.name}`,
-          form_type: 'contact_form',
-          status: 'pending'
-        })
-      });
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // You can replace this with your actual API call:
+      // await axios.post('https://formspree.io/f/myyqrvvk', formData);
 
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok) {
-        alert('Form submitted successfully!');
-        setFormData({ name: '', email: '', message: '' });
-      } else {
-        throw new Error(data.message || 'Error submitting form.');
-      }
+      alert('Form submitted successfully!');
+      setFormData({ name: '', email: '', message: '' });
     } catch (error) {
       console.error('Error submitting form:', error);
       alert('Error submitting form. Please try again.');

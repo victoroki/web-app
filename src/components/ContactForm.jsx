@@ -20,7 +20,7 @@ const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-    const response = await fetch('http://admin.torchbearer.co.ke/api/form-submissions', {
+      const response = await fetch('http://admin.torchbearer.co.ke/api/form-submissions', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

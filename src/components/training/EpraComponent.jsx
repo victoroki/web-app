@@ -136,8 +136,7 @@ useEffect(() => {
           successMessage="Thank you for your interest. You can now access the training materials."
           accessLink="https://drive.google.com/file/d/1IPouG0rutZG-0cVAb9hpIgTJKl6jGvs4/view?usp=drive_link"
           accessLinkText="Access Training Outline"
-          apiEndpoint="https://admin.torchbearer.co.ke/api/form-submissions"
-          formType="solar_training"
+          formspreeEndpoint="https://formspree.io/f/myyqrvvk"
           emailSubject="EPRA Solar Training Outline Request"
         />
       </div>

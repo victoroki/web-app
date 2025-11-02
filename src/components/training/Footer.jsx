@@ -121,9 +121,18 @@ const Footer = () => {
           <p className="text-black mb-4 md:mb-0 text-center md:text-left">
             &copy; {new Date().getFullYear()} Torchbearer Institute. All rights reserved.
           </p>
-          <div className="flex space-x-6 justify-center">
+          <div className="flex items-center space-x-6 justify-center">
             <a href="#" className="text-black hover:text-amber-500 transition-colors">Privacy Policy</a>
             <a href="#" className="text-black hover:text-amber-500 transition-colors">Terms of Service</a>
+            <a
+              href="https://www.garikon.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-black hover:text-amber-500 transition-colors"
+              title="Visit Garikon"
+            >
+              Site made by Garikon
+            </a>
           </div>
         </div>
       </div>

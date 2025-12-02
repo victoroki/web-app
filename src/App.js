@@ -41,6 +41,7 @@ import ElectricVehicle from './components/training/ElectricVehicle';
 import GreenHydrogen from './components/training/GreenHydrogen';
 import Home2 from './components/training/Home2';
 import ContactForm from './components/ContactForm';
+import KenstaneForm from './components/training/KenstaneForm';
 
 
 const TrainingHomepage = () => {
@@ -116,6 +117,7 @@ function App() {
           <Route path="/training/electric-vehicles" element={<ElectricVehicle />} />
           <Route path="/training/green-hydrogen" element={<GreenHydrogen />} />
           <Route path="/training/contactform" element={<ContactForm />} />
+          <Route path="/kenstane/certificate" element={<KenstaneForm />} />
         </Route>
       </Routes>
     </Router>

@@ -8,6 +8,9 @@ import img15kw from './img/15kw.jpeg'
 import img8kw from './img/8kw.jpeg'
 import img5kw from './img/5kw.jpeg'
 import img3kw from './img/3kw.jpeg'
+import img15kwPng from './img/1.5kw.png'
+import img25kw from './img/25kw.jpg'
+import img12kw from './img/12kw.jpg'
 
 import cctv4 from './img/4cctv.png'
 import cctv3 from './img/3cctvs.png'
@@ -27,6 +30,40 @@ import waterheat5 from './img/waterheater5.png'
 
 const Pricing = () => {
   const [activeTab, setActiveTab] = useState('solar');
+
+  // Custom detailed components for specified kits
+  const customKitDetails = {
+    '1 kW': {
+      inverter: '1 kW inverter',
+      battery: '2.200 AH battery',
+      panels: '4 solar panels'
+    },
+    '3 kW': {
+      inverter: '3 kW inverter',
+      battery: '2.200 AH gel battery',
+      panels: '6 solar panels'
+    },
+    '5 kW': {
+      inverter: '5 kW inverter',
+      battery: '5 kW battery',
+      panels: '5 solar panels'
+    },
+    '8 kW': {
+      inverter: '8 kW inverter',
+      battery: '7 kW lithium battery',
+      panels: '8 solar panels'
+    },
+    '10 kW': {
+      inverter: '10 kW inverter',
+      battery: '10 kW lithium battery',
+      panels: '12 solar panels'
+    },
+    '15 kW': {
+      inverter: '15 kW inverter',
+      battery: '20 kW lithium battery',
+      panels: '12 solar panels'
+    }
+  };
 
   const solarKits = [
     { size: '1 kW', price: 100000, popular: false },
@@ -95,12 +132,15 @@ const Pricing = () => {
 
   const solarKitImages = {
     '1 kW': img1kw,
+    '1.5 kW': img15kwPng,
     '3 kW': img3kw,
     '5 kW': img5kw,
     '8 kW': img8kw,
     '10 kW': img10kw,
+    '12 kW': img12kw,
     '15 kW': img15kw,
     '20 kW': img20kw,
+    '25 kW': img25kw,
     '30 kW': img30kw,
   };
 
@@ -163,8 +203,6 @@ const Pricing = () => {
     }).format(price);
   };
 
-
-
   const tabs = [
     { id: 'solar', label: 'Solar Kits', icon: <Sun className="w-5 h-5" /> },
     { id: 'pumps', label: 'Solar Pumps', icon: <Droplets className="w-5 h-5" /> },
@@ -173,49 +211,65 @@ const Pricing = () => {
     { id: 'hvac', label: 'HVAC Services', icon: <Thermometer className="w-5 h-5" /> }
   ];
 
-  // Handle hash navigation
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.substring(1); // Remove the # symbol
+      const hash = window.location.hash.substring(1);
       if (hash && tabs.some(tab => tab.id === hash)) {
         setActiveTab(hash);
       }
     };
 
-    // Check for hash on initial load
     handleHashChange();
-
-    // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
-
-    // Cleanup
-    return () => {
-      window.removeEventListener('hashchange', handleHashChange);
-    };
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
 
-  // Scroll to section when tab changes
   useEffect(() => {
     const scrollToSection = () => {
       const element = document.getElementById(`${activeTab}-section`);
       if (element) {
-        // Small delay to ensure the content is rendered
         setTimeout(() => {
-          element.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 100);
       }
     };
-
     scrollToSection();
   }, [activeTab]);
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
-    // Update URL hash without triggering a page reload
     window.history.pushState(null, null, `#${tabId}`);
+  };
+
+  // Helper to generate "Package includes" list per kit
+  const getPackageIncludes = (kitSize) => {
+    const custom = customKitDetails[kitSize];
+    
+    if (custom) {
+      // Use custom inverter, battery, panels
+      return [
+        custom.inverter,
+        'AC & DC cables',
+        custom.panels,
+        custom.battery,
+        'Mounting rails',
+        'Circuit breakers (DC & AC)',
+        'Lugs, cable ties, tapes, nails',
+        'Professional installation'
+      ];
+    } else {
+      // Use generic list
+      return [
+        'Inverter',
+        'AC & DC cables',
+        'Solar panels',
+        'Batteries',
+        'Mounting rails',
+        'Circuit breakers (DC & AC)',
+        'Lugs, cable ties, tapes, nails',
+        'Professional installation'
+      ];
+    }
   };
 
   return (
@@ -272,19 +326,16 @@ const Pricing = () => {
                       </div>
                     )}
 
-                    {/* Image Section */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <img
                         src={solarKitImages[kit.size]}
                         alt={`${kit.size} Solar Kit`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback if image doesn't load
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
                         }}
                       />
-                      {/* Fallback content if image fails to load */}
                       <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
                         <Sun className="w-16 h-16 text-red-800 opacity-50" />
                       </div>
@@ -299,7 +350,7 @@ const Pricing = () => {
                         <div className="text-left mb-6">
                           <h4 className="font-semibold text-gray-800 mb-3">Package includes:</h4>
                           <ul className="text-sm text-gray-600 space-y-1">
-                            {['Inverter', 'AC & DC cables', 'Solar panels', 'Batteries', 'Mounting rails', 'Circuit breakers (DC & AC)', 'Lugs, cable ties, tapes, nails', 'Professional installation'].map((item, index) => (
+                            {getPackageIncludes(kit.size).map((item, index) => (
                               <li key={index} className="flex items-center">
                                 <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
                                 {item}
@@ -325,7 +376,7 @@ const Pricing = () => {
             </div>
           )}
 
-          {/* Solar Pumps */}
+          {/* Rest of the tabs (unchanged) */}
           {activeTab === 'pumps' && (
             <div id="pumps-section" className="max-w-6xl mx-auto">
               <div className="text-center mb-8">
@@ -371,7 +422,6 @@ const Pricing = () => {
             </div>
           )}
 
-          {/* CCTV Systems */}
           {activeTab === 'cctv' && (
             <div id="cctv-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
@@ -382,19 +432,16 @@ const Pricing = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {cctvPackages.map((pkg) => (
                   <div key={pkg.cameras} className="bg-white rounded-lg shadow-lg p-6 text-center">
-                    {/* Image Section */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <img
                         src={cctvImages[pkg.cameras]}
                         alt={`${pkg.cameras} CCTV Kit`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback if image doesn't load
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
                         }}
                       />
-                      {/* Fallback content if image fails to load */}
                       <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
                         <Sun className="w-16 h-16 text-red-800 opacity-50" />
                       </div>
@@ -430,7 +477,6 @@ const Pricing = () => {
             </div>
           )}
 
-          {/* Solar Heating */}
           {activeTab === 'heating' && (
             <div id="heating-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">
@@ -441,19 +487,16 @@ const Pricing = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {solarHeating.map((system) => (
                   <div key={system.size} className="bg-white rounded-lg shadow-lg p-6">
-                    {/* Image Section */}
                     <div className="relative h-48 bg-gray-100 overflow-hidden">
                       <img
                         src={solarHeatImages[system.size]}
                         alt={`${system.size} Solar Heating Kit`}
                         className="w-full h-full object-cover"
                         onError={(e) => {
-                          // Fallback if image doesn't load
                           e.target.style.display = 'none';
                           e.target.nextSibling.style.display = 'flex';
                         }}
                       />
-                      {/* Fallback content if image fails to load */}
                       <div className="absolute inset-0 bg-gradient-to-br from-red-100 to-red-50 flex items-center justify-center" style={{ display: 'none' }}>
                         <Sun className="w-16 h-16 text-red-800 opacity-50" />
                       </div>
@@ -500,7 +543,6 @@ const Pricing = () => {
             </div>
           )}
 
-          {/* HVAC Services */}
           {activeTab === 'hvac' && (
             <div id="hvac-section" className="max-w-4xl mx-auto">
               <div className="text-center mb-8">

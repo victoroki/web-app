@@ -108,10 +108,18 @@ const Footer = () => {
                 <Phone className="w-5 h-5 text-amber-500 mr-3" />
                 <span className="text-black">+254 789 173033</span>
               </li>
+              {/* <li className="flex items-center">
+                <Phone className="w-5 h-5 text-amber-500 mr-3" />
+                <span className="text-black">+254 743 076376</span>
+              </li> */}
               <li className="flex items-center">
                 <Mail className="w-5 h-5 text-amber-500 mr-3" />
                 <span className="text-black">training@torchbearer.co.ke</span>
               </li>
+              {/* <li className="flex items-center">
+                <Mail className="w-5 h-5 text-amber-500 mr-3" />
+                <span className="text-black">info@torchbearer.co.ke</span>
+              </li> */}
             </ul>
           </div>
         </div>

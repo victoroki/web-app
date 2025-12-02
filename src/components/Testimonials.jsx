@@ -1,120 +1,98 @@
-import React from 'react'
-import { feedback } from '../constants'
-import styles from '../style'
-import Feedback from './Feedback'
+import React from "react";
+import { feedback } from "../constants";
+import Feedback from "./Feedback";
+import { Star } from "lucide-react";
 
 const Testimonials = () => {
   return (
-    <section 
-      id='clients' 
-      className={`relative ${styles.paddingY} ${styles.flexce} flex-col items-center justify-center overflow-hidden`}
-      style={{
-        background: 'linear-gradient(135deg, #223b52 0%, #712B35 50%, #5a2129 100%)',
-      }}
+    <section
+      id="clients"
+      className="relative py-24 md:py-32 overflow-hidden bg-[#712B35]"
     >
-      {/* Decorative Background Elements */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-10 left-10 w-32 h-32 bg-white rounded-full blur-xl"></div>
-        <div className="absolute bottom-10 right-10 w-24 h-24 bg-white rounded-full blur-xl"></div>
-        <div className="absolute top-1/2 left-1/4 w-16 h-16 bg-white rounded-full blur-lg"></div>
+      {/* Soft Gradient Background */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="w-full h-full bg-gradient-to-br from-[#8B3544]/20 via-transparent to-black/40" />
       </div>
 
-      {/* Subtle Pattern Overlay */}
-      <div 
-        className="absolute inset-0 opacity-5"
-        style={{
-          backgroundImage: `radial-gradient(circle at 2px 2px, #dcdcdc 1px, transparent 0)`,
-          backgroundSize: '20px 20px'
-        }}
-      />
+      {/* Dot Pattern Overlay */}
+      <div className="absolute inset-0 opacity-[0.04]">
+        <div
+          style={{
+            backgroundImage: `radial-gradient(circle at 1px 1px, white 1px, transparent 0)`,
+            backgroundSize: "35px 35px",
+          }}
+          className="w-full h-full"
+        />
+      </div>
 
-      <div className='w-full flex justify-between items-center md:flex-row flex-col sm:mb-16 mb-6 relative z-[1] max-w-6xl mx-auto px-4'>
-        <div className="text-center md:text-left mb-8 md:mb-0">
-          <h2 
-            className={`${styles.heading2} text-white font-bold mb-4 relative`}
-            style={{
-              textShadow: '0 4px 8px rgba(0,0,0,0.3)',
-              fontSize: 'clamp(2rem, 5vw, 3.5rem)'
-            }}
-          >
-            What people are{' '}
-            <span 
-              className="relative"
-              style={{ color: '#b89b6e' }}
-            >
-              saying
-              <div 
-                className="absolute -bottom-2 left-0 w-full h-1 rounded-full"
-                style={{ backgroundColor: '#b89b6e' }}
-              />
-            </span>
-            {' '}about us
+      {/* Content Wrapper */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-8">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <h2 className="text-white text-3xl md:text-4xl font-bold tracking-tight animate-fade-in-up">
+            What Our Clients Say
           </h2>
-          <div className="w-16 h-1 rounded-full mt-4 mx-auto md:mx-0 opacity-60" style={{ backgroundColor: '#8d3640' }}></div>
+          <p className="text-white/70 text-lg mt-4 max-w-2xl mx-auto animate-fade-in-up [animation-delay:0.2s]">
+            Real stories from customers who trust our services every day.
+          </p>
         </div>
-        
-        <div className='w-full md:w-auto md:mt-0 mt-6'>
-          <p 
-            className={`${styles.paragraph} text-center md:text-right md:max-w-[450px] text-lg md:text-xl px-5 text-gray-200 leading-relaxed`}
-            style={{
-              textShadow: '0 2px 4px rgba(0,0,0,0.3)'
-            }}
-          >
-            Discover how our innovative solutions have transformed businesses 
-            and empowered success stories across industries.
-          </p>  
+
+        {/* Testimonials Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {feedback.map((card, index) => (
+            <div
+              key={card.id}
+              className="group bg-white/10 backdrop-blur-md p-8 rounded-3xl shadow-lg 
+                hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 
+                border border-white/20 hover:border-white/30 animate-fade-in-up"
+              style={{ animationDelay: `${0.12 * index}s` }}
+            >
+              {/* Rating */}
+              <div className="flex gap-1 mb-5">
+                {[...Array(5)].map((_, i) => (
+                  <Star
+                    key={i}
+                    className="w-5 h-5 text-yellow-400 fill-yellow-400"
+                  />
+                ))}
+              </div>
+
+              {/* Testimonial Content */}
+              <div className="text-white">
+                <Feedback {...card} />
+              </div>
+
+              {/* Subtle Line */}
+              <div className="mt-6 w-full h-[1px] bg-white/20 group-hover:bg-white/40 transition-all"></div>
+
+              {/* Name & Role */}
+              <p className="mt-4 text-white font-semibold text-lg">
+                {card.name}
+              </p>
+              <p className="text-white/60 text-sm">{card.title}</p>
+            </div>
+          ))}
         </div>
       </div>
 
-      {/* Enhanced Feedback Container */}
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full feedback-container relative z-[1] max-w-7xl mx-auto px-4 place-items-center'>
-        {feedback.map((card, index) => ( 
-          <div
-            key={card.id}
-            className="transform transition-all duration-300 hover:scale-105 hover:z-10 w-full max-w-sm"
-            style={{
-              animationDelay: `${index * 0.1}s`,
-              animation: 'fadeInUp 0.6s ease-out forwards'
-            }}
-          >
-            <Feedback {...card} />
-          </div>        
-        ))}
-      </div>
-
-      {/* Bottom Accent */}
-      <div className="absolute bottom-0 left-0 w-full h-1 opacity-30" style={{ background: 'linear-gradient(90deg, transparent, #b89b6e, transparent)' }}></div>
-
+      {/* Animations */}
       <style jsx>{`
-        @keyframes fadeInUp {
-          from {
+        @keyframes fade-in-up {
+          0% {
             opacity: 0;
-            transform: translateY(30px);
+            transform: translateY(20px);
           }
-          to {
+          100% {
             opacity: 1;
             transform: translateY(0);
           }
         }
-        
-        .feedback-container {
-          position: relative;
-        }
-        
-        .feedback-container::before {
-          content: '';
-          position: absolute;
-          top: -20px;
-          left: 50%;
-          transform: translateX(-50%);
-          width: 100px;
-          height: 2px;
-          background: linear-gradient(90deg, transparent, #b89b6e, transparent);
-          border-radius: 2px;
+        .animate-fade-in-up {
+          animation: fade-in-up 0.7s ease-out forwards;
         }
       `}</style>
     </section>
-  )
-}
+  );
+};
 
-export default Testimonials
+export default Testimonials;

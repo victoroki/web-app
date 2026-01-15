@@ -42,6 +42,8 @@ import GreenHydrogen from './components/training/GreenHydrogen';
 import Home2 from './components/training/Home2';
 import ContactForm from './components/ContactForm';
 import KenstaneForm from './components/training/KenstaneForm';
+import TorchbearerCertificateForm from './components/training/TorchbearerForm';
+import NewsletterPage from './components/training/Newsletter';
 
 
 const TrainingHomepage = () => {
@@ -94,9 +96,9 @@ function App() {
           }
         >
           <Route path="/institute" element={<TrainingHomepage />} />
-          
 
-          <Route path="/training/about" element={<><AboutSection /><TrainerProfile /><Partners /><Testimonials/></>} />
+
+          <Route path="/training/about" element={<><AboutSection /><TrainerProfile /><Partners /><Testimonials /></>} />
           <Route path="/training/epra" element={<EPRALicensing />} />
           <Route path="/training/solar" element={<SolarDesignTraining />} />
           <Route path="/training/electrical" element={<ElectricalDesign />} />
@@ -114,10 +116,12 @@ function App() {
           <Route path="/training/community/resources" element={<ResourcesPage />} />
           <Route path="/training/community/links" element={<UsefulLinksPage />} />
           <Route path="/training/community/gallery" element={<GalleryPage />} />
+          <Route path="/training/community/newsletter" element={<NewsletterPage />} />
           <Route path="/training/electric-vehicles" element={<ElectricVehicle />} />
           <Route path="/training/green-hydrogen" element={<GreenHydrogen />} />
           <Route path="/training/contactform" element={<ContactForm />} />
           <Route path="/kenstane/certificate" element={<KenstaneForm />} />
+          <Route path="/torchbearer/certificate" element={<TorchbearerCertificateForm />} />
         </Route>
       </Routes>
     </Router>

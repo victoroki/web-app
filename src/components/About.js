@@ -1,5 +1,7 @@
 import React from 'react';
 import { Shield, Zap, Sun, Users, Clock, Leaf } from 'lucide-react';
+import trophyImg from './img/trophy.png';
+import certificateImg from './img/certificate.jpeg';
 
 const AboutUs = () => {
   return (
@@ -44,6 +46,8 @@ const AboutUs = () => {
           </div>
         </div>
       </section>
+
+      
 
       {/* Our Promise */}
       <section className="py-16 bg-gray-100">

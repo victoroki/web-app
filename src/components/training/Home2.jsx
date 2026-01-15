@@ -3,6 +3,8 @@ import { Battery, Zap, Wind, Leaf, ArrowRight, CheckCircle2, Users, Award, Trend
 import Lottie from "lottie-react";
 import animationData from "../../assets/Green Energy Concept Animation.json";
 import { Link } from "react-router-dom";
+import trophyImg from "../img/trophy.png";
+import certificateImg from "../img/certificate.jpeg";
 
 export default function GreenEnergyLanding() {
     const [isVisible, setIsVisible] = useState(false);
@@ -215,6 +217,8 @@ export default function GreenEnergyLanding() {
 
                 </div>
             </section>
+
+            
 
             {/* CTA Section */}
             <section className="py-20 bg-gradient-to-r from-[#D97706] to-orange-600">

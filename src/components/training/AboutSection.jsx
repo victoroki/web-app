@@ -1,5 +1,7 @@
 import { Award, BookOpen, Target, TrendingUp, Users, Star } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import trophyImg from '../img/trophy.png';
+import certificateImg from '../img/certificate.jpeg';
 
 const AboutSection = () => {
   const [trainedProfessionals, setTrainedProfessionals] = useState(0);
@@ -120,6 +122,42 @@ const AboutSection = () => {
             </div>
           </div>
         </div>
+
+        {/*
+        <div className="py-12">
+          <div className="text-center mb-12">
+            <h3 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">GEA Awards 2025</h3>
+            <p className="text-lg text-gray-700">Green Tech (Sustainability) Award</p>
+            <div className="w-24 h-1 bg-amber-600 mx-auto mt-6"></div>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 items-stretch">
+            <div className="group">
+              <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-amber-50 to-orange-50 ring-1 ring-amber-200/50">
+                <div className="w-full md:h-[340px] h-[220px] flex items-center justify-center">
+                  <img
+                    src={trophyImg}
+                    alt="GEA Awards 2025 Trophy"
+                    loading="lazy"
+                    className="max-h-full w-auto object-contain transform transition-transform duration-500 group-hover:scale-105"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div className="group">
+              <div className="p-6 bg-white rounded-2xl border border-amber-200 h-full">
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">About the Award</h4>
+                <p className="text-gray-700">Recognizes excellence in sustainable technology.</p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-gray-700 text-center max-w-3xl mx-auto mt-8">
+            Recognizing excellence in sustainable technology.
+          </p>
+        </div>
+        */}
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {features.map((feature, index) => (

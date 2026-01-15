@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ceo from '../img/ceo.png';
 import moha from '../img/moha.png';
-import karimi from '../img/karimi.png';
+
 import emmanuel from '../img/emmanuel-marindi.png';
 import Aziz from '../img/Aziz.png';
 import Victor from '../img/imgi_2_profile.png'
@@ -39,17 +39,8 @@ const TrainersSection = () => {
       courses: ["Solar Design", "electrical"],
       // experience: "5+ Years"
     },
+
     {
-      id: 4,
-      name: "Rosemary Karimi",
-      role: "Branding & Digital Services | Graphic Design | Social Media",
-      bio: "Creative in branding, digital strategy, and engaging visual design",
-      image: karimi,
-      link: "https://www.linkedin.com/in/rosemary-karimi-458304332/",
-      courses: ["Graphic Design", "Social Media Marketing"],
-      // experience: "4+ Years"
-    },
-        {
       id: 5,
       name: "Emmanuel Marindi",
       role: "Energy consultant|Electronic Expert | Renewable Energy",
@@ -59,7 +50,7 @@ const TrainersSection = () => {
       courses: ["Energy Consulting", "Electronics", "Renewable Energy", "Solar Training"],
       // experience: "4+ Years"
     },
-            {
+    {
       id: 6,
       name: "Victor Mongare",
       role: "Website Developer | Fullstack developer | Mobile App Developer",
@@ -73,7 +64,7 @@ const TrainersSection = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
-  const [isAutoplay, setIsAutoplay] = useState(true);
+  const [isAutoplay, setIsAutoplay] = useState(false);
 
   // Responsive items per page
   useEffect(() => {
@@ -95,9 +86,9 @@ const TrainersSection = () => {
   // Auto-play functionality
   useEffect(() => {
     if (!isAutoplay) return;
-    
+
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => 
+      setCurrentIndex((prevIndex) =>
         prevIndex + itemsPerPage >= trainers.length ? 0 : prevIndex + 1
       );
     }, 4000);
@@ -107,14 +98,14 @@ const TrainersSection = () => {
 
   const nextSlide = () => {
     setIsAutoplay(false);
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex) =>
       prevIndex + itemsPerPage >= trainers.length ? 0 : prevIndex + 1
     );
   };
 
   const prevSlide = () => {
     setIsAutoplay(false);
-    setCurrentIndex((prevIndex) => 
+    setCurrentIndex((prevIndex) =>
       prevIndex - 1 < 0 ? trainers.length - itemsPerPage : prevIndex - 1
     );
   };
@@ -128,7 +119,7 @@ const TrainersSection = () => {
   const totalSlides = Math.ceil(trainers.length / itemsPerPage);
 
   return (
-    <div className="bg-gradient-to-br from-[#eadcc8] to-[#f5f0e8] py-16 px-4 relative overflow-hidden">
+    <div className="bg-gradient-to-br from-[#eadcc8] to-[#f5f0e8] py-16 px-6 md:px-12 lg:px-16 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-10 left-10 w-32 h-32 bg-[#994a0c] rounded-full blur-3xl"></div>
@@ -155,17 +146,17 @@ const TrainersSection = () => {
         {/* Trainers Carousel */}
         <div className="relative">
           {/* Navigation Buttons - Hidden on mobile */}
-          <button 
+          <button
             onClick={prevSlide}
-            className="hidden md:flex absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-16 bg-white p-3 rounded-full shadow-lg hover:bg-[#994a0c] hover:text-white transition-all duration-300 hover:scale-110 z-20 items-center justify-center"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 md:-translate-x-8 lg:-translate-x-10 bg-white p-3 rounded-full shadow-lg hover:bg-[#994a0c] hover:text-white transition-all duration-300 hover:scale-110 z-20 flex items-center justify-center border border-[#994a0c]/10"
             aria-label="Previous trainers"
           >
             <FaChevronLeft size={20} />
           </button>
-          
-          <button 
+
+          <button
             onClick={nextSlide}
-            className="hidden md:flex absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-16 bg-white p-3 rounded-full shadow-lg hover:bg-[#994a0c] hover:text-white transition-all duration-300 hover:scale-110 z-20 items-center justify-center"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 md:translate-x-8 lg:translate-x-10 bg-white p-3 rounded-full shadow-lg hover:bg-[#994a0c] hover:text-white transition-all duration-300 hover:scale-110 z-20 flex items-center justify-center border border-[#994a0c]/10"
             aria-label="Next trainers"
           >
             <FaChevronRight size={20} />
@@ -174,23 +165,23 @@ const TrainersSection = () => {
           {/* Trainers Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8">
             {visibleTrainers.map((trainer, index) => (
-              <div 
-                key={trainer.id} 
+              <div
+                key={trainer.id}
                 className="group bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 animate-fade-in"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 {/* Trainer Image */}
                 <div className="relative h-56 md:h-48 lg:h-56 overflow-hidden">
-                  <img 
-                    src={trainer.image} 
-                    alt={trainer.name} 
+                  <img
+                    src={trainer.image}
+                    alt={trainer.name}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-                  
+
                   {/* LinkedIn Icon Overlay */}
-                  <a 
+                  <a
                     href={trainer.link}
                     className="absolute top-4 left-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-[#0077b5] hover:text-white transform scale-0 group-hover:scale-100"
                     aria-label={`Connect with ${trainer.name} on LinkedIn`}
@@ -198,7 +189,7 @@ const TrainersSection = () => {
                     <FaLinkedin size={18} />
                   </a>
                 </div>
-                
+
                 {/* Trainer Info */}
                 <div className="p-6">
                   {/* Role Badge */}
@@ -208,24 +199,24 @@ const TrainersSection = () => {
                       <span className="text-xs font-semibold text-[#994a0c] leading-none">{trainer.role}</span>
                     </div>
                   </div>
-                  
+
                   {/* Name */}
                   <h3 className="text-lg md:text-xl font-bold text-[#3a2a16] mb-3 leading-tight group-hover:text-[#994a0c] transition-colors duration-300">
                     {trainer.name}
                   </h3>
-                  
+
                   {/* Bio */}
                   <p className="text-[#5c4a36] mb-4 text-sm leading-relaxed line-clamp-3">
                     {trainer.bio}
                   </p>
-                  
+
                   {/* Courses */}
                   <div className="mb-6">
                     <h4 className="text-xs font-bold text-[#994a0c] mb-2 uppercase tracking-wider">Key Specializations</h4>
                     <div className="flex flex-wrap gap-2">
                       {trainer.courses.map((course, i) => (
-                        <span 
-                          key={i} 
+                        <span
+                          key={i}
                           className="text-xs bg-gradient-to-r from-[#eadcc8] to-[#f5f0e8] text-[#5c4a36] px-3 py-1.5 rounded-full border border-[#994a0c]/20 hover:bg-[#994a0c] hover:text-white transition-all duration-300 cursor-default"
                         >
                           {course}
@@ -233,12 +224,12 @@ const TrainersSection = () => {
                       ))}
                     </div>
                   </div>
-                  
+
                   {/* Footer */}
                   <div className="flex justify-between items-center pt-4 border-t border-[#eadcc8]/50">
                     <a href={trainer.link} className="group/link">
                       <button className="text-sm text-[#994a0c] hover:text-[#cc6610] font-medium flex items-center transition-all duration-300 group-hover/link:translate-x-1">
-                        <FaBookOpen className="mr-2 text-xs" /> 
+                        <FaBookOpen className="mr-2 text-xs" />
                         View Profile
                         <span className="ml-1 transform transition-transform group-hover/link:translate-x-1">→</span>
                       </button>
@@ -255,11 +246,10 @@ const TrainersSection = () => {
               <button
                 key={index}
                 onClick={() => goToSlide(index)}
-                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
-                  Math.floor(currentIndex / itemsPerPage) === index
-                    ? 'bg-[#994a0c] scale-125 shadow-lg'
-                    : 'bg-[#994a0c]/30 hover:bg-[#994a0c]/50'
-                }`}
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${Math.floor(currentIndex / itemsPerPage) === index
+                  ? 'bg-[#994a0c] scale-125 shadow-lg'
+                  : 'bg-[#994a0c]/30 hover:bg-[#994a0c]/50'
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             ))}
